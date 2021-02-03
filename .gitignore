@@ -1,0 +1,2 @@
+# Verhindert das Versionieren lokal installierter Abhängigkeiten
+node_modules

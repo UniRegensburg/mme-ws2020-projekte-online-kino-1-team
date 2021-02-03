@@ -1,0 +1,25 @@
+{
+    "name": "projekt-starter-mme-ws20",
+    "version": "1.0.0",
+    "description": "Startercode für die Abschlussprojekte des MME-Kurses im Wintersemester 2021",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js ./app 8000",
+        "prestart": "npm run build",
+        "prebuild": "npm install && npm run check",
+        "build": "node build.js",
+        "check": "eslint app/resources/js/",
+        "deploy": "forever index.js ./app 9901",
+        "predeploy": "npm run build"
+    },
+    "author": "Alexander Bazo <alexander.bazo@ur.de>",
+    "license": "MIT",
+    "dependencies": {
+        "eslint": "^7.18.0",
+        "express": "^4.17.1"
+    }
+}
