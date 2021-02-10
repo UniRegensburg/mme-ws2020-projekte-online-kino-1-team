@@ -17,10 +17,10 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 | **Playlist erstellen** | Der User hat die Möglichkeit verschiedene Playlists zu erstellen und im Stream wiederzugeben | "mittel" | 1 Tage | User Interface |
 | **Terminkalender** | Die User haben die Möglichkeit Termine festzulegen und andere User zu diesen einzuladen | "mittel" | 2 Tage | User Interface |
 | **Audioformate wiedergeben** | Der User hat die Möglichkeit Audio verschiedener Formate hochzuladen und wiederzugeben z.B. MP3, WAV | "mittel" | 2 Tag | Funktionalität des Players |
-| **Diashow** | Der User hat die Möglichkeit eine Diashow aus vorher hochgeladenen Bildern zu erstellen | "nice-to-have" | 2 Tage | User-Server-Kommunikation |
-| **Shortcuts für den Videoplayer** | Der User hat die Möglichkeit über gängige Shortcuts(z.B. Leertaste für Pause) mit dem Video zu interagieren | "nice-to-have" | 1 Tage | User-Server-Kommunikation |
 | **Kinomodus** | Die User haben die Möglichkeit einen Kinomodus einzuschalten, der den Hintergrund verdunkelt | "nice-to-have" | 1 Tage | Funktionalität des Players |
 | **Ambilight** | Die User haben die Möglichkeit den Ambilight-modus zu aktivieren | "nice-to-have" | 2 Tage | Funktionalität des Players |
+| **Diashow** | Der User hat die Möglichkeit eine Diashow aus vorher hochgeladenen Bildern zu erstellen | "nice-to-have" | 2 Tage | User-Server-Kommunikation |
+| **Shortcuts für den Videoplayer** | Der User hat die Möglichkeit über gängige Shortcuts(z.B. Leertaste für Pause) mit dem Video zu interagieren | "nice-to-have" | 1 Tage | User-Server-Kommunikation |
 | **Passwort festlegen** | User haben die Möglichkeit optional ein Passwort für einen Raum festzulegen | "nice-to-have" | 2 Tag | Server |
 | **Countdown** | Vor dem eigentlichen Video wird ein Countdown eingeblendet | "nice-to-have" | 1 Tage | Funktionalität des Players |
 
@@ -28,7 +28,24 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 
 ## Umsetzung
 
-[Beschreiben Sie kurz das geplante Vorgehen bei der Umsetzung der Features. Entwerfen Sie dazu ein oder mehrere *Vertical Slices* anhand derer Sie den zentralen *Use Case* der Anwendung implementieren werden. Geben Sie an, wann welche Funktionen (und in welchem Vollständigkeitsgrad) implementiert werden. Begründen Sie kurz die gewählte Reihenfolge. ]
+**Vertical Slices:**
+1. Räume erstellen, teilen/beitreten und Nicknames festlegen
+2. Video Upload
+3. Synchrones Abspielen
+4. Synchrone Interaktion mit dem Player
+5. Live Chat
+6. Videoformate formatieren
+7. Drag & Drop für Videoupload
+8. Fullscreen
+9. Playlist erstellen und bearbeiten
+10. Termine für Videoabende planen
+11. Audioformate unterstützen und ggf. formatieren
+12. Kinomodus/Ambilight
+13. Diashow ermöglichen durch Bildupload(Bildformatierung)
+14. Shortcuts für Interaktion mit den UI-Elementen
+15. Countdown vor Start der Wiedergabe
+15. Passwort für Räume optional ermöglichen
 
-Frameworks und API's:
-Video.js, Express.js, fullscreen-api, node.js, (mySQL||MongoDB,) (IFrame Player API,)
+**Frameworks und API's:**
+
+Video.js, Express.js, fullscreen-api, node.js, (mySQL||MongoDB), (IFrame Player API)
