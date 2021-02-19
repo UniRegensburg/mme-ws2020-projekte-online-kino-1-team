@@ -29,3 +29,5 @@ Laden der Bilder vom Server abhängig von Playlistreihenfolge, Abspielen der Dia
 
 Verwalten der erstellten Räume (erstellen, löschen, aktualisieren), empfangen der Dateien von Room.js, evtl. formatieren und auf dem Server zwischenspeichern.
 Empfangen und Senden der Livechat Nachrichten, Zuordnung über "Raum-ID". Sendet Multimediadatei über Playlist an den User. Reagiert auf Callbacks des Players und synchronisiert den Player bei allen Usern. Server sendet Nachricht an Playlist, sobald eine Datei hochgeladen wurde.
+
+![Darstellund des Designs](Design_Bild.jpg)
