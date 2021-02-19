@@ -64,4 +64,4 @@ Formatieren der Multimediadateien und weiterleiten an den Server.
 
 Ermöglicht das Erstellen von Terminen und erstellt ICS-Datei.
 
-![Darstellund des Designs](Design_Bild.jpg)
+![Darstellund des Designs](DesignBild.jpg)
