@@ -4,13 +4,35 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MME</title>
+    <title>WatchMates</title>
     <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
 <body>
-    <h1>Multimedia Engineering</h1>
-    <div></div>
+    <div class="topBar">
+        <span class="logo">WatchMates</span>
+        <span class="calender">Termin festlegen</span>
+    </div>
+    <div class="middleBar">
+        <video class="preview" height="480" width="600" autoplay ="1" loop ="1" muted="1">
+            <source src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+        </video>
+        <span class="explanation">WatchMates bietet Dir die Möglichkeit auch online ein einzigartiges Erlebnis zu haben.
+            Treffe dich mit deiner Familie oder deinen Freunden in einem virtuellen Kino und ihr könnt euch gemeinsam Videos anschauen,
+            eine Diashow erstellen oder zeitgleich Audiodateien anhören.
+        </span>
+    </div>
+    <div class="createAndJoinRoomBar">
+        <span class="creatingRoom">Einen Raum erstellen</span>
+        <span class="joiningRoom">Einen Raum beitreten</span>
+    </div>
+    <div class="bottomBar">
+        <span class="stepOne">Erstelle einen Raum</span>
+        <span class="arrow"></span>
+        <span class="stepTwo">Lade Freunde ein</span>
+        <span class="arrow"></span>
+        <span class="stepThree">Habt zusammen Spaß</span>
+    </div>
     <script type="module" src="resources/js/index.js"></script>
 </body>
 
