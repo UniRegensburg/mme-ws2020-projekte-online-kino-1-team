@@ -91,82 +91,45 @@ body {
     border: 3px solid var(--hover-color);
 }
 
-.overlayJoiningRoom{
-    position: fixed;
-    top: 0em;
-    left: 0em;
-    right: 0em;
-    bottom: 0em;
-    background: var(--background-color-overlay);
-    visibility: hidden;
-}
-
-.overlayJoiningRoom:target{
-    visibility: visible;
-}
-
-.popup{
-    margin: 3.5em auto;
-    padding-top: 1.5em;
-    padding-bottom: 3.3em;
-    padding-left: 0.5em;
-    padding-right: 0.6em;
-    background: var(--background-color-popup);
-    border-radius: 18px;
-    width: 40%;
-    position: relative;
+.dropDownMenu{
+    display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 0 auto 4em auto;
 }
 
-.overlayTitle{
+.hidden{
+    display: none;
+    opacity: 0;
+}
+
+.URLTextArea{
+    width: 50%;
+    font-size: 30px;
+    color: var(--black);
+    border: 3px solid var(--font-color);
+    border-radius: 18px;
+}
+
+.URLTextArea::placeholder{
+    color: var(--hover-color);
+}
+
+.URLTextArea:hover{
+    border: 3px solid var(--hover-color);
+}
+
+.closeDropDownMenu{
     position: relative;
-    padding-left: 3.5em;
-    color: var(--font-color-overlay);
-    font-size: 25px;
-    top: -4px;
+    font-size: 32px;
+    background-color: transparent;
+    border: none;
+    color: var(--black);
+    left: -1.5%;
 }
 
-.closeOverlay{
-    position: absolute;
-    font-size: 40px;
-    font-weight: bold;
-    text-decoration: none;
-    color: var(--font-color-overlay);
-    right: 14px;
-    top: 0px;
-}
-
-.closeOverlay:hover{
-    color: var(--hover-color-overlay);
-}
-
-.URLTextField{
-    position: relative;
-    text-align: left;
-    width: 100%;
-    height: 30px;
-    font-size: 20px;
-    color: var(--font-color-overlay);
-    background: var(--background-color-popup);
-    border: 2px solid var(--font-color-overlay);
-    top: 9px;
-    left: -3px;
-}
-
-.enterTheURL{
-    position: relative;
-    padding: 0.3em;
-    font-size: 25px;
-    color: var(--font-color-overlay);
-    text-decoration: none;
-    border: 3px solid var(--font-color-overlay);
-    border-radius: 5px;
-    top: 32px;
-    left: 290px;
-}
-
-.enterTheURL:hover{
-    border: 3px solid var(--hover-color-overlay);
+.closeDropDownMenu:hover{
+    color: var(--hover-color);
 }
 
 .bottomBar{
