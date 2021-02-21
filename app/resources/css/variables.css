@@ -2,5 +2,10 @@
     /*General Colors*/
     --font-color: white;
     --background-color: #4d4d4d;
-    --hover-color: #858585
+    --hover-color: #858585;
+    --font-color-overlay: black;
+    --background-color-popup: rgb(245, 241, 241);
+    --background-color-overlay: rgba(29, 27, 27, 0.7);
+    --hover-color-overlay: rgb(112, 108, 108);
+
 }
