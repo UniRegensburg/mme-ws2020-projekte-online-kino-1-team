@@ -13,11 +13,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--white);
+    color: var(--font-color);
 }
 
 .topBar {
-    padding-top: 3.5em;
+    padding-top: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,15 +31,15 @@ body {
 }
 
 .calender{
+    background-color: transparent;
+    color: var(--font-color);
     font-size: 40px;
     padding: 0.5em;
     border-radius: 18px;
-    border: 3px solid var(--white);
+    border: 3px solid var(--font-color);
 }
 
 .middleBar {
-    padding-top: 1em;
-    padding-bottom: 1.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +54,6 @@ body {
 }
 
 .createAndJoinRoomBar{
-    padding-top: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,29 +62,37 @@ body {
 }
 
 .creatingRoom{
+    background-color: transparent;
+    color: var(--font-color);
     max-width: 300px;
     justify-content: center;
     margin: 0 auto;
     padding: 0.5em;
     text-align: center;
     border-radius: 18px;
-    border: 3px solid var(--white);
+    border: 3px solid var(--font-color);
     font-size: 40px;
 }
 
 .joiningRoom{
+    background-color: transparent;
+    color: var(--font-color);
     max-width: 300px;
     justify-content: center;
     margin: 0 auto;
     padding: 0.5em;
     text-align: center;
     border-radius: 18px;
-    border: 3px solid var(--white);
+    border: 3px solid var(--font-color);
     font-size: 40px;
 }
 
+.calender:hover, .creatingRoom:hover, .joiningRoom:hover{
+    border: 3px solid var(--hover-color);
+}
+
 .bottomBar{
-    padding-top: 3em;
+    padding-top: 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,7 +108,7 @@ body {
     width: 100px;
     height: 4px;
     border-radius: 4px;
-    background-color: var(--white);
+    background-color: var(--font-color);
     position: relative;
 }
 
@@ -111,7 +118,7 @@ body {
     border-radius: 4px;
     width: 40px;
     height: 4px;
-    background-color: var(--white);
+    background-color: var(--font-color);
     transform: rotate(45deg);
     position: absolute;
     right: -6px;
@@ -124,7 +131,7 @@ body {
     border-radius: 4px;
     width: 40px;
     height: 4px;
-    background-color: white;
+    background-color: var(--font-color);
     transform: rotate(-45deg);
     position: absolute;
     right: -6px;

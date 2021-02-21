@@ -1,5 +1,6 @@
 :root{
     /*General Colors*/
-    --white: white;
+    --font-color: white;
     --background-color: #4d4d4d;
+    --hover-color: #858585
 }
