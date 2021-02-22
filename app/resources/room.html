@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchMates</title>
+    <link rel="stylesheet" href="css/styleRoom.css">
+</head>
+
+<body>
+    <label class="toggle">
+        <input id="toggleButton" type="checkbox">
+        <span class="roundButton"></span>
+    </label>
+    <div class="room">
+        <span class="playlist">Playlist</span>
+        <video class="video" controls="true" width="50%">
+            <source src="" type="video.mp4">
+        </video>
+        <span class="chat disabled">Chat
+            <input class="typeField" type="text" disabled>
+        </span>
+    </div>
+    <input class="nickname" type="text" placeholder="Gebe zuerst einen Nicknamen ein, um den Chat zu nutzen">
+    <div class="footer">
+        <span class="stepOne">Lade ein Video, Bild oder Audio in die Playlist</span>
+        <span class="arrow"></span>
+        <span class="stepTwo">Sortiere die Playlist</span>
+        <span class="arrow"></span>
+        <span class="stepThree">Chattet miteinander</span>
+    </div>
+    <script type="module" src="js/room.js"></script>
+</body>
+
+</html>

@@ -15,7 +15,7 @@ body {
     color: var(--font-color);
 }
 
-.topBar {
+.topBar{
     padding-top: 1em;
     display: flex;
     justify-content: space-between;
@@ -71,6 +71,7 @@ body {
     border-radius: 18px;
     border: 3px solid var(--font-color);
     font-size: 40px;
+    text-decoration: none;
 }
 
 .joiningRoom{
@@ -107,7 +108,7 @@ body {
     width: 50%;
     font-size: 30px;
     color: var(--black);
-    border: 3px solid var(--font-color);
+    border: 3px solid var(--black);
     border-radius: 18px;
 }
 
@@ -138,7 +139,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto 4em auto;
-    max-width: 1500px;
+    max-width: 1420px;
 }
 
 .stepOne, .stepTwo, .stepThree{
@@ -177,4 +178,16 @@ body {
     position: absolute;
     right: -6px;
     bottom: -13px;
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--font-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--font-color);
 }
