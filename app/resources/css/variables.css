@@ -4,8 +4,6 @@
     --background-color: #4d4d4d;
     --hover-color: #858585;
     --black: black;
-    --background-color-room: rgb(42, 40, 40);
-    --background-color-room-features: rgb(85, 77, 77);
-    --placeholder-color-room: rgb(170, 157, 157);
-    --hidden-color-room: rgb(170, 157, 157);
+    --placeholder-color-room: rgb(158, 150, 150);
+    --hidden-color-room: rgb(124, 120, 120);
 }
