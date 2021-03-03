@@ -107,13 +107,16 @@ body {
 .URLTextArea{
     width: 50%;
     font-size: 30px;
-    color: var(--black);
-    border: 3px solid var(--black);
+    color: var(--font-color);
+    background: transparent;
+    border: 3px solid var(--font-color);
     border-radius: 18px;
+    text-align: center;
 }
 
 .URLTextArea::placeholder{
-    color: var(--hover-color);
+    color: var(--placeholder-color-room);
+    text-align: center;
 }
 
 .URLTextArea:hover{
@@ -125,7 +128,7 @@ body {
     font-size: 32px;
     background-color: transparent;
     border: none;
-    color: var(--black);
+    color: var(--font-color);
     left: -1.5%;
 }
 
