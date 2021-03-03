@@ -22,7 +22,7 @@ class AppServer {
    * @param  {String} appDir Relative path to application dir (from parent)
    */
   constructor(appDir) {
-    this.appDir = path.join(__dirname, "../", appDir); 
+    this.appDir = path.join(__dirname, "../", appDir);
     this.app = express();
     this.app.use("/app", express.static(this.appDir));
   }
