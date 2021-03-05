@@ -1,0 +1,11 @@
+{
+  "rooms": [{
+      "roomID": "Room1",
+      "participants": ["Peter", "Hans", "Frida"]
+    },
+    {
+      "roomID": "Room2",
+      "participants": ["Celina", "Jakob", "Sandro"]
+    }
+  ]
+}

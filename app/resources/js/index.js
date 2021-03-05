@@ -24,14 +24,9 @@ function setClickListener() {
   createButton.addEventListener("click", createNewRoom);
 }
 
-/*function testDate(){
-	console.log("ich will ein Date");
-	socket.emit("date", "Client schickt diese Nachricht");
-	socket.send("Mahlzeit!");
-}*/
 
 function createNewRoom(){
-	socket.emit("createRoom", "Platzhalter");
+	socket.emit("createRoom", "Room1");
 }
 
 function showURLTextBox() {
