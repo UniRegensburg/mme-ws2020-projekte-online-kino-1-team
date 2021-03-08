@@ -1,4 +1,0 @@
-use('WatchMatesDB');
-
-db.rooms.drop;
-db.rooms.insert({'roomID': 'room3'});

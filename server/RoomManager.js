@@ -1,14 +1,15 @@
+/* eslint-env node */
+
 var uuid = require("node-uuid");
 
 class RoomManger {
-
 
   constructor(rooms) {
     if (rooms === null) {
       this.rooms = {};
     }
   }
-
+ /*
   get(roomID) {
 
   }
@@ -16,6 +17,15 @@ class RoomManger {
   getIDs() {
 
   }
+
+  delete(roomID) {
+
+  }
+
+  update(roomID, data) {
+
+  }
+  */
 
   create(roomID) {
     let randomURL = "localhost:8000/app/room:" + uuid.v4();
@@ -25,14 +35,6 @@ class RoomManger {
     console.log(this.rooms);
   }
 
-
-  delete(roomID) {
-
-  }
-
-  update(roomID, data) {
-
-  }
 }
 
 module.exports = RoomManger;
