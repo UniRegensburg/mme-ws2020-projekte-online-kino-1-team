@@ -42,8 +42,7 @@ function init() {
 
   // Access command line parameters from start command (see package.json)
   let appDirectory = process.argv[2],
-    appPort = process.argv[3],
-    openRooms;
+    appPort = process.argv[3];
   // port to use for serving static files
   server = new AppServer(appDirectory);
   server.start(appPort);
