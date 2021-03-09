@@ -1,0 +1,9 @@
+:root{
+    /*General Colors*/
+    --font-color: white;
+    --background-color: #4d4d4d;
+    --hover-color: #858585;
+    --black: black;
+    --placeholder-color-room: rgb(158, 150, 150);
+    --hidden-color-room: rgb(124, 120, 120);
+}

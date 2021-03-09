@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchMates</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
+
+<body>
+    <div class="topBar">
+        <span class="logo">WatchMates</span>
+        <button class="calender">Termin festlegen</button>
+    </div>
+    <div class="middleBar">
+        <video class="preview" width="580px" height="480px" loop ="1" muted="1">
+            <source src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+        </video>
+        <span class="explanation">WatchMates bietet Dir die Möglichkeit auch online ein einzigartiges Erlebnis zu haben.
+            Treffe dich mit deiner Familie oder deinen Freunden in einem virtuellen Kino und ihr könnt euch gemeinsam Videos anschauen,
+            eine Diashow erstellen oder zeitgleich Audiodateien anhören.
+        </span>
+    </div>
+    <div class="createAndJoinRoomBar">
+        <a class="creatingRoom" >Einen Raum erstellen</a>
+        <button class="joiningRoom">Einem Raum beitreten</button>
+    </div>
+    <div class="dropDownMenu hidden">
+        <input class="URLTextArea" type="text" placeholder="https://www.URL.com">
+        <button class="closeDropDownMenu">x</button>
+    </div>
+    <div class="bottomBar">
+        <span class="stepOne">Erstelle einen Raum</span>
+        <span class="arrow"></span>
+        <span class="stepTwo">Lade Freunde ein</span>
+        <span class="arrow"></span>
+        <span class="stepThree">Habt zusammen Spaß</span>
+    </div>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer type="module" src="resources/js/index.js"></script>
+</body>
+
+</html>

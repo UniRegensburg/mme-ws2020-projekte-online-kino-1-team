@@ -22,8 +22,10 @@ class AppServer {
    * @param  {String} appDir Relative path to application dir (from parent)
    */
   constructor(appDir) {
-    this.appDir = path.join(__dirname, "../", appDir); 
+    this.appDir = path.join(__dirname, "../", appDir);
     this.app = express();
+    this.app.set("view engine", "ejs");
+    this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
   }
 
@@ -34,10 +36,16 @@ class AppServer {
    */
   start(port) {
     this.server = this.app.listen(port, function() {
-      console.log(
-        `AppServer started. Client available at http://localhost:${port}/app`
-      );
+      /*console.log(
+        `AppServer started. Client available at http://localhost:${port}/app`,
+      );*/
     });
+
+  }
+
+  openRooms(rooms){
+    rooms.forEach(e => 
+      this.app.get("/app/" + e.url, (req,res) => res.render("room")));
   }
 
   /**
@@ -50,6 +58,14 @@ class AppServer {
     this.server.close();
   }
 
+  addRoom(url) {
+    var randomLink = "/app/" + url;
+    this.app.set("view engine", "ejs");
+    this.app.use(express.static(path.join(__dirname, "app")));
+    this.app.get(randomLink, (req, res) => res.render("room"));
+  
+    return url;
+  }
 }
 
 module.exports = AppServer;

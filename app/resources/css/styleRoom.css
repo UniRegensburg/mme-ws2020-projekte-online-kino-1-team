@@ -1,0 +1,205 @@
+@import url("./variables.css");
+
+html {
+    margin: 0;
+}
+
+body{
+    background: url("backgroundRoom.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.toggle {
+    display: flex;
+    position: relative;
+    margin: 2em 0 0 2em;
+    width: 6em;
+    height: 3.4em;
+}
+
+.toggle input {
+    display: none;
+}
+
+.roundButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--font-color);
+    display: block;
+    border-radius: 3em;
+    cursor: pointer;
+}
+
+.roundButton:before {
+    position: absolute;
+    content: "";
+    height: 2.3em;
+    width: 2.3em;
+    border-radius: 100%;
+    display: block;
+    left: 0.5em;
+    bottom: 0.5em;
+    background-color: white;
+    transition: all 0.7s;
+}
+
+.roundButton:hover{
+    border: 2px solid var(--hover-color);
+}
+
+input:checked + .roundButton:before  {
+    transform: translate(2.6em, 0);
+}
+
+.room{
+    padding-top: 4em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 1em auto;
+    max-width: 1600px;
+}
+
+.playlist{
+    background: transparent;
+    font-size: 35px;
+    text-align: center;
+    color: var(--font-color);
+    border-radius: 10px;
+    border: 3px solid var(--font-color);
+    height: 17em;
+    width: 9em;
+    overflow-y: scroll;
+}
+
+.chat{
+    text-align: center;
+    background-color: transparent;
+    font-size: 35px;
+    color: var(--font-color);
+    border-radius: 10px;
+    border: 3px solid var(--font-color);
+    height: 17em;
+    width: 9em;
+    overflow-y: scroll;
+}
+
+.typeField{
+    position: relative;
+    top: 85%;
+    right: 1%;
+    width: 80%;
+    border: 2px solid var(--font-color);
+    border-radius: 18px;
+}
+
+.typeField:hover{
+    border: 2px solid var(--hover-color);
+}
+
+.disabled{
+    color: var(--hidden-color-room);
+}
+
+.typeField:disabled{
+    background: var(--hidden-color-room);
+    border: 2px solid var(--hidden-color-room);
+}
+
+.nickname{
+    display: flex;
+    padding: 0;
+    width: 42%;
+    justify-content: center;
+    margin: 0 auto 2em auto;
+    text-align: center;
+    color: var(--font-color);
+    font-size: 30px;
+    color: var(--font-color);
+    background: transparent;
+    border: 3px solid var(--font-color);
+    border-radius: 18px;
+}
+
+.hidden{
+    display: none;
+    opacity: 100;
+}
+
+.nickname::placeholder{
+    color: var(--placeholder-color-room);
+}
+
+.nickname:hover{
+    border: 3px solid var(--hover-color);
+}
+
+.footer{
+    padding-top: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 4em auto;
+    max-width: 1420px;
+}
+
+.stepOne, .stepTwo, .stepThree{
+    font-size: 30px;
+    color: var(--font-color);
+}
+
+.arrow{
+    width: 100px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--font-color);
+    position: relative;
+}
+
+.arrow:after{
+    content: "";
+    display: inline-block;
+    border-radius: 4px;
+    width: 40px;
+    height: 4px;
+    background: var(--font-color);
+    transform: rotate(45deg);
+    position: absolute;
+    right: -6px;
+    bottom: 13px;
+}
+
+.arrow:before{
+    content: "";
+    display: inline-block;
+    border-radius: 4px;
+    width: 40px;
+    height: 4px;
+    background: var(--font-color);
+    transform: rotate(-45deg);
+    position: absolute;
+    right: -6px;
+    bottom: -13px;
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--font-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--font-color);
+}

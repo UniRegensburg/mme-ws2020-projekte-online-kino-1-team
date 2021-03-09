@@ -1,25 +1,196 @@
+@import url("./variables.css");
+
 html {
     margin: 0;
 }
 
 body {
+    background-image: url("background.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     margin: 0;
-    background: #FAFAFA;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color: #000;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--font-color);
 }
 
-body div {
-    padding: 1vw;
+.topBar{
+    padding-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 4em auto;
+    max-width: 1600px;
 }
 
-h1 {
-    width: 98vw;
-    margin: 0;
-    padding: 1vw;
-    background-color: #333;
-    border-style: solid;
-    border-width: 0 0 0.25vh 0;
-    border-color: #FFF;
-    color: #FAFAFA;
+.logo{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.calender{
+    background-color: transparent;
+    color: var(--font-color);
+    font-size: 40px;
+    padding: 0.5em;
+    border-radius: 18px;
+    border: 3px solid var(--font-color);
+}
+
+.middleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 4em auto;
+    max-width: 1500px;
+}
+
+.explanation {
+    padding-left: 5em;
+    font-size: 35px;
+    text-align: center;
+}
+
+.createAndJoinRoomBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 4em auto;
+    max-width: 1600px;
+}
+
+.creatingRoom{
+    background-color: transparent;
+    color: var(--font-color);
+    max-width: 300px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 18px;
+    border: 3px solid var(--font-color);
+    font-size: 40px;
+    text-decoration: none;
+}
+
+.joiningRoom{
+    background-color: transparent;
+    color: var(--font-color);
+    max-width: 300px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 18px;
+    border: 3px solid var(--font-color);
+    font-size: 40px;
+    text-decoration: none;
+}
+
+.calender:hover, .creatingRoom:hover, .joiningRoom:hover{
+    border: 3px solid var(--hover-color);
+}
+
+.dropDownMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 4em auto;
+}
+
+.hidden{
+    display: none;
+    opacity: 0;
+}
+
+.URLTextArea{
+    width: 50%;
+    font-size: 30px;
+    color: var(--font-color);
+    background: transparent;
+    border: 3px solid var(--font-color);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.URLTextArea::placeholder{
+    color: var(--placeholder-color-room);
+    text-align: center;
+}
+
+.URLTextArea:hover{
+    border: 3px solid var(--hover-color);
+}
+
+.closeDropDownMenu{
+    position: relative;
+    font-size: 32px;
+    background-color: transparent;
+    border: none;
+    color: var(--font-color);
+    left: -1.5%;
+}
+
+.closeDropDownMenu:hover{
+    color: var(--hover-color);
+}
+
+.bottomBar{
+    padding-top: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 4em auto;
+    max-width: 1420px;
+}
+
+.stepOne, .stepTwo, .stepThree{
+    font-size: 30px;
+}
+
+.arrow{
+    width: 100px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--font-color);
+    position: relative;
+}
+
+.arrow:after{
+    content: "";
+    display: inline-block;
+    border-radius: 4px;
+    width: 40px;
+    height: 4px;
+    background: var(--font-color);
+    transform: rotate(45deg);
+    position: absolute;
+    right: -6px;
+    bottom: 13px;
+}
+
+.arrow:before{
+    content: "";
+    display: inline-block;
+    border-radius: 4px;
+    width: 40px;
+    height: 4px;
+    background: var(--font-color);
+    transform: rotate(-45deg);
+    position: absolute;
+    right: -6px;
+    bottom: -13px;
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--font-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--font-color);
 }
