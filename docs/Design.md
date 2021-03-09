@@ -1,21 +1,18 @@
 # Software Desing für WatchMates
 
 ## Client
-**index.js:**
+**index.js:** [Socket.io]
 
 Zentrale Kommunikationsschnittstelle mit dem Server. Verwaltet alle anderen Client Module.
-
-**StartScreen.js**
-
 User-Interface für Startscreen,
 StartScreen.js gibt User die Möglichkeit über einen Button eine Anfrage an den Server zu senden, um eine Unterseite zu erstellen und leitet ihn auf diese weiter.
 Der User kann auch einem existierenden Raum beitreten, über einen vorgefertigten Button + Input Feld (für Link). Gibt der Server das "OK" leitet er ihn auf die Unterseite weiter. Über einen weiteren Button "Raum reservieren" kann der User ein Datum festlegen, einen Raum erstellen und sich den Termin als ICS herunterladen.
 
-**FileDownloader.js**
+**fileDownloader.js**
 
 Lädt die Multimediadatei vom Server in den VideoPlayer/Diashow bei allen Clients des gleichen Raums. Laden der Datei vom Server abhängig von Playlistreihenfolge.
 
-**Room.js:**
+**room.js:**
 
 User Interface für Room,
 Beim Betreten eines Raums erscheint ein Inputfeld, welches einen Nickname fordert.
@@ -36,17 +33,21 @@ Anzeigen des LiveChats und Eingabe der Nachrichten ermöglichen.
 
 ## Server
 
-**index.js**
+**index.js** [Socket.io]
 
 Zentrale Kommunikationsschnittstelle mit den Clients. Verwaltet alle anderen Server Module.
 
-**Server.js** [express.js]
+**AppServer.js** [express.js]
 
-Managen des Servers.
+Managen des Express-servers.
 
-**RoomManager.js**
+**RoomManager.js** [node-uuid]
 
 Verwalten der erstellten Räume (erstellen, löschen, aktualisieren). Verwaltet Playlist.js und LiveChatManager.js
+
+**DBManager.js** [mongoose]
+
+Verwaltet die Datenbank und die Speicherung verschiedener Dateien
 
 **Playlist.js**
 
@@ -63,5 +64,9 @@ Formatieren der Multimediadateien und weiterleiten an den Server.
 **Calendar.js**
 
 Ermöglicht das Erstellen von Terminen und erstellt ICS-Datei.
+
+**Views** [ejs]
+
+index.ejs und room.ejs werden als Templates für die Html-Dateien verwendet.
 
 ![Darstellund des Designs](DesignBild.jpg)
