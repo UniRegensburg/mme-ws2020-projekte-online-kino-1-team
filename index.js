@@ -1,8 +1,8 @@
 /* eslint-env node */
 
-//const { default: DBManager } = require("./server/MongoDB/DBManager.js");
-
 //Server
+const SOCKETPORT = 3000,
+  path = require("path");
 
 var server,
   roomManager,
@@ -13,25 +13,22 @@ const AppServer = require("./server/AppServer.js"),
   express = require("express"),
   RoomManager = require("./server/RoomManager.js"),
   httpServer = require("http").createServer(express),
-  options = { cors: true, origin: "http:localhost:3000" },
+  appDir = path.join(__dirname, "../", process.argv[2]),
+  options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
   uri =
   "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
-
 io.on("connection", (socket) => {
-  //console.log("Connection on Client: " + socket.id);
-  //Hier kommen alle Callbacks für Server-Client Communikation rein:
+  //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
     dbClient.addRoom(url);
     server.addRoom(url);
-    console.log(url);
     socket.emit("changeUrl", url);
   });
 });
 
-httpServer.listen(3000, function() {
-
+httpServer.listen(SOCKETPORT, function() {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
@@ -52,7 +49,6 @@ function init() {
   dbClient = new DBManager(uri);
 
   dbClient.getOpenRooms().then((e) => server.openRooms(e));
-
-  //console.log(dbClient.getOpenRooms());
 }
+
 init();

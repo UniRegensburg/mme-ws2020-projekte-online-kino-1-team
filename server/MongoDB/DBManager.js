@@ -1,7 +1,6 @@
 /* eslint-env node */
 
 var mongoose = require("mongoose"),
-  db,
   RoomSchema,
   room,
   Room;
@@ -12,7 +11,6 @@ class DBManager {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    db = mongoose.connection;
     RoomSchema = mongoose.Schema;
     room = new RoomSchema({
       id: mongoose.Types.ObjectId,
@@ -20,24 +18,7 @@ class DBManager {
       test: String,
     });
     Room = mongoose.model("Room", room);
-    db.on("error", console.error.bind(console, 'MongoDB connection error:'));
   }
-
-  /*testMongoose() {
-    
-    if (!err) { console.log("läuft!"); } else { console.log(err); }
-
-    Room.find({}, function(err,
-      Room) {
-      if (!err) {
-        Room.forEach(e => console.log(e));
-      }
-    });
-
-    //SomeModel.findOneAndRemove({_id: "60462f26aa7b142f8830f594"});
-    //SomeModel.remove({SomeModel});
-  }
-}*/
 
   addRoom(randomUrl) {
     let roomInstance = new Room({
@@ -55,20 +36,8 @@ class DBManager {
   }
 
   getOpenRooms(){
-    //var log = Room.find({url});
-    //console.log(log);
     return Room.find({}, "url").exec();
-  
   }
-
-  /*
-  updatePlaylist(playlist, roomID) {
-  }
-
-  getPlaylist(roomID) {
-
-  }
-  */
 }
 
 module.exports = DBManager;

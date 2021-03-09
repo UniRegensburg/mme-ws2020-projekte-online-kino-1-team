@@ -23,7 +23,6 @@ class AppServer {
    */
   constructor(appDir) {
     this.appDir = path.join(__dirname, "../", appDir);
-    console.log(appDir);
     this.app = express();
     this.app.set("view engine", "ejs");
     this.app.get("/app", (req, res) => res.render("index"));
@@ -37,9 +36,9 @@ class AppServer {
    */
   start(port) {
     this.server = this.app.listen(port, function() {
-      console.log(
+      /*console.log(
         `AppServer started. Client available at http://localhost:${port}/app`,
-      );
+      );*/
     });
 
   }
@@ -65,15 +64,6 @@ class AppServer {
     this.app.use(express.static(path.join(__dirname, "app")));
     this.app.get(randomLink, (req, res) => res.render("room"));
   
-    //this.app.send("Moinsen");
-    //this.app.use('/resources', express.static(__dirname + "/static"));
-    /*this.app.get(randomLink, function(req, res) {
-
-      //express.static("/app/resources/room.html");
-      
-      //res.send(express.static("/app/resources"));
-    });*/
-    //this.app.get(randomLink, (req,res) => res.sendFile());
     return url;
   }
 }
