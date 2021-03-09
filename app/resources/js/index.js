@@ -37,7 +37,7 @@ function hideURLTextBox() {
 function onLinkEntered(e) {
   let URLTextArea = document.querySelector(".URLTextArea");
   if (e.key === "Enter" && URLTextArea.value !== "") {
-    window.open(URLTextArea.value);
+    window.location.href = window.location.href + URLTextArea.value;
   }
 }
 
