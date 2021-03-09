@@ -5,10 +5,14 @@
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
+let dropDownMenu = document.querySelector(".dropDownMenu");
+
 socket.on("connect", () => {
   //console.log("Client: " + socket.id);
 
 });
+socket.on("changeUrl", (data) => window.location.href =
+  "http://localhost:8000/app/" + data);
 
 function init() {
   setClickListener();
@@ -17,24 +21,32 @@ function init() {
 function setClickListener() {
   let joinRoomButton = document.querySelector(".joiningRoom"),
     closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
-	//dateButton = document.querySelector(".calender"),
-	createButton = document.querySelector(".creatingRoom");
+    //dateButton = document.querySelector(".calender"),
+    creatingRoomButton = document.querySelector(".creatingRoom");
+  dropDownMenu.addEventListener("keypress", onLinkEntered);
   joinRoomButton.addEventListener("click", showURLTextBox);
   closeDropDownMenu.addEventListener("click", hideURLTextBox);
-  createButton.addEventListener("click", createNewRoom);
+  creatingRoomButton.addEventListener("click", createNewRoom);
+  console.log("Value hier: " + dropDownMenu.value);
 }
 
-
-function createNewRoom(){
-	socket.emit("createRoom", "Room1");
+function createNewRoom() {
+  socket.emit("createRoom");
 }
 
 function showURLTextBox() {
-  document.querySelector(".dropDownMenu").classList.remove("hidden");
+  dropDownMenu.classList.remove("hidden");
 }
 
 function hideURLTextBox() {
-  document.querySelector(".dropDownMenu").classList.add("hidden");
+  dropDownMenu.classList.add("hidden");
+}
+
+function onLinkEntered(e) {
+  let URLTextArea = document.querySelector(".URLTextArea");
+  if (e.key === "Enter" && URLTextArea.value !== "") {
+    window.open(URLTextArea.value);
+  }
 }
 
 init();

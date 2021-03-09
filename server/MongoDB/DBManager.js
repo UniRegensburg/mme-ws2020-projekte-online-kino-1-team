@@ -39,10 +39,9 @@ class DBManager {
   }
 }*/
 
-  addRoom() {
+  addRoom(randomUrl) {
     let roomInstance = new Room({
-      url: "http://localhost:8000/app",
-      test: "test6",
+      url: randomUrl,
     });
     roomInstance.save();
   }
@@ -54,6 +53,14 @@ class DBManager {
   getRoom(roomID) {
     return Room.find({ _id: roomID });
   }
+
+  getOpenRooms(){
+    //var log = Room.find({url});
+    //console.log(log);
+    return Room.find({}, "url").exec();
+  
+  }
+
   /*
   updatePlaylist(playlist, roomID) {
   }

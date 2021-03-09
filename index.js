@@ -21,7 +21,13 @@ const AppServer = require("./server/AppServer.js"),
 io.on("connection", (socket) => {
   //console.log("Connection on Client: " + socket.id);
   //Hier kommen alle Callbacks für Server-Client Communikation rein:
-  socket.on("createRoom", (data) => roomManager.create(data));
+  socket.on("createRoom", () => {
+    let url = roomManager.createUrl();
+    dbClient.addRoom(url);
+    server.addRoom(url);
+    console.log(url);
+    socket.emit("changeUrl", url);
+  });
 });
 
 httpServer.listen(3000, function() {
@@ -36,14 +42,18 @@ function init() {
 
   // Access command line parameters from start command (see package.json)
   let appDirectory = process.argv[2],
-    appPort = process.argv[3];
- // port to use for serving static files
+    appPort = process.argv[3],
+    openRooms;
+  // port to use for serving static files
   server = new AppServer(appDirectory);
   server.start(appPort);
+
   roomManager = new RoomManager();
 
   dbClient = new DBManager(uri);
-  dbClient.addRoom();
-}
 
+  dbClient.getOpenRooms().then((e) => server.openRooms(e));
+
+  //console.log(dbClient.getOpenRooms());
+}
 init();

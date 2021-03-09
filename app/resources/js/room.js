@@ -2,6 +2,7 @@ let nicknameTextField;
 
 function init(){
     setClickListener();
+    console.log("Room.js");
 }
 
 function setClickListener(){

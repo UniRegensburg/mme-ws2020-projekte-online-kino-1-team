@@ -23,7 +23,10 @@ class AppServer {
    */
   constructor(appDir) {
     this.appDir = path.join(__dirname, "../", appDir);
+    console.log(appDir);
     this.app = express();
+    this.app.set("view engine", "ejs");
+    this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
   }
 
@@ -35,9 +38,15 @@ class AppServer {
   start(port) {
     this.server = this.app.listen(port, function() {
       console.log(
-        `AppServer started. Client available at http://localhost:${port}/app`
+        `AppServer started. Client available at http://localhost:${port}/app`,
       );
     });
+
+  }
+
+  openRooms(rooms){
+    rooms.forEach(e => 
+      this.app.get("/app/" + e.url, (req,res) => res.render("room")));
   }
 
   /**
@@ -50,6 +59,23 @@ class AppServer {
     this.server.close();
   }
 
+  addRoom(url) {
+    var randomLink = "/app/" + url;
+    this.app.set("view engine", "ejs");
+    this.app.use(express.static(path.join(__dirname, "app")));
+    this.app.get(randomLink, (req, res) => res.render("room"));
+  
+    //this.app.send("Moinsen");
+    //this.app.use('/resources', express.static(__dirname + "/static"));
+    /*this.app.get(randomLink, function(req, res) {
+
+      //express.static("/app/resources/room.html");
+      
+      //res.send(express.static("/app/resources"));
+    });*/
+    //this.app.get(randomLink, (req,res) => res.sendFile());
+    return url;
+  }
 }
 
 module.exports = AppServer;
