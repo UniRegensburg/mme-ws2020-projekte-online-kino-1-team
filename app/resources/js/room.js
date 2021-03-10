@@ -2,6 +2,9 @@
 
 import {LiveChat} from "./LiveChat.js";
 
+// eslint-disable-next-line no-undef
+//const socket = io("http://localhost:3000");
+
 let nicknameTextField,
 liveChatInstance;
 

@@ -1,6 +1,7 @@
 /* eslint-env node */
 
 //Server
+
 const SOCKETPORT = 3000,
   path = require("path");
 
@@ -25,6 +26,10 @@ io.on("connection", (socket) => {
     dbClient.addRoom(url);
     server.addRoom(url);
     socket.emit("changeUrl", url);
+  });
+  socket.on("MessageToServer", (message) => {
+    console.log("Message received at SERVER", message);
+    socket.broadcast.emit("MessageToClients", message);
   });
 });
 

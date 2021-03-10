@@ -1,5 +1,7 @@
 /* eslint-env browser */
 
+//Client
+
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
