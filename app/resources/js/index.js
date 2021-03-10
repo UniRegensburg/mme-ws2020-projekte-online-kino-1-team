@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import {Calender} from "./Calender.js";
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
@@ -10,6 +11,8 @@ socket.on("changeUrl", (data) => window.location.href =
 
 function init() {
   setClickListener();
+  let calender = new Calender;
+  calender.clickListenerCalender();
 }
 
 function setClickListener() {

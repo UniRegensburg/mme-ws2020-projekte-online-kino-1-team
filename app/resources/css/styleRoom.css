@@ -191,15 +191,3 @@ input:checked + .roundButton:before  {
     right: -6px;
     bottom: -13px;
 }
-
-::-webkit-scrollbar {
-    height: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--font-color);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--font-color);
-}
