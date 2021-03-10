@@ -1,10 +1,12 @@
 /* eslint-env browser */
-import {Calender} from "./Calender.js";
+import { Calender } from "./Calender.js";
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
-let dropDownMenu = document.querySelector(".dropDownMenu");
+let dropDownMenu = document.querySelector(".dropDownMenu"),
+  joinRoomButton = document.querySelector(".joiningRoom"),
+  URLTextArea = document.querySelector(".URLTextArea");
 
 socket.on("changeUrl", (data) => window.location.href =
   window.location.href + data);
@@ -16,8 +18,7 @@ function init() {
 }
 
 function setClickListener() {
-  let joinRoomButton = document.querySelector(".joiningRoom"),
-    closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
+  let closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
     creatingRoomButton = document.querySelector(".creatingRoom");
   dropDownMenu.addEventListener("keypress", onLinkEntered);
   joinRoomButton.addEventListener("click", showURLTextBox);
@@ -31,6 +32,11 @@ function createNewRoom() {
 
 function showURLTextBox() {
   dropDownMenu.classList.remove("hidden");
+  if(URLTextArea.value !== ""){
+    joinRoomButton.addEventListener("click", function(){
+      window.location.href = window.location.href + URLTextArea.value;
+    });
+  }
 }
 
 function hideURLTextBox() {
@@ -38,7 +44,6 @@ function hideURLTextBox() {
 }
 
 function onLinkEntered(e) {
-  let URLTextArea = document.querySelector(".URLTextArea");
   if (e.key === "Enter" && URLTextArea.value !== "") {
     window.location.href = window.location.href + URLTextArea.value;
   }
