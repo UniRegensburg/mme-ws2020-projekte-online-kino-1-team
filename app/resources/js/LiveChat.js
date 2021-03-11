@@ -6,18 +6,23 @@ import { getNickName } from "./room.js";
 const socket = io("http://localhost:3000");
 let messageTextField;
 
-socket.on("MessageToClients", (message, nickname) => {
-    showMessage(message, nickname);
+socket.on("MessageToClients", (message, nickname, room) => {
+    var clientRoom = window.location.href;
+    // only send message to users in the same room using the link
+    if(room === clientRoom){
+        showMessage(message, nickname);
+    }
 });
 
 // add own message and send to server
 function addNewMessage() {
     var chat = document.querySelector(".chat"),
-        message = document.createElement("div");
+        message = document.createElement("div"),
+        room = window.location.href;
     message.innerHTML = "You: " + messageTextField.value;
     chat.insertBefore(message, document.querySelector(".typeField"));
     // send Message to Server
-    socket.emit("MessageToServer", messageTextField.value, getNickName());
+    socket.emit("MessageToServer", messageTextField.value, getNickName(), room);
     messageTextField.value = "";
 }
 

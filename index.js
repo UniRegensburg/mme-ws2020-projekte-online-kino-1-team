@@ -27,8 +27,8 @@ io.on("connection", (socket) => {
     socket.emit("changeUrl", url);
   });
   // receive Message on Server
-  socket.on("MessageToServer", (message, nickname) => {
-    socket.broadcast.emit("MessageToClients", message, nickname);
+  socket.on("MessageToServer", (message, nickname, room) => {
+    socket.broadcast.emit("MessageToClients", message, nickname, room);
   });
 });
 
