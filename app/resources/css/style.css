@@ -93,6 +93,11 @@ body {
     flex-direction: column;
 }
 
+.overlay-right-body{
+    display: flex;
+    flex-direction: column;
+}
+
 .overlay-body-form{
     display: flex;
     flex-direction: column;
@@ -158,17 +163,37 @@ body {
     border: 2px solid var(--hover-color);
 }
 
-.overlay-output{
+.overlay-output-explanation{
     display: none;
     opacity: 0;
 }
 
-.overlay-output.active{
+.overlay-output-explanation.active{
     display:flex;
     opacity: 1;
     color: var(--font-color);
     font-size: 18.5px;
     margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+.overlay-output-link{
+    display: none;
+    opacity: 0;
+}
+
+.overlay-output-link.active{
+    display: flex;
+    opacity: 1;
+    color: var(--font-color);
+    font-size: 18.5px;
+    margin-left: 2em;
+    background: transparent;
+    border: 2px solid var(--font-color);
+    border-radius: 6px;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
 }
 
 .overlay-background{
