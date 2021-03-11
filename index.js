@@ -17,8 +17,7 @@ const AppServer = require("./server/AppServer.js"),
   appDir = path.join(__dirname, "../", process.argv[2]),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
-  uri =
-  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
+  uri = "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
 io.on("connection", (socket) => {
   //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
@@ -27,13 +26,13 @@ io.on("connection", (socket) => {
     server.addRoom(url);
     socket.emit("changeUrl", url);
   });
-  socket.on("MessageToServer", (message) => {
-    console.log("Message received at SERVER", message);
-    socket.broadcast.emit("MessageToClients", message);
+  // receive Message on Server
+  socket.on("MessageToServer", (message, nickname) => {
+    socket.broadcast.emit("MessageToClients", message, nickname);
   });
 });
 
-httpServer.listen(SOCKETPORT, function() {
+httpServer.listen(SOCKETPORT, function () {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 

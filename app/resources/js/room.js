@@ -28,4 +28,8 @@ function enterNickname(){
     document.querySelector(".typeField").disabled = false;
 }
 
+export function getNickName(){
+    return nicknameTextField.value;
+}
+
 init();
