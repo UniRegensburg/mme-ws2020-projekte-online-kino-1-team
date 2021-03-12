@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import { Calender } from "./Calender.js";
+import { Calender, getUrlFromIndex } from "./Calender.js";
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
@@ -10,6 +10,10 @@ let dropDownMenu = document.querySelector(".dropDownMenu"),
 
 socket.on("changeUrl", (data) => window.location.href =
   window.location.href + data);
+  
+socket.on("urlToClient", (data) => {
+  getUrlFromIndex(data);
+});
 
 function init() {
   setClickListener();
@@ -47,6 +51,10 @@ function onLinkEntered(e) {
   if (e.key === "Enter" && URLTextArea.value !== "") {
     window.location.href = window.location.href + URLTextArea.value;
   }
+}
+
+export function sendDateToServer(){
+  socket.emit("dateToServer");
 }
 
 init();

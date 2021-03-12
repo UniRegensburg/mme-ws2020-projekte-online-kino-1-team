@@ -196,6 +196,10 @@ body {
     text-align: center;
 }
 
+.overlay-output-link.active:hover{
+    border: 2px solid var(--hover-color);
+}
+
 .overlay-background{
     position: fixed;
     transition: 200ms ease-in-out;
