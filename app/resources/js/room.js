@@ -1,16 +1,12 @@
 /* eslint-env node */
 
-import {LiveChat} from "./LiveChat.js";
+import {setLiveChatClickListener} from "./LiveChat.js";
 
-// eslint-disable-next-line no-undef
-//const socket = io("http://localhost:3000");
-
-let nicknameTextField,
-liveChatInstance;
+let nicknameTextField;
 
 function init(){
     setClickListener();
-    liveChatInstance = new LiveChat();
+    setLiveChatClickListener();
 }
 
 function setClickListener(){

@@ -6,6 +6,15 @@ import { getNickName } from "./room.js";
 const socket = io("http://localhost:3000");
 let messageTextField;
 
+export function setLiveChatClickListener() {
+        messageTextField = document.querySelector(".typeField");
+        messageTextField.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" && messageTextField.value !== "") {
+                addNewMessage();
+            }
+        });
+    }
+
 socket.on("MessageToClients", (message, nickname, room) => {
     var clientRoom = window.location.href;
     // only send message to users in the same room using the link
@@ -33,19 +42,4 @@ function showMessage(messageFromServer, nickname) {
         message = document.createElement("div");
     message.innerHTML = nickname + ": " + messageFromServer;
     chat.insertBefore(message, document.querySelector(".typeField"));
-}
-
-export class LiveChat {
-    constructor() {
-        this.setClickListener();
-    }
-
-    setClickListener() {
-        messageTextField = document.querySelector(".typeField");
-        messageTextField.addEventListener("keypress", function (e) {
-            if (e.key === "Enter" && messageTextField.value !== "") {
-                addNewMessage();
-            }
-        });
-    }
 }
