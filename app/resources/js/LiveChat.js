@@ -19,6 +19,7 @@ function addNewMessage() {
     var chat = document.querySelector(".chat"),
         message = document.createElement("div"),
         room = window.location.href;
+        message.className="message";
     message.innerHTML = "You: " + messageTextField.value;
     chat.insertBefore(message, document.querySelector(".typeField"));
     // send Message to Server

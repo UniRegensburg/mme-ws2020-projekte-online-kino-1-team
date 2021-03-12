@@ -83,6 +83,8 @@ input:checked + .roundButton:before  {
 }
 
 .chat{
+    display: flex;
+    flex-direction: column;
     text-align: center;
     background-color: transparent;
     font-size: 35px;
@@ -94,11 +96,15 @@ input:checked + .roundButton:before  {
     overflow-y: scroll;
 }
 
+.message{
+    z-index: -1;
+    color: var(--font-color);
+    font-size: 25px;
+}
+
 .typeField{
-    position: relative;
-    top: 85%;
-    right: 1%;
-    width: 80%;
+    width: 70%;
+    
     border: 2px solid var(--font-color);
     border-radius: 18px;
 }
