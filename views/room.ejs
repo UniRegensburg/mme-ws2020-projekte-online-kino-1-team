@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WatchMates</title>
     <link rel="stylesheet" href="resources/css/styleRoom.css">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="//vjs.zencdn.net/7.8.2/video.min.js"></script>
+    <script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 </head>
 
 <body>
@@ -15,9 +18,19 @@
     </label>
     <div class="room">
         <span class="playlist">Playlist</span>
-        <video class="video" controls="true" width="50%">
-            <source src="" type="video.mp4">
-        </video>
+
+        <div class="video-box">
+            <p class="video-prompt">Drag&Drop</p>
+            <video id="videoPlayer" class="video-js" width="640">
+                <source id="videoSrc" src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+
         <span class="chat disabled">Chat
             <input class="typeField" type="text" disabled>
         </span>
@@ -31,5 +44,7 @@
         <span class="stepThree">Chattet miteinander</span>
     </div>
     <script type="module" src="resources/js/room.js"></script>
+    
 </body>
+
 </html>
