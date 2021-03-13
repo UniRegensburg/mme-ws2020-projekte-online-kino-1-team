@@ -41,7 +41,6 @@ class DBManager {
   }
 
   updatePlaylist(roomID, playlist) {
-    
     Room.findOneAndUpdate({_id: roomID}, {playlist: playlist}).exec();
   }
 

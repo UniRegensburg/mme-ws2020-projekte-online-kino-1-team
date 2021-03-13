@@ -9,7 +9,7 @@ function init() {
         temp2Playlist = [],
         sources1 = {
             sources: [{
-                src: "resources/css/Bunny.mp4",
+                src: "resources/css/SampleVideo_1280x720_2mb.mp4",
                 type: "video/mp4",
             }],
         },

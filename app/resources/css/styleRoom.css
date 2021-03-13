@@ -4,7 +4,7 @@ html {
     margin: 0;
 }
 
-body{
+body {
     background: url("backgroundRoom.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -53,15 +53,15 @@ body{
     transition: all 0.7s;
 }
 
-.roundButton:hover{
+.roundButton:hover {
     border: 2px solid var(--hover-color);
 }
 
-input:checked + .roundButton:before  {
+input:checked+.roundButton:before {
     transform: translate(2.6em, 0);
 }
 
-.room{
+.room {
     padding-top: 4em;
     display: flex;
     justify-content: space-between;
@@ -70,7 +70,7 @@ input:checked + .roundButton:before  {
     max-width: 1600px;
 }
 
-.playlist{
+.playlist {
     background: transparent;
     font-size: 35px;
     text-align: center;
@@ -79,10 +79,52 @@ input:checked + .roundButton:before  {
     border: 3px solid var(--font-color);
     height: 17em;
     width: 9em;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-color: dark;
 }
 
-.chat{
+li {
+    text-align: left;
+    padding: 5%;
+    display: flex;
+    height: 2.5em;
+    width: justify-content;
+}
+
+li img {
+    width: 2.5em;
+    height: 100%;
+}
+
+li p {
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: center;
+    font-size: 17px;
+    word-wrap: break-word;
+    overflow: auto;
+    width: 13em;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+li p::-webkit-scrollbar {
+    display: none;
+}
+
+button {
+    color: white;
+    background-color: transparent;
+    border: transparent;
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    position: sticky;
+    align-items: flex-end;
+
+}
+
+.chat {
     text-align: center;
     background-color: transparent;
     font-size: 35px;
@@ -94,7 +136,7 @@ input:checked + .roundButton:before  {
     overflow-y: scroll;
 }
 
-.typeField{
+.typeField {
     position: relative;
     top: 85%;
     right: 1%;
@@ -103,20 +145,20 @@ input:checked + .roundButton:before  {
     border-radius: 18px;
 }
 
-.typeField:hover{
+.typeField:hover {
     border: 2px solid var(--hover-color);
 }
 
-.disabled{
+.disabled {
     color: var(--hidden-color-room);
 }
 
-.typeField:disabled{
+.typeField:disabled {
     background: var(--hidden-color-room);
     border: 2px solid var(--hidden-color-room);
 }
 
-.nickname{
+.nickname {
     display: flex;
     padding: 0;
     width: 42%;
@@ -131,20 +173,20 @@ input:checked + .roundButton:before  {
     border-radius: 18px;
 }
 
-.hidden{
+.hidden {
     display: none;
     opacity: 100;
 }
 
-.nickname::placeholder{
+.nickname::placeholder {
     color: var(--placeholder-color-room);
 }
 
-.nickname:hover{
+.nickname:hover {
     border: 3px solid var(--hover-color);
 }
 
-.footer{
+.footer {
     padding-top: 2.5em;
     display: flex;
     justify-content: space-between;
@@ -153,12 +195,14 @@ input:checked + .roundButton:before  {
     max-width: 1420px;
 }
 
-.stepOne, .stepTwo, .stepThree{
+.stepOne,
+.stepTwo,
+.stepThree {
     font-size: 30px;
     color: var(--font-color);
 }
 
-.arrow{
+.arrow {
     width: 100px;
     height: 4px;
     border-radius: 4px;
@@ -166,7 +210,7 @@ input:checked + .roundButton:before  {
     position: relative;
 }
 
-.arrow:after{
+.arrow:after {
     content: "";
     display: inline-block;
     border-radius: 4px;
@@ -179,7 +223,7 @@ input:checked + .roundButton:before  {
     bottom: 13px;
 }
 
-.arrow:before{
+.arrow:before {
     content: "";
     display: inline-block;
     border-radius: 4px;
@@ -241,4 +285,3 @@ input:checked + .roundButton:before  {
     text-align: center;
     color: rgb(250, 250, 250);
 }
-
