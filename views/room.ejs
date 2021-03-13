@@ -14,11 +14,16 @@
         <span class="roundButton"></span>
     </label>
     <div class="room">
-        <span class="playlist">Playlist</span>
-        <video class="video" controls="true" width="50%">
+        <div class="playlist">
+            <span class="playlist-header">Playlist</span>
+        </div>
+        <video class="video" controls="true" width="80%">
             <source src="" type="video.mp4">
         </video>
-        <div class="chat disabled">Chat
+        <div class="chat">
+            <div class="chat-body">
+                <div class="chat-header disabled">Chat</div>
+            </div>
             <input class="typeField" type="text" disabled>
         </div>
     </div>
@@ -33,4 +38,5 @@
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
+
 </html>

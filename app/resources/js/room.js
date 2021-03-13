@@ -20,7 +20,7 @@ function setClickListener(){
 
 function enterNickname(){
     nicknameTextField.classList.add("hidden");
-    document.querySelector(".chat").classList.remove("disabled");
+    document.querySelector(".chat-header").classList.remove("disabled");
     document.querySelector(".typeField").disabled = false;
 }
 

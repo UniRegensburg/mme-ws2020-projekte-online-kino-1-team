@@ -71,40 +71,61 @@ input:checked + .roundButton:before  {
 }
 
 .playlist{
+    display: flex;
+    flex-direction: column;
     background: transparent;
-    font-size: 35px;
-    text-align: center;
-    color: var(--font-color);
+    margin-right: 5em;
     border-radius: 10px;
     border: 3px solid var(--font-color);
-    height: 17em;
-    width: 9em;
+    height: 500px;
+    width: 30%;
     overflow-y: scroll;
+}
+
+.playlist-header{
+    font-size: 40px;
+    text-align: center;
+    color: var(--font-color);
 }
 
 .chat{
     display: flex;
     flex-direction: column;
-    text-align: center;
-    background-color: transparent;
-    font-size: 35px;
-    color: var(--font-color);
-    border-radius: 10px;
+    background: transparent;
+    margin-left: 5em;
+    height: 500px;
+    width: 30%;
     border: 3px solid var(--font-color);
-    height: 17em;
-    width: 9em;
+    border-radius: 10px;
+}
+
+.chat-body{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    height: 450px;
     overflow-y: scroll;
 }
 
+.chat-header{
+    font-size: 40px;
+    color: var(--font-color);
+    text-align: center;
+}
+
 .message{
-    z-index: -1;
     color: var(--font-color);
     font-size: 25px;
+    margin-top: 0.2em;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0.5em;
 }
 
 .typeField{
-    width: 70%;
-    
+    margin-top: 1.2em;
+    margin-left: 0.8em;
+    width: 90%;
     border: 2px solid var(--font-color);
     border-radius: 18px;
 }
@@ -196,16 +217,4 @@ input:checked + .roundButton:before  {
     position: absolute;
     right: -6px;
     bottom: -13px;
-}
-
-::-webkit-scrollbar {
-    height: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--font-color);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--font-color);
 }
