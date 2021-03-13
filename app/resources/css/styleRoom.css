@@ -80,23 +80,21 @@ input:checked+.roundButton:before {
     height: 17em;
     width: 9em;
     overflow-y: auto;
-    scrollbar-color: dark;
 }
 
-li {
+.playlist li {
     text-align: left;
     padding: 5%;
     display: flex;
     height: 2.5em;
-    width: justify-content;
 }
 
-li img {
+.playlist li img {
     width: 2.5em;
     height: 100%;
 }
 
-li p {
+.playlist li p {
     padding-left: 2%;
     padding-right: 2%;
     text-align: center;
@@ -108,7 +106,7 @@ li p {
     -ms-overflow-style: none;
 }
 
-li p::-webkit-scrollbar {
+.playlist li p::-webkit-scrollbar {
     display: none;
 }
 
@@ -260,21 +258,6 @@ button {
     width: 480px;
     height: 360px;
     margin: 0 auto;
-}
-
-.video-box.dragover {
-    border-color: rgb(20, 120, 220);
-    background-color: rgb(30, 30, 30);
-}
-
-.video-box.playing {
-    border-color: rgb(20, 120, 220);
-    background-color: rgb(30, 30, 30);
-    opacity: 0.7;
-}
-
-.video-box.playing:hover {
-    opacity: 1;
 }
 
 .video-box .video-prompt {

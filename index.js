@@ -1,5 +1,7 @@
 /* eslint-env node */
 
+const { ObjectID } = require("bson");
+
 //Server
 const SOCKETPORT = 3000,
   path = require("path");
@@ -26,6 +28,7 @@ io.on("connection", (socket) => {
     server.addRoom(url);
     socket.emit("changeUrl", url);
   });
+  socket.on("fileUpload", e => console.log(e));
 });
 
 httpServer.listen(SOCKETPORT, function() {
