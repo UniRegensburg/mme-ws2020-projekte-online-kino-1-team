@@ -80,6 +80,7 @@ function setFileUpload() {
       titel: "Erster Titel",
     }]);
     playlist.setDragAndDrop();
+    playlist.initDeleteButton();
     socket.emit("fileUpload", "testVideo");
     }
 

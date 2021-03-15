@@ -16,6 +16,7 @@ class Playlist {
 
     });
     this.setDragAndDrop();
+    this.initDeleteButton();
   }
 
   addFile(playlist) {
@@ -42,6 +43,13 @@ class Playlist {
     });
 
   }
+  initDeleteButton() {
+    var deleteButtons = document.querySelectorAll(".deleteButton"),
+      i;
+    for (i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener("click", deletePlaylistObject);
+    }
+  }
 }
 
 function dragStart(eventStart) {
@@ -59,10 +67,15 @@ function dragEnter(eventEnter) {
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
     playlistBox = document.querySelector(".playlistBox");
-  if (dragTarget.parentNode !== dropTarget) {
+  if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
     playlistBox.insertBefore(dragTarget, dropTarget);
   }
 
+}
+
+function deletePlaylistObject(event) {
+  var el = event.target;
+  el.parentNode.remove(el);
 }
 
 export default Playlist;
