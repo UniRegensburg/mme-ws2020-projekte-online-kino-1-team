@@ -15,10 +15,10 @@ class Playlist {
       playlistBox.appendChild(clone);
 
     });
-    setDragAndDrop();
+    this.setDragAndDrop();
   }
-  
-  addFile(playlist){
+
+  addFile(playlist) {
     let playlistBox = document.querySelector(".playlistBox"),
       playlistTemplate = document.getElementById("playlistTemplate"),
       templateImg = playlistTemplate.content.querySelector("img"),
@@ -32,17 +32,16 @@ class Playlist {
 
     });
   }
-}
+  setDragAndDrop() {
+    let playlistEls = document.querySelectorAll("li");
+    playlistEls.forEach(element => {
+      element.addEventListener("dragstart", dragStart);
+      element.addEventListener("dragover", dragOver);
+      element.addEventListener("dragenter", dragEnter);
+      element.addEventListener("drop", dragDrop);
+    });
 
-function setDragAndDrop() {
-  let playlistEls = document.querySelectorAll("li");
-  playlistEls.forEach(element => {
-    element.addEventListener("dragstart", dragStart);
-    element.addEventListener("dragover", dragOver);
-    element.addEventListener("dragenter", dragEnter);
-    element.addEventListener("drop", dragDrop);
-  });
-
+  }
 }
 
 function dragStart(eventStart) {
@@ -60,10 +59,10 @@ function dragEnter(eventEnter) {
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
     playlistBox = document.querySelector(".playlistBox");
-    if(dragTarget.parentNode !== dropTarget){
-      playlistBox.insertBefore(dragTarget, dropTarget);
-    }
-  
+  if (dragTarget.parentNode !== dropTarget) {
+    playlistBox.insertBefore(dragTarget, dropTarget);
+  }
+
 }
 
 export default Playlist;

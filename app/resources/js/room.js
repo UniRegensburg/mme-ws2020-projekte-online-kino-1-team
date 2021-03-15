@@ -79,6 +79,7 @@ function setFileUpload() {
       poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
       titel: "Erster Titel",
     }]);
+    playlist.setDragAndDrop();
     socket.emit("fileUpload", "testVideo");
     }
 
