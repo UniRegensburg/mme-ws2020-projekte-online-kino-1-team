@@ -9,10 +9,18 @@
 </head>
 
 <body>
-    <label class="toggle">
-        <input id="toggleButton" type="checkbox">
-        <span class="roundButton"></span>
-    </label>
+    <div class="header">
+        <label class="toggleOne">
+            <input id="toggleButton" type="checkbox">
+            <span class="roundButton"></span>
+        </label>
+        <label class="toggleTwo">
+            <input id="toggleButton" type="checkbox">
+            <span class="roundButton"></span>
+        </label>
+    </div>
+    <div class="overlay-toggleOne hidden">Ambilight</div>
+    <div class="overlay-toggleTwo hidden">Nachrichten stummschalten</div>
     <div class="room">
         <div class="playlist">
             <span class="playlist-header">Playlist</span>
@@ -21,11 +29,19 @@
             <source src="" type="video.mp4">
         </video>
         <div class="chat">
-            <div class="chat-body">
-                <div class="chat-header disabled">Chat</div>
+            <div class="chat-header">
+                <img src="arrowIcon.png" alt="Icon-Arrow" class="chat-header-icon" />
+                <div class="chat-header-title disabled">Chat</div>
             </div>
-            <input class="typeField" type="text" disabled>
+            <div class="chat-body">
+                <div class="chat-messages"></div>
+            </div>
+            <div class="chat-footer">
+                <input class="typeField" type="text" disabled>
+                <img src="sendIcon.png" alt="Icon-Send" class="chat-footer-icon" />
+            </div>
         </div>
+        <img src="arrowIcon.png" alt="Icon" class="chat-icon hidden" />
     </div>
     <input class="nickname" type="text" placeholder="Gebe zuerst einen Nicknamen ein">
     <div class="footer">
