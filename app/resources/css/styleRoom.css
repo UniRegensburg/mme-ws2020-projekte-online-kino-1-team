@@ -173,12 +173,16 @@ input:checked + .roundButton:before  {
 }
 
 .user, .receivedUser{
-    color: var(--font-color);
+    color: var(--user-color);
     font-size: 25px;
     font-weight: 780;
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0.5em;
+}
+
+.receivedUser{
+    color: var(--user-received);
 }
 
 .message, .receivedMessage{

@@ -4,7 +4,7 @@ import { getNickName } from "./room.js";
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
-let messageTextField,
+var messageTextField,
     messageSendIcon;
 
 export function setLiveChatClickListener() {
@@ -16,8 +16,8 @@ export function setLiveChatClickListener() {
             addNewMessage();
         }
     });
-    messageSendIcon.addEventListener("click", function (){
-        if (messageTextField.value !== ""){
+    messageSendIcon.addEventListener("click", function () {
+        if (messageTextField.value !== "") {
             addNewMessage();
         }
     });
@@ -55,14 +55,28 @@ function showMessage(messageFromServer, nickname) {
     var chat = document.querySelector(".chat-messages"),
         message = document.createElement("p"),
         user = document.createElement("p");
-
     message.className = "receivedMessage disabled";
     user.className = "receivedUser disabled";
     message.innerHTML = messageFromServer;
     user.innerHTML = nickname + ":";
     chat.appendChild(user, chat);
     chat.appendChild(message, chat);
+
+    playSound();
     checkIfNicknameEntered();
+
+}
+
+function playSound() {
+    var audio = document.querySelector(".audioFile"),
+        muteCheckBox = document.getElementById("toggleButtonTwo");
+
+    if (!muteCheckBox.checked) {
+        audio.volume = 0.3;
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
+    }
 }
 
 function checkIfNicknameEntered() {
@@ -91,8 +105,8 @@ function removeDisabled() {
 
 function pageScroll() {
     let autoScroll = document.querySelector(".chat-body"),
-    scrolldelay;
-    autoScroll.scrollBy(0,1);
+        scrolldelay;
+    autoScroll.scrollBy(0, 1);
     // eslint-disable-next-line no-unused-vars
     scrolldelay = setTimeout(pageScroll, 3);
 }

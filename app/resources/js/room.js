@@ -46,19 +46,19 @@ function showChat() {
     showChatIcon.classList.add("hidden");
 }
 
-function showOverlayOne(){
+function showOverlayOne() {
     document.querySelector(".overlay-toggleOne").classList.remove("hidden");
 }
 
-function showOverlayTwo(){
+function showOverlayTwo() {
     document.querySelector(".overlay-toggleTwo").classList.remove("hidden");
 }
 
-function hideOverlayOne(){
+function hideOverlayOne() {
     document.querySelector(".overlay-toggleOne").classList.add("hidden");
 }
 
-function hideOverlayTwo(){
+function hideOverlayTwo() {
     document.querySelector(".overlay-toggleTwo").classList.add("hidden");
 }
 
