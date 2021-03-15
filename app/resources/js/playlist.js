@@ -60,7 +60,10 @@ function dragEnter(eventEnter) {
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
     playlistBox = document.querySelector(".playlistBox");
-  playlistBox.insertBefore(dragTarget, dropTarget);
+    if(dragTarget.parentNode !== dropTarget){
+      playlistBox.insertBefore(dragTarget, dropTarget);
+    }
+  
 }
 
 export default Playlist;
