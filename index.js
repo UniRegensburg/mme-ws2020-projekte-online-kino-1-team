@@ -26,6 +26,12 @@ io.on("connection", (socket) => {
     server.addRoom(url);
     socket.emit("changeUrl", url);
   });
+  socket.on("dateToServer", () => {
+    let url = roomManager.createUrl();
+    dbClient.addRoom(url);
+    server.addRoom(url);
+    socket.emit("urlToClient", url);
+  });
 });
 
 httpServer.listen(SOCKETPORT, function() {
