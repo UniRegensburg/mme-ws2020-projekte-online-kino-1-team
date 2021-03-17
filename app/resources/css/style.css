@@ -30,12 +30,190 @@ body {
 }
 
 .calender{
+    cursor: pointer;
     background-color: transparent;
     color: var(--font-color);
     font-size: 40px;
     padding: 0.5em;
     border-radius: 18px;
     border: 3px solid var(--font-color);
+}
+
+.overlay{
+    position: fixed;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 3px solid var(--font-color);
+    border-radius: 18px;
+    z-index: 3;
+    background-color: var(--overlay-background);
+    width: 500px;
+    max-width: 80%;
+}
+
+.overlay.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.overlay-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-bottom: 3px solid var(--font-color);
+}
+
+.overlay-title{
+    font-size: 30px;
+}
+
+.overlay-close{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 25px;
+    color: var(--font-color);
+}
+
+.overlay-close:hover{
+    color: var(--hover-color);
+}
+
+.overlay-body{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.overlay-left-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-right-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-body-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-label-date{
+    padding-bottom: 0.5em;
+}
+
+.overlay-choose-date{
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid var(--font-color);
+}
+
+.overlay-choose-date:hover{
+    border: 2px solid var(--hover-color);
+}
+
+.overlay-label-time{
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+.overlay-choose-time{
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid var(--font-color);
+}
+
+.overlay-choose-time:hover{
+    border: 2px solid var(--hover-color);
+}
+
+.overlay-input-error{
+    display: none;
+    opacity: 0;
+}
+
+.overlay-input-error.active{
+    display: flex;
+    padding: none;
+    opacity: 1;
+    color: var(--font-color);
+    font-size: 15px;
+}
+
+.overlay-submit-button{
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid var(--font-color);
+    border-radius: 6px;
+    color: var(--font-color);
+    margin-top: 0.8em;
+}
+
+.overlay-submit-button:hover{
+    border: 2px solid var(--hover-color);
+}
+
+.overlay-output-explanation{
+    display: none;
+    opacity: 0;
+}
+
+.overlay-output-explanation.active{
+    display:flex;
+    opacity: 1;
+    color: var(--font-color);
+    font-size: 18.5px;
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+.overlay-output-link{
+    display: none;
+    opacity: 0;
+}
+
+.overlay-output-link.active{
+    display: flex;
+    opacity: 1;
+    color: var(--font-color);
+    font-size: 18.5px;
+    margin-left: 2em;
+    background: transparent;
+    border: 2px solid var(--font-color);
+    border-radius: 6px;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+}
+
+.overlay-output-link.active:hover{
+    border: 2px solid var(--hover-color);
+}
+
+.overlay-background{
+    position: fixed;
+    transition: 200ms ease-in-out;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.overlay-background.active{
+    opacity: 1;
+    pointer-events: all;
 }
 
 .middleBar {
@@ -61,6 +239,7 @@ body {
 }
 
 .creatingRoom{
+    cursor: pointer;
     background-color: transparent;
     color: var(--font-color);
     max-width: 300px;
@@ -75,6 +254,7 @@ body {
 }
 
 .joiningRoom{
+    cursor: pointer;
     background-color: transparent;
     color: var(--font-color);
     max-width: 300px;
@@ -124,6 +304,7 @@ body {
 }
 
 .closeDropDownMenu{
+    cursor: pointer;
     position: relative;
     font-size: 32px;
     background-color: transparent;
@@ -181,16 +362,4 @@ body {
     position: absolute;
     right: -6px;
     bottom: -13px;
-}
-
-::-webkit-scrollbar {
-    height: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--font-color);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--font-color);
 }

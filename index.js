@@ -29,6 +29,12 @@ io.on("connection", (socket) => {
   // receive Message on Server
   socket.on("MessageToServer", (message, nickname, room) => {
     socket.broadcast.emit("MessageToClients", message, nickname, room);
+    });
+  socket.on("dateToServer", () => {
+    let url = roomManager.createUrl();
+    dbClient.addRoom(url);
+    server.addRoom(url);
+    socket.emit("urlToClient", url);
   });
 });
 
