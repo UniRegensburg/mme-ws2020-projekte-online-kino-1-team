@@ -1,6 +1,7 @@
 /* eslint-env node */
 
 //Server
+
 const SOCKETPORT = 3000,
   path = require("path");
 
@@ -16,8 +17,7 @@ const AppServer = require("./server/AppServer.js"),
   appDir = path.join(__dirname, "../", process.argv[2]),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
-  uri =
-  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
+  uri = "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
 io.on("connection", (socket) => {
   //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
@@ -26,9 +26,19 @@ io.on("connection", (socket) => {
     server.addRoom(url);
     socket.emit("changeUrl", url);
   });
+  // receive Message on Server
+  socket.on("MessageToServer", (message, nickname, room) => {
+    socket.broadcast.emit("MessageToClients", message, nickname, room);
+    });
+  socket.on("dateToServer", () => {
+    let url = roomManager.createUrl();
+    dbClient.addRoom(url);
+    server.addRoom(url);
+    socket.emit("urlToClient", url);
+  });
 });
 
-httpServer.listen(SOCKETPORT, function() {
+httpServer.listen(SOCKETPORT, function () {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 

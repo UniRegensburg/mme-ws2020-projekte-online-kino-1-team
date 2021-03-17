@@ -27,6 +27,7 @@ class AppServer {
     this.app.set("view engine", "ejs");
     this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
+    this.app.use("/app", express.static("public"));
   }
 
   /**

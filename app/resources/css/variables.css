@@ -4,6 +4,9 @@
     --background-color: #4d4d4d;
     --hover-color: #858585;
     --black: black;
+    --overlay-background: rgb(20, 20, 20);
     --placeholder-color-room: rgb(158, 150, 150);
     --hidden-color-room: rgb(124, 120, 120);
+    --user-color: rgb(107, 233, 233);
+    --user-received: rgb(138, 88, 163);
 }
