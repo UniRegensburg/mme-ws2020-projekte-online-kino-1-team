@@ -9,18 +9,40 @@
 </head>
 
 <body>
-    <label class="toggle">
-        <input id="toggleButton" type="checkbox">
-        <span class="roundButton"></span>
-    </label>
+    <audio src="messageSound.mp3" class="audioFile"></audio>
+    <div class="header">
+        <label class="toggleOne">
+            <input id="toggleButtonOne" type="checkbox">
+            <span class="roundButton"></span>
+        </label>
+        <label class="toggleTwo">
+            <input id="toggleButtonTwo" type="checkbox">
+            <span class="roundButton"></span>
+        </label>
+    </div>
+    <div class="overlay-toggleOne hidden">Ambilight</div>
+    <div class="overlay-toggleTwo hidden">Nachrichten stummschalten</div>
     <div class="room">
-        <span class="playlist">Playlist</span>
-        <video class="video" controls="true" width="50%">
+        <div class="playlist">
+            <span class="playlist-header">Playlist</span>
+        </div>
+        <video class="video" controls="true" width="80%">
             <source src="" type="video.mp4">
         </video>
-        <span class="chat disabled">Chat
-            <input class="typeField" type="text" disabled>
-        </span>
+        <div class="chat">
+            <div class="chat-header">
+                <img src="arrowIcon.png" alt="Icon-Arrow" class="chat-header-icon" />
+                <div class="chat-header-title disabled">Chat</div>
+            </div>
+            <div class="chat-body">
+                <div class="chat-messages"></div>
+            </div>
+            <div class="chat-footer">
+                <input class="typeField" type="text" disabled>
+                <img src="sendIcon.png" alt="Icon-Send" class="chat-footer-icon" />
+            </div>
+        </div>
+        <img src="arrowIcon.png" alt="Icon" class="chat-icon hidden" />
     </div>
     <input class="nickname" type="text" placeholder="Gebe zuerst einen Nicknamen ein">
     <div class="footer">
@@ -30,6 +52,8 @@
         <span class="arrow"></span>
         <span class="stepThree">Chattet miteinander</span>
     </div>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
+
 </html>

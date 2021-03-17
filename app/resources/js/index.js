@@ -1,6 +1,8 @@
 /* eslint-env browser */
 import { Calender, getUrlFromIndex } from "./Calender.js";
 
+//Client
+
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
