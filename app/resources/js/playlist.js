@@ -15,10 +15,11 @@ class Playlist {
       playlistBox.appendChild(clone);
 
     });
-    setDragAndDrop();
+    this.setDragAndDrop();
+    this.initDeleteButton();
   }
-  
-  addFile(playlist){
+
+  addFile(playlist) {
     let playlistBox = document.querySelector(".playlistBox"),
       playlistTemplate = document.getElementById("playlistTemplate"),
       templateImg = playlistTemplate.content.querySelector("img"),
@@ -32,17 +33,23 @@ class Playlist {
 
     });
   }
-}
+  setDragAndDrop() {
+    let playlistEls = document.querySelectorAll("li");
+    playlistEls.forEach(element => {
+      element.addEventListener("dragstart", dragStart);
+      element.addEventListener("dragover", dragOver);
+      element.addEventListener("dragenter", dragEnter);
+      element.addEventListener("drop", dragDrop);
+    });
 
-function setDragAndDrop() {
-  let playlistEls = document.querySelectorAll("li");
-  playlistEls.forEach(element => {
-    element.addEventListener("dragstart", dragStart);
-    element.addEventListener("dragover", dragOver);
-    element.addEventListener("dragenter", dragEnter);
-    element.addEventListener("drop", dragDrop);
-  });
-
+  }
+  initDeleteButton() {
+    var deleteButtons = document.querySelectorAll(".deleteButton"),
+      i;
+    for (i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener("click", deletePlaylistObject);
+    }
+  }
 }
 
 function dragStart(eventStart) {
@@ -60,7 +67,15 @@ function dragEnter(eventEnter) {
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
     playlistBox = document.querySelector(".playlistBox");
-  playlistBox.insertBefore(dragTarget, dropTarget);
+  if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
+    playlistBox.insertBefore(dragTarget, dropTarget);
+  }
+
+}
+
+function deletePlaylistObject(event) {
+  var el = event.target;
+  el.parentNode.remove(el);
 }
 
 export default Playlist;
