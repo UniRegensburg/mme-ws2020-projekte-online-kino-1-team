@@ -25,19 +25,19 @@ function init() {
       }],
     };
 
-  temp4Playlist = [{
-      poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
-      titel: "Erster Titel",
-    },
-    {
-      poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
-      titel: "2. cooler Titel",
-    },
-    {
-      poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
-      titel: "2. cooler Titel",
-    },
-  ];
+  /*temp4Playlist = [{
+    poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
+    titel: "Erster Titel",
+  },
+  {
+    poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+    titel: "2. cooler Titel",
+  },
+  {
+    poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+    titel: "2. cooler Titel",
+  },
+  ];*/
 
   tempPlaylist.push(sources1, sources2);
 
@@ -73,12 +73,15 @@ function setFileUpload() {
       url = window.URL || window.webkitURL,
       fileUrl = url.createObjectURL(files[0]);
     console.log(fileUrl);
+    console.log(files[0].name);
+
 
     playlist.addFile([{
-      poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
-      titel: "Erster Titel",
+      poster: fileUrl,
+      titel: files[0].name,
     }]);
     socket.emit("fileUpload", "testVideo");
+    //socket.emit("createThumbnail", fileUrl);
 
   });
 }

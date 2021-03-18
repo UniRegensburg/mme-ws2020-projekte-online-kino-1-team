@@ -80,17 +80,18 @@ input:checked+.roundButton:before {
     height: 17em;
     width: 9em;
     overflow-y: auto;
+    padding-left: 0px;
 }
 
 .playlist li {
     text-align: left;
-    padding: 5%;
+    padding: 2.5%;
     display: flex;
     height: 2.5em;
 }
 
-.playlist li img {
-    width: 2.5em;
+.playlist li video {
+    width: 3em;
     height: 100%;
 }
 
@@ -246,25 +247,10 @@ button {
     background: var(--font-color);
 }
 
-.video-box {
-    border-style: solid;
-    border-width: 2px;
-    border-color: whitesmoke;
-}
-
 .video-box .video-js {
     float: left;
     display: block;
     width: 480px;
     height: 360px;
     margin: 0 auto;
-}
-
-.video-box .video-prompt {
-    position: absolute;
-    width: 480px;
-    height: 100px;
-    margin-top: 150px;
-    text-align: center;
-    color: rgb(250, 250, 250);
 }

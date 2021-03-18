@@ -5,7 +5,7 @@ class Playlist {
   constructor(playlist) {
     let playlistBox = document.querySelector(".playlistBox"),
       playlistTemplate = document.getElementById("playlistTemplate"),
-      templateImg = playlistTemplate.content.querySelector("img"),
+      templateImg = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
     playlist.forEach(element => {
@@ -17,11 +17,11 @@ class Playlist {
     });
     setDragAndDrop();
   }
-  
-  addFile(playlist){
+
+  addFile(playlist) {
     let playlistBox = document.querySelector(".playlistBox"),
       playlistTemplate = document.getElementById("playlistTemplate"),
-      templateImg = playlistTemplate.content.querySelector("img"),
+      templateImg = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
     playlist.forEach(element => {
