@@ -240,7 +240,7 @@ input:checked + .roundButton:before  {
     padding: 0;
     width: 42%;
     justify-content: center;
-    margin: 0 auto 2em auto;
+    margin: 0 auto 1em auto;
     text-align: center;
     color: var(--font-color);
     font-size: 30px;
@@ -263,8 +263,21 @@ input:checked + .roundButton:before  {
     border: 3px solid var(--hover-color);
 }
 
+.copyTheURL{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.copy{
+    color: var(--font-color);
+    font-size: 30px;
+    cursor: pointer;
+}
+
 .footer{
-    padding-top: 2.5em;
+    padding-top: 1.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
