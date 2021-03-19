@@ -1,13 +1,16 @@
 /* eslint-env node */
 import VideoPlayer from "./VideoPlayer.js";
 import Playlist from "./playlist.js";
+//import SocketIOFileUpload from "socketio-file-upload";
 
 //eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
+//var socket = io.connect();
 
 let nicknameTextField;
 var player,
-  playlist;
+  playlist,
+  uploader = new SocketIOFileUpload(socket);
 
 function init() {
   let tempPlaylist = [],
@@ -43,12 +46,18 @@ function init() {
 
   // eslint-disable-next-line no-unused-vars
   player = new VideoPlayer(tempPlaylist);
-  playlist = new Playlist(temp4Playlist);
+  //playlist = new Playlist(temp4Playlist);
 
   setClickListener();
   setFileUpload();
+  uploader.listenOnInput(document.getElementById("siofu_input"));
+  uploader.addEventListener("load", emitFileUpload);
 }
 
+function emitFileUpload(){
+  let roomID = window.location.pathname.split("/")[2];
+  socket.emit("fileUpload", roomID);
+}
 function setClickListener() {
   nicknameTextField = document.querySelector(".nickname");
   nicknameTextField.addEventListener("keypress", function(e) {
@@ -69,17 +78,7 @@ function setFileUpload() {
   playlistBox.addEventListener("dragover", (e) => e.preventDefault());
   playlistBox.addEventListener("drop", (e) => {
     e.preventDefault();
-    let files = e.dataTransfer.files,
-      url = window.URL || window.webkitURL,
-      fileUrl = url.createObjectURL(files[0]);
-    console.log(fileUrl);
-
-    playlist.addFile([{
-      poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
-      titel: "Erster Titel",
-    }]);
-    socket.emit("fileUpload", "testVideo");
-
+    
   });
 }
 
