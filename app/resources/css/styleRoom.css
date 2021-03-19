@@ -276,6 +276,10 @@ input:checked + .roundButton:before  {
     cursor: pointer;
 }
 
+.copy:hover{
+    color: var(--hover-color);
+}
+
 .footer{
     padding-top: 1.5em;
     display: flex;
