@@ -51,6 +51,7 @@ function init() {
   setClickListener();
   setFileUpload();
   uploader.listenOnInput(document.getElementById("siofu_input"));
+  uploader.listenOnDrop(document.querySelector(".playlist"));
   uploader.addEventListener("load", emitFileUpload);
 }
 
