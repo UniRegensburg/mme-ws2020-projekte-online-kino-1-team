@@ -6,26 +6,36 @@ import { Playlist } from "./Playlist.js";
 let nicknameTextField,
     showChatIcon = document.querySelector(".chat-icon"),
     playlist;
+// eslint-disable-next-line no-undef
+const socket = io("http://localhost:3000");
 
 function init() {
     setClickListener();
     setLiveChatClickListener();
 
     let temp4Playlist = [{
-        poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
+        src: "data/Erde.mov",
         titel: "Erster Titel",
       },
       {
-        poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+        src: "data/Erde.mov",
         titel: "2. cooler Titel",
       },
       {
-        poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+        src: "data/Erde.mov",
         titel: "2. cooler Titel",
       },
     ];
     playlist = new Playlist(temp4Playlist);
     setFileUpload();
+    socket.on("addFileToPlaylist", file => {
+        let playlistFile;
+        console.log(file);
+
+        playlist.addFile([file]);
+        playlist.setDragAndDrop();
+        playlist.initDeleteButton();
+    });
 }
 
 function setClickListener() {
@@ -105,17 +115,19 @@ function setFileUpload() {
     playlistBox.addEventListener("drop", (e) => {
       e.preventDefault();
       if(e.dataTransfer.files.length){
-        
+
+        //file zum Server schicken
+
+        //auf Socket nachricht vom Server hören => playlist.addFile(Nachricht vom Server);
+
         /*let files = e.dataTransfer.files,
         url = window.URL || window.webkitURL,
         fileUrl = url.createObjectURL(files[0]);*/
   
-      playlist.addFile([{
-        poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
+      /*playlist.addFile([{
+        src: "data/Erde.mov",
         titel: "Erster Titel",
-      }]);
-      playlist.setDragAndDrop();
-      playlist.initDeleteButton();
+      }]);*/
       }
   
     });

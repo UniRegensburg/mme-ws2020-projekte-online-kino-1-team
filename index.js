@@ -36,6 +36,9 @@ io.on("connection", (socket) => {
     server.addRoom(url);
     socket.emit("urlToClient", url);
   });
+  //Dummy Emit
+  socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
+
 });
 
 httpServer.listen(SOCKETPORT, function () {
@@ -59,6 +62,7 @@ function init() {
   dbClient = new DBManager(uri);
 
   dbClient.getOpenRooms().then((e) => server.openRooms(e));
+
 }
 
 init();

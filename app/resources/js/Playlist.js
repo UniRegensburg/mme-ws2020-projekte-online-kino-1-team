@@ -5,11 +5,11 @@ export class Playlist {
   constructor(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
       playlistTemplate = document.getElementById("playlistTemplate"),
-      templateImg = playlistTemplate.content.querySelector("img"),
+      templateVideo = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
     playlist.forEach(element => {
-      templateImg.src = element.poster;
+      templateVideo.src = element.poster;
       templateP.innerHTML = element.titel;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
@@ -22,16 +22,17 @@ export class Playlist {
   addFile(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
       playlistTemplate = document.getElementById("playlistTemplate"),
-      templateImg = playlistTemplate.content.querySelector("img"),
+      templateVideo = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
     playlist.forEach(element => {
-      templateImg.src = element.poster;
+      templateVideo.src = element.src;
       templateP.innerHTML = element.titel;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
 
     });
+
   }
   setDragAndDrop() {
     let playlistEls = document.querySelectorAll("li");
