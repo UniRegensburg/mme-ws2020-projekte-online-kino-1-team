@@ -41,7 +41,6 @@ export class Playlist {
       element.addEventListener("dragenter", dragEnter);
       element.addEventListener("drop", dragDrop);
     });
-
   }
   initDeleteButton() {
     var deleteButtons = document.querySelectorAll(".deleteButtonPlaylist"),

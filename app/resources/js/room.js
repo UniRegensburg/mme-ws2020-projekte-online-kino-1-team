@@ -25,6 +25,7 @@ function init() {
       },
     ];
     playlist = new Playlist(temp4Playlist);
+    setFileUpload();
 }
 
 function setClickListener() {
@@ -97,5 +98,27 @@ function copyURL() {
 export function getNickName() {
     return nicknameTextField.value;
 }
+
+function setFileUpload() {
+    let playlistBox = document.querySelector(".playlist");
+    playlistBox.addEventListener("dragover", (e) => e.preventDefault());
+    playlistBox.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if(e.dataTransfer.files.length){
+        
+        /*let files = e.dataTransfer.files,
+        url = window.URL || window.webkitURL,
+        fileUrl = url.createObjectURL(files[0]);*/
+  
+      playlist.addFile([{
+        poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
+        titel: "Erster Titel",
+      }]);
+      playlist.setDragAndDrop();
+      playlist.initDeleteButton();
+      }
+  
+    });
+  }
 
 init();
