@@ -7,6 +7,9 @@
     <title>WatchMates</title>
     <link rel="stylesheet" href="resources/css/styleRoom.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
+    <script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 </head>
 
 <body>
@@ -24,12 +27,23 @@
     <div class="overlay-toggleOne hidden">Ambilight</div>
     <div class="overlay-toggleTwo hidden">Nachrichten stummschalten</div>
     <div class="room">
-        <div class="playlist">
-            <span class="playlist-header">Playlist</span>
+        <div class="playlist">Playlist
+            <input type="file" id="siofu_input"/>
+            <ul class= "playlistBox">
+
+            </ul>
         </div>
-        <video class="video" controls="true" width="80%">
-            <source src="" type="video.mp4">
-        </video>
+        <div class="video-box">
+            <p class="video-prompt">Drag&Drop</p>
+            <video id="videoPlayer" class="video-js" width="640">
+                <source id="videoSrc" src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
         <div class="chat">
             <div class="chat-header">
                 <img src="arrowIcon.png" alt="Icon-Arrow" class="chat-header-icon" />
@@ -57,7 +71,14 @@
         <span class="stepThree">Chattet miteinander</span>
     </div>
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="/siofu/client.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
-
+<template id="playlistTemplate">
+    <li id="playlistElement" draggable="true">
+        <img src="" alt="">
+        <p></p>
+        <button>&#9746</button>
+    </li>
+</template>
 </html>
