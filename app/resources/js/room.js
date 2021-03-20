@@ -1,33 +1,13 @@
 /* eslint-env node */
 
 import { setLiveChatClickListener } from "./LiveChat.js";
-import VideoPlayer from "./VideoPlayer.js";
-import Playlist from "./playlist.js";
-
-//eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
 
 let nicknameTextField,
-  player,
-  playlist,
-  uploader = new SocketIOFileUpload(socket),
-  showChatIcon = document.querySelector(".chat-icon");
+    showChatIcon = document.querySelector(".chat-icon");
 
 function init() {
-    // eslint-disable-next-line no-unused-vars
-  //player = new VideoPlayer(tempPlaylist);
-  //playlist = new Playlist(temp4Playlist);
-
-  setClickListener();
-  setFileUpload();
-  uploader.listenOnInput(document.getElementById("siofu_input"));
-  uploader.listenOnDrop(document.querySelector(".playlist"));
-  uploader.addEventListener("load", emitFileUpload);
-}
-
-function emitFileUpload(){
-  let roomID = window.location.pathname.split("/")[2];
-  socket.emit("fileUpload", roomID);
+    setClickListener();
+    setLiveChatClickListener();
 }
 
 function setClickListener() {
@@ -54,13 +34,6 @@ function enterNickname() {
     nicknameTextField.classList.add("hidden");
     document.querySelector(".chat-header-title").classList.remove("disabled");
     document.querySelector(".typeField").disabled = false;
-}
-function setFileUpload() {
-  let playlistBox = document.querySelector(".playlist");
-  playlistBox.addEventListener("dragover", (e) => e.preventDefault());
-  playlistBox.addEventListener("drop", (e) => {
-    e.preventDefault(); 
-  });
 }
 
 function hideChat() {

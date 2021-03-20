@@ -1,8 +1,7 @@
 /* eslint-env node */
 
 const path = require("path"),
-  express = require("express"),
-  siofu = require("socketio-file-upload");
+  express = require("express");
 
 /**
  * AppServer
@@ -29,8 +28,6 @@ class AppServer {
     this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
     this.app.use("/app", express.static("public"));
-    this.app.use(siofu.router);
-    this.app.use("/app", express.static("data"));
   }
 
   /**
@@ -69,10 +66,6 @@ class AppServer {
     this.app.get(randomLink, (req, res) => res.render("room"));
   
     return url;
-  }
-
-  updatePlaylist(roomID){
-    this.app.get("/app/"+ roomID + "/data", express.static("data/" + roomID));
   }
 }
 

@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-const { ObjectID } = require("bson");
-
 var mongoose = require("mongoose"),
   RoomSchema,
   room,
@@ -14,20 +12,17 @@ class DBManager {
       useUnifiedTopology: true,
     });
     RoomSchema = mongoose.Schema;
-    
     room = new RoomSchema({
       id: mongoose.Types.ObjectId,
-      urls: String,
+      url: String,
       test: String,
-      playlist: Array,
     });
-
     Room = mongoose.model("Room", room);
   }
 
   addRoom(randomUrl) {
     let roomInstance = new Room({
-      urls: randomUrl,
+      url: randomUrl,
     });
     roomInstance.save();
   }
@@ -37,18 +32,10 @@ class DBManager {
   }
 
   getRoom(roomID) {
-    return Room.find({ _id: roomID }).exec();
+    return Room.find({ _id: roomID });
   }
 
-  updatePlaylist(roomID, playlist) {
-    Room.findOneAndUpdate({_id: roomID}, {playlist: playlist}).exec();
-  }
-
-  getPlaylist(roomID) {
-    return Room.findOne({ _id: roomID }, "playlist").exec();
-  }
-
-  getOpenRooms() {
+  getOpenRooms(){
     return Room.find({}, "url").exec();
   }
 }

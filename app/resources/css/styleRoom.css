@@ -4,7 +4,7 @@ html {
     margin: 0;
 }
 
-body {
+body{
     background: url("backgroundRoom.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -58,11 +58,11 @@ body {
     transition: all 0.7s;
 }
 
-.roundButton:hover {
+.roundButton:hover{
     border: 2px solid var(--hover-color);
 }
 
-input:checked+.roundButton:before {
+input:checked + .roundButton:before  {
     transform: translate(2.6em, 0);
 }
 
@@ -119,45 +119,8 @@ input:checked+.roundButton:before {
     overflow-y: scroll;
 }
 
-.playlist li {
-    text-align: left;
-    padding: 5%;
-    display: flex;
-    height: 2.5em;
-}
-
-.playlist li img {
-    width: 2.5em;
-    height: 100%;
-}
-
-.playlist li p {
-    padding-left: 2%;
-    padding-right: 2%;
-    text-align: center;
-    font-size: 17px;
-    word-wrap: break-word;
-    overflow: auto;
-    width: 13em;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.playlist li p::-webkit-scrollbar {
-    display: none;
-}
-
-button {
-    color: white;
-    background-color: transparent;
-    border: transparent;
-    width: auto;
-    height: auto;
-    font-size: 1em;
-    position: sticky;
-    align-items: flex-end;
-}
-.chat {
+.playlist-header{
+    font-size: 40px;
     text-align: center;
     color: var(--font-color);
     margin-top: 0.2em;
@@ -182,7 +145,6 @@ button {
     height: 450px;
     overflow-y: scroll;
 }
-
 
 .chat-header{
     display: flex;
@@ -256,11 +218,11 @@ button {
     border: 2px solid var(--hover-color);
 }
 
-.disabled {
+.disabled{
     color: var(--hidden-color-room);
 }
 
-.typeField:disabled {
+.typeField:disabled{
     background: var(--hidden-color-room);
     border: 2px solid var(--hidden-color-room);
 }
@@ -288,16 +250,16 @@ button {
     border-radius: 18px;
 }
 
-.hidden {
+.hidden{
     display: none;
     opacity: 100;
 }
 
-.nickname::placeholder {
+.nickname::placeholder{
     color: var(--placeholder-color-room);
 }
 
-.nickname:hover {
+.nickname:hover{
     border: 3px solid var(--hover-color);
 }
 
@@ -327,14 +289,12 @@ button {
     max-width: 1420px;
 }
 
-.stepOne,
-.stepTwo,
-.stepThree {
+.stepOne, .stepTwo, .stepThree{
     font-size: 30px;
     color: var(--font-color);
 }
 
-.arrow {
+.arrow{
     width: 100px;
     height: 4px;
     border-radius: 4px;
@@ -342,7 +302,7 @@ button {
     position: relative;
 }
 
-.arrow:after {
+.arrow:after{
     content: "";
     display: inline-block;
     border-radius: 4px;
@@ -355,7 +315,7 @@ button {
     bottom: 13px;
 }
 
-.arrow:before {
+.arrow:before{
     content: "";
     display: inline-block;
     border-radius: 4px;
@@ -366,17 +326,4 @@ button {
     position: absolute;
     right: -6px;
     bottom: -13px;
-
-.video-box {
-    border-style: solid;
-    border-width: 2px;
-    border-color: whitesmoke;
-}
-
-.video-box .video-js {
-    float: left;
-    display: block;
-    width: 480px;
-    height: 360px;
-    margin: 0 auto;
 }
