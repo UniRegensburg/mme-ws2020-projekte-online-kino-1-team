@@ -29,16 +29,38 @@ io.on("connection", (socket) => {
   // receive Message on Server
   socket.on("MessageToServer", (message, nickname, room) => {
     socket.broadcast.emit("MessageToClients", message, nickname, room);
-    });
+  });
   socket.on("dateToServer", () => {
     let url = roomManager.createUrl();
     dbClient.addRoom(url);
     server.addRoom(url);
     socket.emit("urlToClient", url);
   });
-  //Dummy Emit
-  socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
 
+  //Dummy Emit
+  //socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
+  let temp4Playlist = [{
+    src: "Erde.mov",
+    titel: "Erster Titel",
+  },
+  {
+    src: "Calculated.mp4",
+    titel: "6. cooler Titel",
+  },
+  {
+    src: "Calculated.mp4",
+    titel: "2. cooler Titel",
+  },
+  ];
+  socket.emit("loadPlaylist", temp4Playlist);
+
+  socket.on("clientUploadsFile", data => {
+
+    //Dummydata src muss später logisch reingepackt werden
+    let playlistObject = {roomID: data.roomID, playlistObject: {src: "Calculated.mp4", title: data.title}};
+    //Hier kommt eigentliche Logik später rein!
+    io.emit("playlistObjectToClients", playlistObject);
+  });
 });
 
 httpServer.listen(SOCKETPORT, function () {

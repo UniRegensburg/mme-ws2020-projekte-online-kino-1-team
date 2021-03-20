@@ -12,29 +12,26 @@ const socket = io("http://localhost:3000");
 function init() {
     setClickListener();
     setLiveChatClickListener();
-
-    let temp4Playlist = [{
-        src: "data/Erde.mov",
-        titel: "Erster Titel",
-      },
-      {
-        src: "data/Erde.mov",
-        titel: "2. cooler Titel",
-      },
-      {
-        src: "data/Erde.mov",
-        titel: "2. cooler Titel",
-      },
-    ];
-    playlist = new Playlist(temp4Playlist);
     setFileUpload();
-    socket.on("addFileToPlaylist", file => {
-        let playlistFile;
-        console.log(file);
 
+    socket.on("loadPlaylist", playlistFiles =>{
+        playlist = new Playlist(playlistFiles);
+        playlist.setDragAndDrop();
+        playlist.initDeleteButton();
+    });
+   
+    socket.on("addFileToPlaylist", file => {
         playlist.addFile([file]);
         playlist.setDragAndDrop();
         playlist.initDeleteButton();
+    });
+
+    socket.on("playlistObjectToClients", playlistObject => {
+        if(window.location.href === playlistObject.roomID){
+            playlist.addFile([playlistObject.playlistObject]);
+            playlist.setDragAndDrop();
+            playlist.initDeleteButton();
+        }
     });
 }
 
@@ -111,23 +108,17 @@ export function getNickName() {
 
 function setFileUpload() {
     let playlistBox = document.querySelector(".playlist");
+    var url2 = window.location.href;
     playlistBox.addEventListener("dragover", (e) => e.preventDefault());
     playlistBox.addEventListener("drop", (e) => {
       e.preventDefault();
       if(e.dataTransfer.files.length){
+          //Hier kommt noch der eigentliche File upload mit Socketio-File-Upload
 
-        //file zum Server schicken
-
-        //auf Socket nachricht vom Server hören => playlist.addFile(Nachricht vom Server);
-
-        /*let files = e.dataTransfer.files,
-        url = window.URL || window.webkitURL,
-        fileUrl = url.createObjectURL(files[0]);*/
-  
-      /*playlist.addFile([{
-        src: "data/Erde.mov",
-        titel: "Erster Titel",
-      }]);*/
+          // dummy data
+          
+          let data = {roomID: url2, title:"Calculated.mp4"};
+        socket.emit("clientUploadsFile", data);
       }
   
     });

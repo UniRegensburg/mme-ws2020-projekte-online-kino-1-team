@@ -9,7 +9,7 @@ export class Playlist {
       templateP = playlistTemplate.content.querySelector("p");
 
     playlist.forEach(element => {
-      templateVideo.src = element.poster;
+      templateVideo.src = element.src;
       templateP.innerHTML = element.titel;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
