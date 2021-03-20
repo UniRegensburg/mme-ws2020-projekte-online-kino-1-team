@@ -17,17 +17,17 @@ class DBManager {
     
     room = new RoomSchema({
       id: mongoose.Types.ObjectId,
-      urls: String,
+      url: String,
       test: String,
       playlist: Array,
-    });
+    });  
 
     Room = mongoose.model("Room", room);
   }
 
   addRoom(randomUrl) {
     let roomInstance = new Room({
-      urls: randomUrl,
+      url: randomUrl,
     });
     roomInstance.save();
   }
