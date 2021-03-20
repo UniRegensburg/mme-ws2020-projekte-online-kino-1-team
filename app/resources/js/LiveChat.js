@@ -1,7 +1,6 @@
 /* eslint-env node */
 
 import { getNickName } from "./room.js";
-
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 var messageTextField,

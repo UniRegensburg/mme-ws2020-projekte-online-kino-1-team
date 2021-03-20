@@ -1,13 +1,30 @@
 /* eslint-env node */
 
 import { setLiveChatClickListener } from "./LiveChat.js";
+import { Playlist } from "./Playlist.js";
 
 let nicknameTextField,
-    showChatIcon = document.querySelector(".chat-icon");
+    showChatIcon = document.querySelector(".chat-icon"),
+    playlist;
 
 function init() {
     setClickListener();
     setLiveChatClickListener();
+
+    let temp4Playlist = [{
+        poster: "https://kuscheltiere.biz/media/2342/catalog/haschen-urmel-hase-bunny-kaninchen-gelb-weis-kuscheltier-19-cm.jpg?size=256",
+        titel: "Erster Titel",
+      },
+      {
+        poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+        titel: "2. cooler Titel",
+      },
+      {
+        poster: "https://media.istockphoto.com/photos/gray-rabbit-bunny-baby-isolated-on-white-background-picture-id176985426",
+        titel: "2. cooler Titel",
+      },
+    ];
+    playlist = new Playlist(temp4Playlist);
 }
 
 function setClickListener() {
