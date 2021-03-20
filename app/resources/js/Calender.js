@@ -46,12 +46,12 @@ function readFormInput() {
     let overlayOutputExplanation = document.querySelector(".overlay-output-explanation");
     overlayOutputExplanation.classList.add("active");
     overlayOutputExplanation.innerHTML = "Der Raum ist reserviert für den " + date.value + " um " + time.value + " Uhr. <br>" +
-        "Unter der folgenden Url kannst du schon einmal beitreten und alles einstellen: " + url;
+        "Unter der folgenden Url kannst du schon einmal beitreten und alles einstellen: " + window.location.href + url;
 }
 
 function addICalInCalender() {
     let dateAndTime = date.value + " " + time.value;
-    CAL_SINGLE.addEvent("WatchMates", "Du hast dir diese URL gesichert: " + url, "", dateAndTime, "");
+    CAL_SINGLE.addEvent("WatchMates", "Du hast dir diese URL gesichert: " + window.location.href + url, "", dateAndTime, "");
     document.querySelector(".overlay-output-link").addEventListener("click", function () {
         CAL_SINGLE.download("Termin WatchMates");
     });
