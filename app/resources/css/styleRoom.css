@@ -14,7 +14,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.toggle {
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.toggleOne {
     display: flex;
     position: relative;
     margin: 2em 0 0 2em;
@@ -22,7 +27,7 @@ body {
     height: 3.4em;
 }
 
-.toggle input {
+.toggleOne input {
     display: none;
 }
 
@@ -61,7 +66,39 @@ input:checked+.roundButton:before {
     transform: translate(2.6em, 0);
 }
 
-.room {
+.toggleTwo{
+    display: flex;
+    position: relative;
+    margin: 2em 2em 0 0;
+    width: 6em;
+    height: 3.4em;
+}
+
+.toggleTwo input {
+    display: none;
+}
+
+.overlay-toggleOne{
+    position: absolute;
+    z-index: 10;
+    background: transparent;
+    color: var(--font-color);
+    font-size: 15px;
+    margin-left: 3em;
+    margin-top: 0.7em;
+}
+
+.overlay-toggleTwo{
+    position: absolute;
+    z-index: 10;
+    background: transparent;
+    color: var(--font-color);
+    font-size: 15px;
+    margin-left: 90%;
+    margin-top: 0.7em;
+}
+
+.room{
     padding-top: 4em;
     display: flex;
     justify-content: space-between;
@@ -70,16 +107,16 @@ input:checked+.roundButton:before {
     max-width: 1600px;
 }
 
-.playlist {
+.playlist{
+    display: flex;
+    flex-direction: column;
     background: transparent;
-    font-size: 35px;
-    text-align: center;
-    color: var(--font-color);
+    margin-right: 5em;
     border-radius: 10px;
     border: 3px solid var(--font-color);
-    height: 17em;
-    width: 9em;
-    overflow-y: auto;
+    height: 500px;
+    width: 30%;
+    overflow-y: scroll;
 }
 
 .playlist li {
@@ -119,31 +156,103 @@ button {
     font-size: 1em;
     position: sticky;
     align-items: flex-end;
-
 }
-
 .chat {
     text-align: center;
-    background-color: transparent;
-    font-size: 35px;
     color: var(--font-color);
-    border-radius: 10px;
+    margin-top: 0.2em;
+}
+
+.chat{
+    display: flex;
+    flex-direction: column;
+    opacity: 100;
+    background: transparent;
+    margin-left: 5em;
+    height: 500px;
+    width: 30%;
     border: 3px solid var(--font-color);
-    height: 17em;
-    width: 9em;
+    border-radius: 10px;
+}
+
+.chat-body{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    height: 450px;
     overflow-y: scroll;
 }
 
-.typeField {
-    position: relative;
-    top: 85%;
-    right: 1%;
-    width: 80%;
+
+.chat-header{
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+}
+
+.chat-header-icon{
+    width: 13%;
+    cursor: pointer;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.8em;
+}
+
+.chat-header-title{
+    font-size: 40px;
+    color: var(--font-color);
+    margin-left: 1.7em;
+    margin-top: 0.2em;
+}
+
+.chat-messages{
+    display: flex;
+    flex-direction: column;
+}
+
+.user, .receivedUser{
+    color: var(--user-color);
+    font-size: 25px;
+    font-weight: 780;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0.5em;
+}
+
+.receivedUser{
+    color: var(--user-received);
+}
+
+.message, .receivedMessage{
+    color: var(--font-color);
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+}
+
+.chat-footer{
+    display: flex;
+    flex-direction: row;
+}
+
+.typeField{
+    margin-top: 1.2em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+    width: 75%;
     border: 2px solid var(--font-color);
     border-radius: 18px;
 }
 
-.typeField:hover {
+.chat-footer-icon{
+    width: 10%;
+    margin-left: 0.5em;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.typeField:hover{
     border: 2px solid var(--hover-color);
 }
 
@@ -156,12 +265,20 @@ button {
     border: 2px solid var(--hidden-color-room);
 }
 
-.nickname {
+.chat-icon{
+    display: flex;
+    margin-left: 5em;
+    width: 2.5em;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+.nickname{
     display: flex;
     padding: 0;
     width: 42%;
     justify-content: center;
-    margin: 0 auto 2em auto;
+    margin: 0 auto 1em auto;
     text-align: center;
     color: var(--font-color);
     font-size: 30px;
@@ -184,8 +301,25 @@ button {
     border: 3px solid var(--hover-color);
 }
 
-.footer {
-    padding-top: 2.5em;
+.copyTheURL{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.copy{
+    color: var(--font-color);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.copy:hover{
+    color: var(--hover-color);
+}
+
+.footer{
+    padding-top: 1.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -232,19 +366,6 @@ button {
     position: absolute;
     right: -6px;
     bottom: -13px;
-}
-
-::-webkit-scrollbar {
-    height: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--font-color);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--font-color);
-}
 
 .video-box {
     border-style: solid;
@@ -258,13 +379,4 @@ button {
     width: 480px;
     height: 360px;
     margin: 0 auto;
-}
-
-.video-box .video-prompt {
-    position: absolute;
-    width: 480px;
-    height: 100px;
-    margin-top: 150px;
-    text-align: center;
-    color: rgb(250, 250, 250);
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WatchMates</title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
@@ -13,6 +14,29 @@
         <span class="logo">WatchMates</span>
         <button class="calender">Termin festlegen</button>
     </div>
+    <div class="overlay" id="overlay">
+        <div class="overlay-header">
+            <div class="overlay-title">Lege einen Termin fest</div>
+            <button class="overlay-close">&times;</button>
+        </div>
+        <div class="overlay-body">
+            <div class="overlay-left-body">
+                <form class ="overlay-body-form">
+                    <label class="overlay-label-date">Datum:</label>
+                    <input class="overlay-choose-date" name="choose-date" type="date" min="2021-01-01" max="2025-12-31">
+                    <label class="overlay-label-time">Uhrzeit:</label>
+                    <input class="overlay-choose-time" name="choose-time" type="time">
+                </form>
+                <p class="overlay-input-error">Es müssen beide Felder ausgefüllt sein!</p>
+                <button class="overlay-submit-button">Raum reservieren</button>
+            </div>
+            <div class="overlay-right-body">
+                <p class="overlay-output-explanation"></p>
+                <button class="overlay-output-link">Lade den Termin herunter</button>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-background"></div>
     <div class="middleBar">
         <video class="preview" width="580px" height="480px" loop ="1" muted="1">
             <source src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
@@ -28,7 +52,7 @@
     </div>
     <div class="dropDownMenu hidden">
         <input class="URLTextArea" type="text" placeholder="https://www.URL.com">
-        <button class="closeDropDownMenu">x</button>
+        <button class="closeDropDownMenu">&times;</button>
     </div>
     <div class="bottomBar">
         <span class="stepOne">Erstelle einen Raum</span>

@@ -3,3 +3,15 @@ https://unsplash.com/photos/4SLz_RCk6kQ
 
 BackgroundRoom picture:
 https://unsplash.com/photos/G9i_plbfDgk
+
+ArrowIcon:
+https://www.flaticon.com/free-icon/next_130857?k=1615812729790
+
+SendIcon:
+https://de.freepik.com/freie-ikonen/papierflieger_809024.htm#page=1&query=send&position=15
+
+Favicon:
+https://de.freepik.com/freie-ikonen/tv-hand-gezeichnet-umriss_734774.htm
+
+Message Sound:
+self made
