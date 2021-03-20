@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-const { ObjectID } = require("bson");
-
 var mongoose = require("mongoose"),
   RoomSchema,
   room,
@@ -12,12 +10,12 @@ class DBManager {
     mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    });
+    });  
     RoomSchema = mongoose.Schema;
-    
+      
     room = new RoomSchema({
       id: mongoose.Types.ObjectId,
-      urls: String,
+      url: String,
       test: String,
       playlist: Array,
     });
@@ -27,7 +25,7 @@ class DBManager {
 
   addRoom(randomUrl) {
     let roomInstance = new Room({
-      urls: randomUrl,
+      url: randomUrl,
     });
     roomInstance.save();
   }
