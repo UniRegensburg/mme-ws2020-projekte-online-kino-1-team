@@ -35,6 +35,11 @@ function init() {
     });
 }
 
+export function sendDeleteNumber(deleteNumber){
+    //console.log("DELETE NUMBER: " + deleteNumber);
+    socket.emit("deleteNumberToServer", deleteNumber);
+}
+
 function setClickListener() {
     nicknameTextField = document.querySelector(".nickname");
     let hideChatIcon = document.querySelector(".chat-header-icon"),

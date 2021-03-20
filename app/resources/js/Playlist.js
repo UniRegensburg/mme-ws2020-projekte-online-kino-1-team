@@ -1,3 +1,7 @@
+/* eslint-env node */
+
+import {sendDeleteNumber} from "./room.js";
+
 var dragTarget;
 
 export class Playlist {
@@ -74,6 +78,18 @@ function dragDrop(eventDrop) {
 }
 
 function deletePlaylistObject(event) {
-  var el = event.target;
+  var el = event.target,
+    i = 0,
+    tempEl = el.parentNode;
+  //console.log(tempEl.tagName);
+  while (tempEl.previousSibling !== null) {
+    if(tempEl.previousSibling.tagName === "LI"){
+      i++;
+    }
+    tempEl = tempEl.previousSibling;
+    //console.log(tempEl);
+  }
+  //console.log(i);
   el.parentNode.remove(el);
+  sendDeleteNumber(i);
 }
