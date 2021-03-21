@@ -33,11 +33,26 @@ function init() {
             playlist.initDeleteButton();
         }
     });
+    socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
+        if(window.location.href === roomID){
+            playlist.deletePlaylistEl(deleteNumber);
+        }
+    });
+    socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
+        if(window.location.href === roomID){
+            playlist.changeDragDropPosition(iDrag, iDrop);
+        }
+    });
 }
 
 export function sendDeleteNumber(deleteNumber){
-    //console.log("DELETE NUMBER: " + deleteNumber);
-    socket.emit("deleteNumberToServer", deleteNumber);
+    var roomID = window.location.href;
+    socket.emit("deleteNumberToServer", roomID, deleteNumber);
+}
+
+export function sendDragDropPosition(iDrag, iDrop){
+    var roomID = window.location.href;
+    socket.emit("DragDropPositionToServer", roomID, iDrag, iDrop);
 }
 
 function setClickListener() {

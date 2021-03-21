@@ -61,6 +61,14 @@ io.on("connection", (socket) => {
     //Hier kommt eigentliche Logik später rein!
     io.emit("playlistObjectToClients", playlistObject);
   });
+
+  socket.on("deleteNumberToServer", (roomID, numberDelete) => {
+    io.emit("deleteNumberToClients", roomID, numberDelete);
+  });
+
+  socket.on("DragDropPositionToServer", (roomID, iDrag, iDrop) => {
+    io.emit("DragDropPositionToClients", roomID, iDrag, iDrop);
+  });
 });
 
 httpServer.listen(SOCKETPORT, function () {

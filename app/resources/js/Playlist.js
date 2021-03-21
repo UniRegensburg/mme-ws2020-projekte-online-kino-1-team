@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import {sendDeleteNumber} from "./room.js";
+import {sendDeleteNumber, sendDragDropPosition} from "./room.js";
 
 var dragTarget;
 
@@ -54,6 +54,23 @@ export class Playlist {
       deleteButtons[i].addEventListener("click", deletePlaylistObject);
     }
   }
+  deletePlaylistEl(deleteNumber){
+    var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
+    
+    allChildElemtsPlaylistBody[deleteNumber].remove();
+    }
+    
+  changeDragDropPosition(dragPosition, dropPosition){
+    var allPlaylistElements = document.querySelectorAll("#playlistElement"),
+    dragElement = allPlaylistElements[dragPosition],
+    dragElementCopy = dragElement.cloneNode(true),
+    dropElement = allPlaylistElements[dropPosition];
+    // eslint-disable-next-line no-unused-vars
+    dragElement.parentNode.insertBefore(dragElementCopy,dropElement);
+    dragElement.remove();
+    this.setDragAndDrop();
+    this.initDeleteButton();
+  }
 }
 
 function dragStart(eventStart) {
@@ -70,26 +87,42 @@ function dragEnter(eventEnter) {
 
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
-    playlistBox = document.querySelector(".playlist-body");
-  if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
-    playlistBox.insertBefore(dragTarget, dropTarget);
-  }
 
+    iDrag = 0,
+    iDrop = 0,
+    tempDragTarget = dragTarget,
+    tempDropTarget = dropTarget;
+
+  if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
+
+    // get position of drag element
+    while (tempDragTarget.previousSibling !== null) {
+      if(tempDragTarget.previousSibling.tagName === "LI"){
+        iDrag++;
+      }
+      tempDragTarget = tempDragTarget.previousSibling;
+    }
+    // get position of drop element
+    while (tempDropTarget.previousSibling !== null) {
+      if(tempDropTarget.previousSibling.tagName === "LI"){
+        iDrop++;
+      }
+      tempDropTarget = tempDropTarget.previousSibling;
+    }
+    sendDragDropPosition(iDrag, iDrop);
+  }
 }
 
 function deletePlaylistObject(event) {
   var el = event.target,
     i = 0,
     tempEl = el.parentNode;
-  //console.log(tempEl.tagName);
+
   while (tempEl.previousSibling !== null) {
     if(tempEl.previousSibling.tagName === "LI"){
       i++;
     }
     tempEl = tempEl.previousSibling;
-    //console.log(tempEl);
   }
-  //console.log(i);
-  el.parentNode.remove(el);
   sendDeleteNumber(i);
 }
