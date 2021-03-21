@@ -1,7 +1,8 @@
 /* eslint-env node */
 
 const path = require("path"),
-  express = require("express");
+  express = require("express"),
+  siofu = require("socketio-file-upload");
 
 /**
  * AppServer
@@ -28,7 +29,10 @@ class AppServer {
     this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
     this.app.use("/app", express.static("public"));
-    this.app.use("/app", express.static("data"));
+    this.app.use(siofu.router);
+
+    //Das hier ist Crap!!!!!!!!
+    //this.app.use("/app", express.static("data"));
   }
 
   /**

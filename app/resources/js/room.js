@@ -43,6 +43,8 @@ function init() {
             playlist.changeDragDropPosition(iDrag, iDrop);
         }
     });
+
+    socket.emit("clientEntersRoom", (window.location.href));
 }
 
 export function sendDeleteNumber(deleteNumber){

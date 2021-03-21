@@ -3,7 +3,9 @@
 //Server
 
 const SOCKETPORT = 3000,
-  path = require("path");
+  path = require("path"),
+  siofu = require("socketio-file-upload"),
+  fs = require("fs");
 
 var server,
   roomManager,
@@ -19,6 +21,16 @@ const AppServer = require("./server/AppServer.js"),
   io = require("socket.io")(httpServer, options),
   uri = "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
 io.on("connection", (socket) => {
+  let uploader = new siofu(),
+  roomID;
+
+  socket.on("clientEntersRoom", url =>{
+    roomID = url.split("/").pop();
+    uploader.dir = path.join(__dirname, "./data/" + roomID);
+    createRoomFolder(uploader.dir);
+    uploader.listen(socket);
+
+  });
   //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
@@ -75,9 +87,14 @@ httpServer.listen(SOCKETPORT, function () {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
+function createRoomFolder(roomDir){
+  fs.mkdirSync(roomDir, { recursive: true });
+}
+
 /**
  * Starts webserver to serve files from "/app" folder
  */
+
 function init() {
 
   // Access command line parameters from start command (see package.json)
