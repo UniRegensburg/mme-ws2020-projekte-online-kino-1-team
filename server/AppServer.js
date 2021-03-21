@@ -28,6 +28,7 @@ class AppServer {
     this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
     this.app.use("/app", express.static("public"));
+    this.app.use("/app", express.static("data"));
   }
 
   /**

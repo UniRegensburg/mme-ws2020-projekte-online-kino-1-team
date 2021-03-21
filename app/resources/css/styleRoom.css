@@ -126,6 +126,44 @@ input:checked + .roundButton:before  {
     margin-top: 0.2em;
 }
 
+li{
+    text-align: left;
+    padding: 5%;
+    display: flex;
+    height: 2.5em;
+    width: justify-content;
+}
+
+li video{
+    width: 2.5em;
+    height: 100%;
+}
+
+.test{
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: center;
+    font-size: 17px;
+    word-wrap: break-word;
+    overflow: auto;
+    width: 13em;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    color: var(--font-color);
+    font-size: 30px;
+}
+
+.buttonPlaylist{
+    color: white;
+    background-color: transparent;
+    border: transparent;
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    position: sticky;
+    align-items: flex-end;
+}
+
 .chat{
     display: flex;
     flex-direction: column;

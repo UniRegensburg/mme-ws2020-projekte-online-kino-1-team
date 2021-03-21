@@ -26,6 +26,7 @@
     <div class="room">
         <div class="playlist">
             <span class="playlist-header">Playlist</span>
+            <ul class="playlist-body"></ul>
         </div>
         <video class="video" controls="true" width="80%">
             <source src="" type="video.mp4">
@@ -59,5 +60,11 @@
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
-
+<template id="playlistTemplate">
+    <li id="playlistElement" draggable="true">
+        <video src="" draggable="false"></video>
+        <p></p>
+        <button class="deleteButtonPlaylist">&times</button>
+    </li>
+</template>
 </html>

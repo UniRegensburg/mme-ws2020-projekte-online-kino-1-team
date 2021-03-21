@@ -1,13 +1,58 @@
 /* eslint-env node */
 
 import { setLiveChatClickListener } from "./LiveChat.js";
+import { Playlist } from "./Playlist.js";
 
 let nicknameTextField,
-    showChatIcon = document.querySelector(".chat-icon");
+    showChatIcon = document.querySelector(".chat-icon"),
+    playlist;
+// eslint-disable-next-line no-undef
+const socket = io("http://localhost:3000");
 
 function init() {
     setClickListener();
     setLiveChatClickListener();
+    setFileUpload();
+
+    socket.on("loadPlaylist", playlistFiles =>{
+        playlist = new Playlist(playlistFiles);
+        playlist.setDragAndDrop();
+        playlist.initDeleteButton();
+    });
+   
+    socket.on("addFileToPlaylist", file => {
+        playlist.addFile([file]);
+        playlist.setDragAndDrop();
+        playlist.initDeleteButton();
+    });
+
+    socket.on("playlistObjectToClients", playlistObject => {
+        if(window.location.href === playlistObject.roomID){
+            playlist.addFile([playlistObject.playlistObject]);
+            playlist.setDragAndDrop();
+            playlist.initDeleteButton();
+        }
+    });
+    socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
+        if(window.location.href === roomID){
+            playlist.deletePlaylistEl(deleteNumber);
+        }
+    });
+    socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
+        if(window.location.href === roomID){
+            playlist.changeDragDropPosition(iDrag, iDrop);
+        }
+    });
+}
+
+export function sendDeleteNumber(deleteNumber){
+    var roomID = window.location.href;
+    socket.emit("deleteNumberToServer", roomID, deleteNumber);
+}
+
+export function sendDragDropPosition(iDrag, iDrop){
+    var roomID = window.location.href;
+    socket.emit("DragDropPositionToServer", roomID, iDrag, iDrop);
 }
 
 function setClickListener() {
@@ -80,5 +125,23 @@ function copyURL() {
 export function getNickName() {
     return nicknameTextField.value;
 }
+
+function setFileUpload() {
+    let playlistBox = document.querySelector(".playlist");
+    var url2 = window.location.href;
+    playlistBox.addEventListener("dragover", (e) => e.preventDefault());
+    playlistBox.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if(e.dataTransfer.files.length){
+          //Hier kommt noch der eigentliche File upload mit Socketio-File-Upload
+
+          // dummy data
+          
+          let data = {roomID: url2, title:"Calculated.mp4"};
+        socket.emit("clientUploadsFile", data);
+      }
+  
+    });
+  }
 
 init();
