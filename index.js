@@ -19,21 +19,36 @@ const AppServer = require("./server/AppServer.js"),
   appDir = path.join(__dirname, "../", process.argv[2]),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
-  uri = "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
+  uri =
+  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
 io.on("connection", (socket) => {
   let uploader = new siofu(),
-  roomID;
+    roomID/*,
+    temp4Playlist = [{
+        src: "Erde.mov",
+        titel: "Erster Titel",
+      },
+      {
+        src: "Calculated.mp4",
+        titel: "6. cooler Titel",
+      },
+      {
+        src: "Calculated.mp4",
+        titel: "2. cooler Titel",
+      },
+    ]*/;
 
-  socket.on("clientEntersRoom", url =>{
+  socket.on("clientEntersRoom", url => {
     roomID = url.split("/").pop();
-    uploader.dir = path.join(__dirname, "./data/" + roomID);
+    uploader.dir = path.join(__dirname, "/data/" + roomID);
     createRoomFolder(uploader.dir);
     uploader.listen(socket);
-
+    //uploader.addEventListener("complete", e => console.log(e));
   });
   //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
+
     dbClient.addRoom(url);
     server.addRoom(url);
     socket.emit("changeUrl", url);
@@ -51,25 +66,15 @@ io.on("connection", (socket) => {
 
   //Dummy Emit
   //socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
-  let temp4Playlist = [{
-    src: "Erde.mov",
-    titel: "Erster Titel",
-  },
-  {
-    src: "Calculated.mp4",
-    titel: "6. cooler Titel",
-  },
-  {
-    src: "Calculated.mp4",
-    titel: "2. cooler Titel",
-  },
-  ];
-  socket.emit("loadPlaylist", temp4Playlist);
+  socket.emit("loadPlaylist", []);
 
   socket.on("clientUploadsFile", data => {
 
     //Dummydata src muss später logisch reingepackt werden
-    let playlistObject = {roomID: data.roomID, playlistObject: {src: "Calculated.mp4", title: data.title}};
+    let playlistObject = {
+      roomID: data.roomID,
+      playlistObject: { src: "Calculated.mp4", title: data.title },
+    };
     //Hier kommt eigentliche Logik später rein!
     io.emit("playlistObjectToClients", playlistObject);
   });
@@ -83,11 +88,11 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(SOCKETPORT, function () {
+httpServer.listen(SOCKETPORT, function() {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
-function createRoomFolder(roomDir){
+function createRoomFolder(roomDir) {
   fs.mkdirSync(roomDir, { recursive: true });
 }
 
@@ -109,6 +114,9 @@ function init() {
   dbClient = new DBManager(uri);
 
   dbClient.getOpenRooms().then((e) => server.openRooms(e));
+
+ //dbClient.updatePlaylist("605779dc19e80c2a2400aeb3", "Calculated.mp4");
+ //.then((e) => console.log(e));
 
 }
 

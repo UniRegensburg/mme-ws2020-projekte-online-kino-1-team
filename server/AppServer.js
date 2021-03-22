@@ -41,17 +41,18 @@ class AppServer {
    * @param  {Number} port Port to use for serving static files
    */
   start(port) {
-    this.server = this.app.listen(port, function() {
+    this.server = this.app.listen(port, function () {
       /*console.log(
         `AppServer started. Client available at http://localhost:${port}/app`,
       );*/
     });
-
   }
 
-  openRooms(rooms){
-    rooms.forEach(e => 
-      this.app.get("/app/" + e.url, (req,res) => res.render("room")));
+  openRooms(rooms) {
+    rooms.forEach(e => {
+      this.app.get("/app/" + e.url, (req, res) => res.render("room"));
+      this.app.use("/app/" + e.url, express.static("data/" + e.url));
+    });
   }
 
   /**
@@ -69,7 +70,7 @@ class AppServer {
     this.app.set("view engine", "ejs");
     this.app.use(express.static(path.join(__dirname, "app")));
     this.app.get(randomLink, (req, res) => res.render("room"));
-  
+    this.app.use("/app/" + url, express.static("data/" + url));
     return url;
   }
 }
