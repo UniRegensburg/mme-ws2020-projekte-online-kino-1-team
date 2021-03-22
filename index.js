@@ -1,7 +1,6 @@
 /* eslint-env node */
 
 //Server
-
 const SOCKETPORT = 3000,
   path = require("path"),
   siofu = require("socketio-file-upload"),
@@ -20,29 +19,21 @@ const AppServer = require("./server/AppServer.js"),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
   uri =
-  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
+    "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
 io.on("connection", (socket) => {
   let uploader = new siofu(),
-    roomID/*,
-    temp4Playlist = [{
-        src: "Erde.mov",
-        titel: "Erster Titel",
-      },
-      {
-        src: "Calculated.mp4",
-        titel: "6. cooler Titel",
-      },
-      {
-        src: "Calculated.mp4",
-        titel: "2. cooler Titel",
-      },
-    ]*/;
+    roomID;
 
   socket.on("clientEntersRoom", url => {
     roomID = url.split("/").pop();
     uploader.dir = path.join(__dirname, "/data/" + roomID);
     createRoomFolder(uploader.dir);
     uploader.listen(socket);
+
+    dbClient.getPlaylist(roomID).then(e => {
+      socket.emit("loadPlaylist", e[0].playlist);
+    });
+
   });
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
@@ -62,30 +53,32 @@ io.on("connection", (socket) => {
     socket.emit("urlToClient", url);
   });
 
-  //Dummy Emit
-  //socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
-  socket.emit("loadPlaylist", []);
-
   socket.on("fileUpload", (roomID, srcName, name, type) => {
+    let tempSrc = roomID + "/" + name + "." + srcName.split(".").pop(),
+      playlistObject = {
+        roomID: roomID,
+        playlistObject: { src: tempSrc, title: tempSrc.split("/").pop() },
+      };
 
-    let tempSrc = roomID + "/" + name + "."+ srcName.split(".").pop(),
-    playlistObject = {
-      roomID: roomID,
-      playlistObject: { src: tempSrc, title: name },
-    };
     io.emit("playlistObjectToClients", playlistObject);
+
+    dbClient.addPlaylistEntry(roomID,tempSrc);
   });
 
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
     io.emit("deleteNumberToClients", roomID, numberDelete);
+
+    dbClient.deletePlaylistEntry(roomID.split("/").pop(), numberDelete);
   });
 
   socket.on("DragDropPositionToServer", (roomID, iDrag, iDrop) => {
     io.emit("DragDropPositionToClients", roomID, iDrag, iDrop);
+
+    dbClient.changePlaylistPosition(roomID.split("/").pop(), iDrag, iDrop);
   });
 });
 
-httpServer.listen(SOCKETPORT, function() {
+httpServer.listen(SOCKETPORT, function () {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
@@ -111,13 +104,6 @@ function init() {
   dbClient = new DBManager(uri);
 
   dbClient.getOpenRooms().then((e) => server.openRooms(e));
-
- //dbClient.updatePlaylist("605779dc19e80c2a2400aeb3", "Calculated.mp4");
- //.then((e) => console.log(e));
-
- //dbClient.addPlaylistEntry("605886d9436a153d24aad437", "Calculated.mp4");
- //dbClient.getPlaylist("605886d9436a153d24aad437").then(e => dbClient.updatePlaylist("605886d9436a153d24aad437", ["hallo", "hallo2"]));
-
 }
 
 init();

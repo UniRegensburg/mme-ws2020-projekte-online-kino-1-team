@@ -17,7 +17,12 @@ function init() {
   localRoomID = window.location.href.split("/").pop();
 
   socket.on("loadPlaylist", playlistFiles => {
-    playlist = new Playlist(playlistFiles);
+    let tempPlaylist = [];
+    playlistFiles.forEach(element => {
+      tempPlaylist.push({src: element, title: element.split("/").pop()});
+    });
+
+    playlist = new Playlist(tempPlaylist);
     playlist.setDragAndDrop();
     playlist.initDeleteButton();
   });
@@ -47,7 +52,6 @@ function init() {
   });
 
   socket.emit("clientEntersRoom", (window.location.href));
-
   // eslint-disable-next-line no-undef
   uploader = new SocketIOFileUpload(socket);
   uploader.listenOnInput(document.getElementById("siofu_input"));

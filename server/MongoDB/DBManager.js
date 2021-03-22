@@ -33,27 +33,53 @@ class DBManager {
   }
 
   getRoom(roomID) {
-    return Room.find({ _id: roomID });
+    return Room.find({ url: roomID });
   }
 
   getOpenRooms() {
     return Room.find({}, "url").exec();
   }
 
-  getPlaylist(roomID){
-    return Room.find({_id: roomID}, "playlist").exec();
+  getPlaylist(roomID) {
+    return Room.find({ url: roomID }, "playlist").exec();
   }
-  
-  addPlaylistEntry(roomID, playlistEntry) {
-    Room.find({ _id: roomID}, "playlist").exec().then(e => {
+
+  deletePlaylistEntry(roomID, playlistIndex) {
+    Room.find({ url: roomID }, "playlist").exec().then(e => {
       let tempPlaylist = e[0].playlist;
-      tempPlaylist.push(playlistEntry);
-      Room.findOneAndUpdate({_id: roomID},{playlist: tempPlaylist}).exec();
+      tempPlaylist.splice(playlistIndex, 1);
+      Room.findOneAndUpdate({ url: roomID }, { playlist: tempPlaylist }).exec();
     });
   }
 
-  updatePlaylist(roomID, playlist){
-    Room.findOneAndUpdate({_id: roomID}, {playlist: playlist}).exec();
+  addPlaylistEntry(roomID, playlistEntry) {
+    Room.find({ url: roomID }, "playlist").exec().then(e => {
+      let tempPlaylist = e[0].playlist;
+      tempPlaylist.push(playlistEntry);
+      Room.findOneAndUpdate({ url: roomID }, { playlist: tempPlaylist }).exec();
+    });
+  }
+
+  changePlaylistPosition(roomID, iDrag, iDrop) {
+    Room.find({ url: roomID }, "playlist").exec().then(e => {
+      let startPlaylist = e[0].playlist,
+        tempPlaylist = [],
+        iDragEl = startPlaylist[iDrag];
+
+      for (let index = 0; index < startPlaylist.length; index++) {
+        if (index === iDrop) {
+          tempPlaylist.push(iDragEl);
+        }
+        if (index !== iDrag) {
+          tempPlaylist.push(startPlaylist[index]);
+        }
+      }
+      Room.findOneAndUpdate({ url: roomID }, { playlist: tempPlaylist }).exec();
+    });
+  }
+
+  updatePlaylist(roomID, playlist) {
+    Room.findOneAndUpdate({ _id: roomID }, { playlist: playlist }).exec();
   }
 }
 
