@@ -40,7 +40,7 @@ function showURLTextBox() {
   dropDownMenu.classList.remove("hidden");
   if(URLTextArea.value !== ""){
     joinRoomButton.addEventListener("click", function(){
-      window.location.href = window.location.href + URLTextArea.value;
+      window.location.href = window.location.href + URLTextArea.value.split("/").pop();
     });
   }
 }
