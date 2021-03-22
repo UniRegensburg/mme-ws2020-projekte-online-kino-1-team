@@ -6,14 +6,15 @@ import { Playlist } from "./Playlist.js";
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
   playlist,
-  uploader;
+  uploader,
+  localRoomID;
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
 function init() {
   setClickListener();
   setLiveChatClickListener();
-  setFileUpload();
+  localRoomID = window.location.href.split("/").pop();
 
   socket.on("loadPlaylist", playlistFiles => {
     playlist = new Playlist(playlistFiles);
@@ -28,7 +29,7 @@ function init() {
   });
 
   socket.on("playlistObjectToClients", playlistObject => {
-    if (window.location.href === playlistObject.roomID) {
+    if (localRoomID === playlistObject.roomID) {
       playlist.addFile([playlistObject.playlistObject]);
       playlist.setDragAndDrop();
       playlist.initDeleteButton();
@@ -53,15 +54,11 @@ function init() {
   uploader.listenOnDrop(document.querySelector(".playlist"));
 
   uploader.addEventListener("load", emitFileUpload);
-  //    console.log(e);,
-  //  console.log("uploaded");
-  //socket.emit("fileUploaded", (window.location.href), "");
-  //});
 }
 
-function emitFileUpload() {
+function emitFileUpload(e) {
   let roomID = window.location.pathname.split("/")[2];
-  socket.emit("fileUpload", roomID);
+  socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
 }
 
 export function sendDeleteNumber(deleteNumber) {
@@ -143,23 +140,6 @@ function copyURL() {
 
 export function getNickName() {
   return nicknameTextField.value;
-}
-
-function setFileUpload() {
-  let playlistBox = document.querySelector(".playlist");
-  var url2 = window.location.href;
-  playlistBox.addEventListener("dragover", (e) => e.preventDefault());
-  playlistBox.addEventListener("drop", (e) => {
-    e.preventDefault();
-    if (e.dataTransfer.files.length) {
-      //Hier kommt noch der eigentliche File upload mit Socketio-File-Upload
-
-      // dummy data
-
-      let data = { roomID: url2, title: "Calculated.mp4" };
-      socket.emit("clientUploadsFile", data);
-    }
-  });
 }
 
 init();

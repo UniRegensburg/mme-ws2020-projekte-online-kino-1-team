@@ -43,9 +43,7 @@ io.on("connection", (socket) => {
     uploader.dir = path.join(__dirname, "/data/" + roomID);
     createRoomFolder(uploader.dir);
     uploader.listen(socket);
-    //uploader.addEventListener("complete", e => console.log(e));
   });
-  //Hier kommen alle Callbacks für Server-Client Kommunikation rein:
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
 
@@ -68,14 +66,13 @@ io.on("connection", (socket) => {
   //socket.emit("addFileToPlaylist", {src: "Calculated.mp4", titel: "Erde.Mov"});
   socket.emit("loadPlaylist", []);
 
-  socket.on("clientUploadsFile", data => {
+  socket.on("fileUpload", (roomID, srcName, name, type) => {
 
-    //Dummydata src muss später logisch reingepackt werden
-    let playlistObject = {
-      roomID: data.roomID,
-      playlistObject: { src: "Calculated.mp4", title: data.title },
+    let tempSrc = roomID + "/" + name + "."+ srcName.split(".").pop(),
+    playlistObject = {
+      roomID: roomID,
+      playlistObject: { src: tempSrc, title: name },
     };
-    //Hier kommt eigentliche Logik später rein!
     io.emit("playlistObjectToClients", playlistObject);
   });
 
@@ -117,6 +114,9 @@ function init() {
 
  //dbClient.updatePlaylist("605779dc19e80c2a2400aeb3", "Calculated.mp4");
  //.then((e) => console.log(e));
+
+ //dbClient.addPlaylistEntry("605886d9436a153d24aad437", "Calculated.mp4");
+ //dbClient.getPlaylist("605886d9436a153d24aad437").then(e => dbClient.updatePlaylist("605886d9436a153d24aad437", ["hallo", "hallo2"]));
 
 }
 
