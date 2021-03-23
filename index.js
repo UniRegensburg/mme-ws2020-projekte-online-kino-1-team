@@ -33,8 +33,8 @@ io.on("connection", (socket) => {
     dbClient.getPlaylist(roomID).then(e => {
       socket.emit("loadPlaylist", e[0].playlist);
     });
-
   });
+
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
 
@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
 
     io.emit("playlistObjectToClients", playlistObject);
 
-    dbClient.addPlaylistEntry(roomID,tempSrc);
+    dbClient.addPlaylistEntry(roomID, tempSrc);
   });
 
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
@@ -91,7 +91,6 @@ function createRoomFolder(roomDir) {
  */
 
 function init() {
-
   // Access command line parameters from start command (see package.json)
   let appDirectory = process.argv[2],
     appPort = process.argv[3];

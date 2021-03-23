@@ -10,7 +10,7 @@ let nicknameTextField,
   uploader,
   localRoomID,
   videoPlayer;
-  
+
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
@@ -18,17 +18,17 @@ function init() {
   setClickListener();
   setLiveChatClickListener();
   localRoomID = window.location.href.split("/").pop();
-  
+
   socket.on("loadPlaylist", playlistFiles => {
     let tempPlaylist = [];
     playlistFiles.forEach(element => {
-      tempPlaylist.push({src: element, title: element.split("/").pop()});
+      tempPlaylist.push({ src: element, title: element.split("/").pop() });
     });
 
     playlist = new Playlist(tempPlaylist);
-    playlist.setDragAndDrop();
+    playlist.setListener();
     playlist.initDeleteButton();
-    
+
     videoPlayer = new VideoPlayer("my-player", playlistFiles, 0);
     videoPlayer.setAutoplay();
   });
@@ -36,7 +36,7 @@ function init() {
   socket.on("playlistObjectToClients", playlistObject => {
     if (localRoomID === playlistObject.roomID) {
       playlist.addFile([playlistObject.playlistObject]);
-      playlist.setDragAndDrop();
+      playlist.setListener();
       playlist.initDeleteButton();
       videoPlayer.addSource(playlistObject.playlistObject.src);
     }
@@ -45,7 +45,12 @@ function init() {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
       //console.log(playlist.getPlaylistArray());
+      console.log("room, deleteNumbertoClients: TrackNumber: " + videoPlayer.getCurrentTrackNumber());
+      console.log("deletNumber: " + deleteNumber);
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
+      if (videoPlayer.getCurrentTrackNumber() === deleteNumber) {
+        videoPlayer.load(videoPlayer.getCurrentTrackNumber());
+      }
     }
   });
   socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
@@ -60,7 +65,6 @@ function init() {
   uploader = new SocketIOFileUpload(socket);
   uploader.listenOnInput(document.getElementById("siofu_input"));
   uploader.listenOnDrop(document.querySelector(".playlist"));
-
   uploader.addEventListener("load", emitFileUpload);
 }
 
@@ -90,6 +94,7 @@ function setClickListener() {
       enterNickname();
     }
   });
+
   hideChatIcon.addEventListener("click", hideChat);
   showChatIcon.addEventListener("click", showChat);
   toggleOne.addEventListener("mouseover", showOverlayOne);
@@ -148,6 +153,35 @@ function copyURL() {
 
 export function getNickName() {
   return nicknameTextField.value;
+}
+
+export function changeVideoOnClick(e) {
+  let liElement = e.target,
+    tempLi = liElement,
+    deleteButtons = document.querySelectorAll(".deleteButtonPlaylist"),
+    isDeleteButton,
+    counter = 0;
+
+  deleteButtons.forEach(e => {
+    if (liElement === e) {
+      isDeleteButton = true;
+    }
+  });
+
+  if (!isDeleteButton) {
+    if (liElement.parentNode.tagName === "LI") {
+      liElement = liElement.parentNode;
+      tempLi = liElement;
+    }
+    while (tempLi.previousSibling !== null) {
+      if (tempLi.previousSibling.tagName === "LI") {
+        counter++;
+      }
+      tempLi = tempLi.previousSibling;
+    }
+
+    videoPlayer.load(counter);
+  }
 }
 
 init();

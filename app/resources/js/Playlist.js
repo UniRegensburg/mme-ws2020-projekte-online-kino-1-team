@@ -1,9 +1,9 @@
 /* eslint-env node */
 
-import {sendDeleteNumber, sendDragDropPosition} from "./room.js";
+import { sendDeleteNumber, sendDragDropPosition, changeVideoOnClick } from "./room.js";
 
 var dragTarget,
-playlistSources;
+  playlistSources;
 
 export class Playlist {
 
@@ -13,7 +13,7 @@ export class Playlist {
       templateVideo = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
-      playlistSources = [];
+    playlistSources = [];
 
     playlist.forEach(element => {
       templateVideo.src = element.src;
@@ -23,7 +23,7 @@ export class Playlist {
       playlistSources.push(element.src);
 
     });
-    this.setDragAndDrop();
+    this.setListener();
     this.initDeleteButton();
   }
 
@@ -39,19 +39,20 @@ export class Playlist {
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
       playlistSources.push(element.src);
-
     });
 
   }
-  setDragAndDrop() {
+  setListener() {
     let playlistEls = document.querySelectorAll("li");
     playlistEls.forEach(element => {
       element.addEventListener("dragstart", dragStart);
       element.addEventListener("dragover", dragOver);
       element.addEventListener("dragenter", dragEnter);
       element.addEventListener("drop", dragDrop);
+      element.addEventListener("click", changeVideoOnClick);
     });
   }
+
   initDeleteButton() {
     var deleteButtons = document.querySelectorAll(".deleteButtonPlaylist"),
       i;
@@ -59,40 +60,40 @@ export class Playlist {
       deleteButtons[i].addEventListener("click", deletePlaylistObject);
     }
   }
-  deletePlaylistEl(deleteNumber){
+
+  deletePlaylistEl(deleteNumber) {
     var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
-    
+
     allChildElemtsPlaylistBody[deleteNumber].remove();
     playlistSources.splice(deleteNumber, 1);
-    console.log("deleted: " + playlistSources);
-    }
-    
-  changeDragDropPosition(dragPosition, dropPosition){
+  }
+
+  changeDragDropPosition(dragPosition, dropPosition) {
     var allPlaylistElements = document.querySelectorAll("#playlistElement"),
-    dragElement = allPlaylistElements[dragPosition],
-    dragElementCopy = dragElement.cloneNode(true),
-    dropElement = allPlaylistElements[dropPosition];
-    dragElement.parentNode.insertBefore(dragElementCopy,dropElement);
+      dragElement = allPlaylistElements[dragPosition],
+      dragElementCopy = dragElement.cloneNode(true),
+      dropElement = allPlaylistElements[dropPosition];
+    dragElement.parentNode.insertBefore(dragElementCopy, dropElement);
     dragElement.remove();
-    this.setDragAndDrop();
+    this.setListener();
     this.initDeleteButton();
 
     let startPlaylist = playlistSources,
-        tempPlaylist = [],
-        iDragEl = startPlaylist[dragPosition];
+      tempPlaylist = [],
+      iDragEl = startPlaylist[dragPosition];
 
-      for (let index = 0; index < startPlaylist.length; index++) {
-        if (index === dropPosition) {
-          tempPlaylist.push(iDragEl);
-        }
-        if (index !== dragPosition) {
-          tempPlaylist.push(startPlaylist[index]);
-        }
+    for (let index = 0; index < startPlaylist.length; index++) {
+      if (index === dropPosition) {
+        tempPlaylist.push(iDragEl);
       }
+      if (index !== dragPosition) {
+        tempPlaylist.push(startPlaylist[index]);
+      }
+    }
     playlistSources = tempPlaylist;
   }
 
-  getPlaylistSources(){
+  getPlaylistSources() {
     return playlistSources;
   }
 }
@@ -111,7 +112,6 @@ function dragEnter(eventEnter) {
 
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode,
-
     iDrag = 0,
     iDrop = 0,
     tempDragTarget = dragTarget,
@@ -121,14 +121,14 @@ function dragDrop(eventDrop) {
 
     // get position of drag element
     while (tempDragTarget.previousSibling !== null) {
-      if(tempDragTarget.previousSibling.tagName === "LI"){
+      if (tempDragTarget.previousSibling.tagName === "LI") {
         iDrag++;
       }
       tempDragTarget = tempDragTarget.previousSibling;
     }
     // get position of drop element
     while (tempDropTarget.previousSibling !== null) {
-      if(tempDropTarget.previousSibling.tagName === "LI"){
+      if (tempDropTarget.previousSibling.tagName === "LI") {
         iDrop++;
       }
       tempDropTarget = tempDropTarget.previousSibling;
@@ -143,7 +143,7 @@ function deletePlaylistObject(event) {
     tempEl = el.parentNode;
 
   while (tempEl.previousSibling !== null) {
-    if(tempEl.previousSibling.tagName === "LI"){
+    if (tempEl.previousSibling.tagName === "LI") {
       i++;
     }
     tempEl = tempEl.previousSibling;

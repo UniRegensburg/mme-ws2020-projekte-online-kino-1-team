@@ -3,9 +3,7 @@
 var player,
   options = {
     controls: true,
-  },
-  playlist = [],
-  currentTrack;
+  };
 
 export class VideoPlayer {
 
@@ -14,8 +12,6 @@ export class VideoPlayer {
     this.currentTrack = currentTrack;
     this.playlist = playlist;
 
-    // console.log("constructor: " + playlist);
-    //console.log("construktorthis: " + this.playlist);
     if (playlist.length === 0) {
       videoSource.src = "//vjs.zencdn.net/v/oceans.mp4";
     } else {
@@ -23,6 +19,10 @@ export class VideoPlayer {
     }
     // eslint-disable-next-line no-undef
     player = videojs(videoJsID, options);
+  }
+
+  getCurrentTrackNumber(){
+    return this.currentTrack;
   }
 
   setAutoplay() {
@@ -38,12 +38,10 @@ export class VideoPlayer {
   }
 
   loadNext() {
-
-    if (this.currentTrack < this.playlist.length -1 ) {
-      console.log("in der if");
+    if (this.currentTrack < this.playlist.length - 1) {
       this.currentTrack++;
       this.changeSrc(this.playlist[this.currentTrack]);
-    this.play();
+      this.play();
     }
   }
 
@@ -54,8 +52,10 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    this.currentTrack = trackNumber;
-    this.changeSrc(this.playlist[this.currentTrack]);
+    if(this.playlist.length !== 0){
+      this.currentTrack = trackNumber;
+      this.changeSrc(this.playlist[this.currentTrack]);
+    }
   }
 
   addSource(source) {
