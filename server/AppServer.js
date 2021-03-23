@@ -1,7 +1,8 @@
 /* eslint-env node */
 
 const path = require("path"),
-  express = require("express");
+  express = require("express"),
+  siofu = require("socketio-file-upload");
 
 /**
  * AppServer
@@ -28,7 +29,10 @@ class AppServer {
     this.app.get("/app", (req, res) => res.render("index"));
     this.app.use("/app", express.static(this.appDir));
     this.app.use("/app", express.static("public"));
-    this.app.use("/app", express.static("data"));
+    this.app.use(siofu.router);
+
+    //Das hier ist Crap!!!!!!!!
+    //this.app.use("/app", express.static("data"));
   }
 
   /**
@@ -37,17 +41,18 @@ class AppServer {
    * @param  {Number} port Port to use for serving static files
    */
   start(port) {
-    this.server = this.app.listen(port, function() {
+    this.server = this.app.listen(port, function () {
       /*console.log(
         `AppServer started. Client available at http://localhost:${port}/app`,
       );*/
     });
-
   }
 
-  openRooms(rooms){
-    rooms.forEach(e => 
-      this.app.get("/app/" + e.url, (req,res) => res.render("room")));
+  openRooms(rooms) {
+    rooms.forEach(e => {
+      this.app.get("/app/" + e.url, (req, res) => res.render("room"));
+      this.app.use("/app/" + e.url, express.static("data/" + e.url));
+    });
   }
 
   /**
@@ -65,7 +70,7 @@ class AppServer {
     this.app.set("view engine", "ejs");
     this.app.use(express.static(path.join(__dirname, "app")));
     this.app.get(randomLink, (req, res) => res.render("room"));
-  
+    this.app.use("/app/" + url, express.static("data/" + url));
     return url;
   }
 }

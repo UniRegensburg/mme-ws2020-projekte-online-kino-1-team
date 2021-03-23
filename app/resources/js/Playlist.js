@@ -14,7 +14,7 @@ export class Playlist {
 
     playlist.forEach(element => {
       templateVideo.src = element.src;
-      templateP.innerHTML = element.titel;
+      templateP.innerHTML = element.title;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
 
@@ -31,7 +31,7 @@ export class Playlist {
 
     playlist.forEach(element => {
       templateVideo.src = element.src;
-      templateP.innerHTML = element.titel;
+      templateP.innerHTML = element.title;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
 
@@ -65,7 +65,6 @@ export class Playlist {
     dragElement = allPlaylistElements[dragPosition],
     dragElementCopy = dragElement.cloneNode(true),
     dropElement = allPlaylistElements[dropPosition];
-    // eslint-disable-next-line no-unused-vars
     dragElement.parentNode.insertBefore(dragElementCopy,dropElement);
     dragElement.remove();
     this.setDragAndDrop();

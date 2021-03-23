@@ -1,3 +1,5 @@
+//Source: https://github.com/nwcell/ics.js/blob/master/demo/demo.html
+
 /* eslint-disable strict */
 /* eslint-disable no-void */
 /* eslint-disable no-undef */
