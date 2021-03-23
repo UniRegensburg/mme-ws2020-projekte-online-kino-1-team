@@ -2,12 +2,15 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
+import { VideoPlayer } from "./VideoPlayer.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
   playlist,
   uploader,
-  localRoomID;
+  localRoomID,
+  videoPlayer;
+  
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
@@ -15,7 +18,7 @@ function init() {
   setClickListener();
   setLiveChatClickListener();
   localRoomID = window.location.href.split("/").pop();
-
+  
   socket.on("loadPlaylist", playlistFiles => {
     let tempPlaylist = [];
     playlistFiles.forEach(element => {
@@ -25,12 +28,9 @@ function init() {
     playlist = new Playlist(tempPlaylist);
     playlist.setDragAndDrop();
     playlist.initDeleteButton();
-  });
-
-  socket.on("addFileToPlaylist", file => {
-    playlist.addFile([file]);
-    playlist.setDragAndDrop();
-    playlist.initDeleteButton();
+    
+    videoPlayer = new VideoPlayer("my-player", playlistFiles, 0);
+    videoPlayer.setAutoplay();
   });
 
   socket.on("playlistObjectToClients", playlistObject => {
@@ -38,16 +38,20 @@ function init() {
       playlist.addFile([playlistObject.playlistObject]);
       playlist.setDragAndDrop();
       playlist.initDeleteButton();
+      videoPlayer.addSource(playlistObject.playlistObject.src);
     }
   });
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
+      //console.log(playlist.getPlaylistArray());
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
   socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
     if (window.location.href === roomID) {
       playlist.changeDragDropPosition(iDrag, iDrop);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
 

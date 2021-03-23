@@ -2,7 +2,8 @@
 
 import {sendDeleteNumber, sendDragDropPosition} from "./room.js";
 
-var dragTarget;
+var dragTarget,
+playlistSources;
 
 export class Playlist {
 
@@ -12,11 +13,14 @@ export class Playlist {
       templateVideo = playlistTemplate.content.querySelector("video"),
       templateP = playlistTemplate.content.querySelector("p");
 
+      playlistSources = [];
+
     playlist.forEach(element => {
       templateVideo.src = element.src;
       templateP.innerHTML = element.title;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
+      playlistSources.push(element.src);
 
     });
     this.setDragAndDrop();
@@ -34,6 +38,7 @@ export class Playlist {
       templateP.innerHTML = element.title;
       let clone = document.importNode(playlistTemplate.content, true);
       playlistBox.appendChild(clone);
+      playlistSources.push(element.src);
 
     });
 
@@ -58,6 +63,8 @@ export class Playlist {
     var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
     
     allChildElemtsPlaylistBody[deleteNumber].remove();
+    playlistSources.splice(deleteNumber, 1);
+    console.log("deleted: " + playlistSources);
     }
     
   changeDragDropPosition(dragPosition, dropPosition){
@@ -69,6 +76,24 @@ export class Playlist {
     dragElement.remove();
     this.setDragAndDrop();
     this.initDeleteButton();
+
+    let startPlaylist = playlistSources,
+        tempPlaylist = [],
+        iDragEl = startPlaylist[dragPosition];
+
+      for (let index = 0; index < startPlaylist.length; index++) {
+        if (index === dropPosition) {
+          tempPlaylist.push(iDragEl);
+        }
+        if (index !== dragPosition) {
+          tempPlaylist.push(startPlaylist[index]);
+        }
+      }
+    playlistSources = tempPlaylist;
+  }
+
+  getPlaylistSources(){
+    return playlistSources;
   }
 }
 

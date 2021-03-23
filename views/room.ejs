@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WatchMates</title>
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/styleRoom.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
@@ -29,8 +30,15 @@
             <input type="file" id="siofu_input"/>
             <ul class="playlist-body"></ul>
         </div>
-        <video class="video" controls="true" width="80%">
-            <source src="" type="video.mp4">
+        <video id="my-player" class="video-js">
+            <source id="video-source" src="" type=""></source>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">
+                        supports HTML5 video
+                    </a>
+                </p>
         </video>
         <div class="chat">
             <div class="chat-header">
@@ -60,6 +68,7 @@
     </div>
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="/siofu/client.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
 <template id="playlistTemplate">
