@@ -73,6 +73,7 @@ io.on("connection", (socket) => {
     socket.emit("urlToClient", url);
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("fileUpload", (roomID, srcName, name, type) => {
     let tempSrc = roomID + "/" + name + "." + srcName.split(".").pop(),
       playlistObject = {

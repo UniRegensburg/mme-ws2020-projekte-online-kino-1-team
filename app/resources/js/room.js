@@ -44,9 +44,6 @@ function init() {
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
-      //console.log(playlist.getPlaylistArray());
-      console.log("room, deleteNumbertoClients: TrackNumber: " + videoPlayer.getCurrentTrackNumber());
-      console.log("deletNumber: " + deleteNumber);
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
       if (videoPlayer.getCurrentTrackNumber() === deleteNumber) {
         videoPlayer.load(videoPlayer.getCurrentTrackNumber());
@@ -60,27 +57,22 @@ function init() {
     }
   });
 
-
-
   // Für Data Synchro
   socket.on("sendDataRequestToClients", (url) => {
     var currentTrack;
     if (url === window.location.href) {
       currentTrack = videoPlayer.getCurrentTrackNumber();
-      //videoPlayer.getCurrentTime();
       socket.emit("currentTrackInfoToServer", url, currentTrack);
     }
 
   });
   socket.on("currentTrackInfoToClients", (url, currentTrack) => {
     if (url === window.location.href) {
-      console.log("TrackInfoAngekommen: " + currentTrack);
       videoPlayer.load(currentTrack);
     }
   });
   socket.on("videoClickToClients", (url, currentTrack) => {
     if (url === window.location.href) {
-      console.log("VideoClickAngekommen: " + currentTrack);
       videoPlayer.load(currentTrack);
     }
   });
@@ -224,7 +216,6 @@ export function changeVideoOnClick(e) {
 }
 
 export function onVideoPlayed(time) {
-  console.log("TIME :D" + time);
   socket.emit("videoPlayedToServer", window.location.href, time);
 }
 export function onVideoPaused() {

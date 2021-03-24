@@ -27,13 +27,10 @@ export class VideoPlayer {
     }
     // eslint-disable-next-line no-undef
     player = videojs(videoJsID, options);
-    console.log("Player", player);
     player.on("play", () => {
-      console.log("PLAY");
       onVideoPlayed(player.currentTime());
     });
     player.on("pause", () => {
-      console.log("Paused");
       onVideoPaused();
     });
   }
@@ -93,8 +90,6 @@ export class VideoPlayer {
   }
   
   getCurrentTime() {
-    var time = player.currentTime();
-    console.log("TIMEXDDD: " + time);
     return player.currentTime();
   }
   setCurrentTime(time){
