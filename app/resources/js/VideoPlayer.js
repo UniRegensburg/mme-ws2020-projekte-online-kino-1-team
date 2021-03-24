@@ -1,8 +1,16 @@
 /* eslint-env node */
 
+import { onVideoPlayed, onVideoPaused } from "./room.js";
+
 var player,
   options = {
     controls: true,
+    muted: true,
+    controlBar: {
+      playToggle: {
+        playing: false,
+      },
+    },
   };
 
 export class VideoPlayer {
@@ -19,9 +27,18 @@ export class VideoPlayer {
     }
     // eslint-disable-next-line no-undef
     player = videojs(videoJsID, options);
+    console.log("Player", player);
+    player.on("play", () => {
+      console.log("PLAY");
+      onVideoPlayed(player.currentTime());
+    });
+    player.on("pause", () => {
+      console.log("Paused");
+      onVideoPaused();
+    });
   }
 
-  getCurrentTrackNumber(){
+  getCurrentTrackNumber() {
     return this.currentTrack;
   }
 
@@ -36,12 +53,15 @@ export class VideoPlayer {
   play() {
     player.play();
   }
+  pause() {
+    player.pause();
+  }
 
   loadNext() {
     if (this.currentTrack < this.playlist.length - 1) {
       this.currentTrack++;
       this.changeSrc(this.playlist[this.currentTrack]);
-      this.play();
+      //this.play();
     }
   }
 
@@ -52,7 +72,7 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    if(this.playlist.length !== 0){
+    if (this.playlist.length !== 0) {
       this.currentTrack = trackNumber;
       this.changeSrc(this.playlist[this.currentTrack]);
     }
@@ -67,5 +87,17 @@ export class VideoPlayer {
 
   updatePlaylist(playlist) {
     this.playlist = playlist;
+  }
+  getPlayer() {
+    return player;
+  }
+  
+  getCurrentTime() {
+    var time = player.currentTime();
+    console.log("TIMEXDDD: " + time);
+    return player.currentTime();
+  }
+  setCurrentTime(time){
+    player.currentTime(time);
   }
 }

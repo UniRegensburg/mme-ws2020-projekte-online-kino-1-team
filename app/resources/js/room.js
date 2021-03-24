@@ -59,20 +59,42 @@ function init() {
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
+
+
+
   // Für Data Synchro
   socket.on("sendDataRequestToClients", (url) => {
     var currentTrack;
-    if(url === window.location.href){
+    if (url === window.location.href) {
       currentTrack = videoPlayer.getCurrentTrackNumber();
       //videoPlayer.getCurrentTime();
       socket.emit("currentTrackInfoToServer", url, currentTrack);
     }
-    
+
   });
-  socket.on("currentTrackInfoToClients", (url, currentTrack) =>{
-    if(url === window.location.href){
+  socket.on("currentTrackInfoToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
       console.log("TrackInfoAngekommen: " + currentTrack);
       videoPlayer.load(currentTrack);
+    }
+  });
+  socket.on("videoClickToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      console.log("VideoClickAngekommen: " + currentTrack);
+      videoPlayer.load(currentTrack);
+    }
+  });
+  //videoPlayedToClients
+  socket.on("videoPlayedToClients", (url, time) => {
+    if (url === window.location.href) {
+      videoPlayer.setCurrentTime(time);
+      videoPlayer.play();
+    }
+  });
+  //videoPausedToClients
+  socket.on("videoPausedToClients", (url) =>{
+    if (url === window.location.href) {
+      videoPlayer.pause();
     }
   });
 
@@ -196,8 +218,17 @@ export function changeVideoOnClick(e) {
       tempLi = tempLi.previousSibling;
     }
 
-    videoPlayer.load(counter);
+    socket.emit("videoClickToServer", window.location.href, counter);
+    //videoPlayer.load(counter);
   }
+}
+
+export function onVideoPlayed(time) {
+  console.log("TIME :D" + time);
+  socket.emit("videoPlayedToServer", window.location.href, time);
+}
+export function onVideoPaused() {
+  socket.emit("videoPausedToServer", window.location.href);
 }
 
 init();

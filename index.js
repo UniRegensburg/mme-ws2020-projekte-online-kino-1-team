@@ -36,9 +36,23 @@ io.on("connection", (socket) => {
     });
     
   });
-
+  //Synchroner Stream
+  // init
   socket.on("currentTrackInfoToServer",(url, currentTrack) =>{
     socket.broadcast.emit("currentTrackInfoToClients", url, currentTrack);
+  });
+
+  //videoclick
+  socket.on("videoClickToServer", (url, currentTrack) => {
+    io.emit("videoClickToClients", url, currentTrack);
+  });
+  //onVideoPlayed
+  socket.on("videoPlayedToServer", (url, time) => {
+    io.emit("videoPlayedToClients", url, time);
+  });
+  //onVideoPaused
+  socket.on("videoPausedToServer", (url) => {
+    io.emit("videoPausedToClients", url);
   });
 
   socket.on("createRoom", () => {
