@@ -59,6 +59,22 @@ function init() {
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
+  // Für Data Synchro
+  socket.on("sendDataRequestToClients", (url) => {
+    var currentTrack;
+    if(url === window.location.href){
+      currentTrack = videoPlayer.getCurrentTrackNumber();
+      //videoPlayer.getCurrentTime();
+      socket.emit("currentTrackInfoToServer", url, currentTrack);
+    }
+    
+  });
+  socket.on("currentTrackInfoToClients", (url, currentTrack) =>{
+    if(url === window.location.href){
+      console.log("TrackInfoAngekommen: " + currentTrack);
+      videoPlayer.load(currentTrack);
+    }
+  });
 
   socket.emit("clientEntersRoom", (window.location.href));
   // eslint-disable-next-line no-undef

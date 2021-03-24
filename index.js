@@ -32,7 +32,13 @@ io.on("connection", (socket) => {
 
     dbClient.getPlaylist(roomID).then(e => {
       socket.emit("loadPlaylist", e[0].playlist);
+      socket.broadcast.emit("sendDataRequestToClients", url);
     });
+    
+  });
+
+  socket.on("currentTrackInfoToServer",(url, currentTrack) =>{
+    socket.broadcast.emit("currentTrackInfoToClients", url, currentTrack);
   });
 
   socket.on("createRoom", () => {
