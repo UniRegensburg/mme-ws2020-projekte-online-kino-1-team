@@ -76,6 +76,11 @@ io.on("connection", (socket) => {
 
     dbClient.changePlaylistPosition(roomID.split("/").pop(), iDrag, iDrop);
   });
+  socket.on("URLEnteredInTextField", (roomID) => {
+    dbClient.getRoom(roomID).then((room) => {
+      socket.emit("URLFound", room[0]);
+    });
+  });
 });
 
 httpServer.listen(SOCKETPORT, function () {
