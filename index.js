@@ -32,9 +32,29 @@ io.on("connection", (socket) => {
 
     dbClient.getPlaylist(roomID).then(e => {
       socket.emit("loadPlaylist", e[0].playlist);
+      socket.broadcast.emit("sendDataRequestToClients", url);
     });
-
+    
   });
+  //Synchroner Stream
+  // init
+  socket.on("currentTrackInfoToServer",(url, currentTrack) =>{
+    socket.broadcast.emit("currentTrackInfoToClients", url, currentTrack);
+  });
+
+  //videoclick
+  socket.on("videoClickToServer", (url, currentTrack) => {
+    io.emit("videoClickToClients", url, currentTrack);
+  });
+  //onVideoPlayed
+  socket.on("videoPlayedToServer", (url, time) => {
+    io.emit("videoPlayedToClients", url, time);
+  });
+  //onVideoPaused
+  socket.on("videoPausedToServer", (url) => {
+    io.emit("videoPausedToClients", url);
+  });
+
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
 
@@ -53,6 +73,7 @@ io.on("connection", (socket) => {
     socket.emit("urlToClient", url);
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("fileUpload", (roomID, srcName, name, type) => {
     let tempSrc = roomID + "/" + name + "." + srcName.split(".").pop(),
       playlistObject = {
@@ -62,7 +83,7 @@ io.on("connection", (socket) => {
 
     io.emit("playlistObjectToClients", playlistObject);
 
-    dbClient.addPlaylistEntry(roomID,tempSrc);
+    dbClient.addPlaylistEntry(roomID, tempSrc);
   });
 
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
@@ -75,6 +96,11 @@ io.on("connection", (socket) => {
     io.emit("DragDropPositionToClients", roomID, iDrag, iDrop);
 
     dbClient.changePlaylistPosition(roomID.split("/").pop(), iDrag, iDrop);
+  });
+  socket.on("URLEnteredInTextField", (roomID) => {
+    dbClient.getRoom(roomID).then((room) => {
+      socket.emit("URLFound", room[0]);
+    });
   });
 });
 
@@ -91,7 +117,6 @@ function createRoomFolder(roomDir) {
  */
 
 function init() {
-
   // Access command line parameters from start command (see package.json)
   let appDirectory = process.argv[2],
     appPort = process.argv[3];

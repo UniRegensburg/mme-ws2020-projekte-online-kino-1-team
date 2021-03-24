@@ -103,9 +103,10 @@ function removeDisabled() {
 }
 
 function pageScroll() {
+    var scrollNumber = 3;
     let autoScroll = document.querySelector(".chat-body"),
         scrolldelay;
     autoScroll.scrollBy(0, 1);
     // eslint-disable-next-line no-unused-vars
-    scrolldelay = setTimeout(pageScroll, 3);
+    scrolldelay = setTimeout(pageScroll, scrollNumber);
 }

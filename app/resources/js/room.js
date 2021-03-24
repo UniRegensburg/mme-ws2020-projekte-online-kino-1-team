@@ -2,12 +2,15 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
+import { VideoPlayer } from "./VideoPlayer.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
   playlist,
   uploader,
-  localRoomID;
+  localRoomID,
+  videoPlayer;
+
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
 
@@ -19,35 +22,71 @@ function init() {
   socket.on("loadPlaylist", playlistFiles => {
     let tempPlaylist = [];
     playlistFiles.forEach(element => {
-      tempPlaylist.push({src: element, title: element.split("/").pop()});
+      tempPlaylist.push({ src: element, title: element.split("/").pop() });
     });
 
     playlist = new Playlist(tempPlaylist);
-    playlist.setDragAndDrop();
+    playlist.setListener();
     playlist.initDeleteButton();
-  });
 
-  socket.on("addFileToPlaylist", file => {
-    playlist.addFile([file]);
-    playlist.setDragAndDrop();
-    playlist.initDeleteButton();
+    videoPlayer = new VideoPlayer("my-player", playlistFiles, 0);
+    videoPlayer.setAutoplay();
   });
 
   socket.on("playlistObjectToClients", playlistObject => {
     if (localRoomID === playlistObject.roomID) {
       playlist.addFile([playlistObject.playlistObject]);
-      playlist.setDragAndDrop();
+      playlist.setListener();
       playlist.initDeleteButton();
+      videoPlayer.addSource(playlistObject.playlistObject.src);
     }
   });
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
+      if (videoPlayer.getCurrentTrackNumber() === deleteNumber) {
+        videoPlayer.load(videoPlayer.getCurrentTrackNumber());
+      }
     }
   });
   socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
     if (window.location.href === roomID) {
       playlist.changeDragDropPosition(iDrag, iDrop);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
+    }
+  });
+
+  // Für Data Synchro
+  socket.on("sendDataRequestToClients", (url) => {
+    var currentTrack;
+    if (url === window.location.href) {
+      currentTrack = videoPlayer.getCurrentTrackNumber();
+      socket.emit("currentTrackInfoToServer", url, currentTrack);
+    }
+
+  });
+  socket.on("currentTrackInfoToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
+  socket.on("videoClickToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
+  //videoPlayedToClients
+  socket.on("videoPlayedToClients", (url, time) => {
+    if (url === window.location.href) {
+      videoPlayer.setCurrentTime(time);
+      videoPlayer.play();
+    }
+  });
+  //videoPausedToClients
+  socket.on("videoPausedToClients", (url) =>{
+    if (url === window.location.href) {
+      videoPlayer.pause();
     }
   });
 
@@ -56,7 +95,6 @@ function init() {
   uploader = new SocketIOFileUpload(socket);
   uploader.listenOnInput(document.getElementById("siofu_input"));
   uploader.listenOnDrop(document.querySelector(".playlist"));
-
   uploader.addEventListener("load", emitFileUpload);
 }
 
@@ -86,6 +124,7 @@ function setClickListener() {
       enterNickname();
     }
   });
+
   hideChatIcon.addEventListener("click", hideChat);
   showChatIcon.addEventListener("click", showChat);
   toggleOne.addEventListener("mouseover", showOverlayOne);
@@ -144,6 +183,43 @@ function copyURL() {
 
 export function getNickName() {
   return nicknameTextField.value;
+}
+
+export function changeVideoOnClick(e) {
+  let liElement = e.target,
+    tempLi = liElement,
+    deleteButtons = document.querySelectorAll(".deleteButtonPlaylist"),
+    isDeleteButton,
+    counter = 0;
+
+  deleteButtons.forEach(e => {
+    if (liElement === e) {
+      isDeleteButton = true;
+    }
+  });
+
+  if (!isDeleteButton) {
+    if (liElement.parentNode.tagName === "LI") {
+      liElement = liElement.parentNode;
+      tempLi = liElement;
+    }
+    while (tempLi.previousSibling !== null) {
+      if (tempLi.previousSibling.tagName === "LI") {
+        counter++;
+      }
+      tempLi = tempLi.previousSibling;
+    }
+
+    socket.emit("videoClickToServer", window.location.href, counter);
+    //videoPlayer.load(counter);
+  }
+}
+
+export function onVideoPlayed(time) {
+  socket.emit("videoPlayedToServer", window.location.href, time);
+}
+export function onVideoPaused() {
+  socket.emit("videoPausedToServer", window.location.href);
 }
 
 init();
