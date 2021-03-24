@@ -12,7 +12,7 @@ let dropDownMenu = document.querySelector(".dropDownMenu"),
 
 socket.on("changeUrl", (data) => window.location.href =
   window.location.href + data);
-  
+
 socket.on("urlToClient", (data) => {
   getUrlFromIndex(data);
 });
@@ -38,9 +38,17 @@ function createNewRoom() {
 
 function showURLTextBox() {
   dropDownMenu.classList.remove("hidden");
-  if(URLTextArea.value !== ""){
-    joinRoomButton.addEventListener("click", function(){
-      window.location.href = window.location.href + URLTextArea.value.split("/").pop();
+  if (URLTextArea.value !== "") {
+    joinRoomButton.addEventListener("click", function () {
+      socket.emit("URLEnteredInTextField", (URLTextArea.value.split("/").pop()));
+      socket.on("URLFound", (boolean) => {
+        if (boolean) {
+          window.location.href = window.location.href + URLTextArea.value.split("/").pop();
+        } else {
+          URLTextArea.value = "";
+          URLTextArea.placeholder = "Die eingegebene URL ist fehlerhaft";
+        }
+      });
     });
   }
 }
@@ -51,11 +59,19 @@ function hideURLTextBox() {
 
 function onLinkEntered(e) {
   if (e.key === "Enter" && URLTextArea.value !== "") {
-    window.location.href = window.location.href + URLTextArea.value;
+    socket.emit("URLEnteredInTextField", (URLTextArea.value.split("/").pop()));
+    socket.on("URLFound", (boolean) => {
+      if (boolean) {
+        window.location.href = window.location.href + URLTextArea.value.split("/").pop();
+      } else {
+        URLTextArea.value = "";
+        URLTextArea.placeholder = "Die eingegebene URL ist fehlerhaft";
+      }
+    });
   }
 }
 
-export function sendDateToServer(){
+export function sendDateToServer() {
   socket.emit("dateToServer");
 }
 
