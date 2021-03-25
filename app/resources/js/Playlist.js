@@ -116,7 +116,6 @@ function dragDrop(eventDrop) {
     iDrop = 0,
     tempDragTarget = dragTarget,
     tempDropTarget = dropTarget;
-    console.log("DROPTARGET: " + dropTarget);
    
   if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
 
@@ -134,8 +133,6 @@ function dragDrop(eventDrop) {
       }
       tempDropTarget = tempDropTarget.previousSibling;
     }
-    console.log("IDRAG: " + iDrag);
-    console.log("IDROP: " + iDrop);
     sendDragDropPosition(iDrag, iDrop);
   }
 }
