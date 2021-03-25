@@ -1,6 +1,7 @@
 :root{
     /*General Colors*/
     --font-color: white;
+    --font-shadow-color: rgb(146, 135, 135);
     --background-color: #4d4d4d;
     --hover-color: #858585;
     --black: black;

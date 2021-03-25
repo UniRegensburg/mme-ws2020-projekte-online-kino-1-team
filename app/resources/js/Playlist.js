@@ -111,12 +111,12 @@ function dragEnter(eventEnter) {
 }
 
 function dragDrop(eventDrop) {
-  var dropTarget = eventDrop.target.parentNode,
+  var dropTarget = eventDrop.target.parentNode.parentNode,
     iDrag = 0,
     iDrop = 0,
     tempDragTarget = dragTarget,
     tempDropTarget = dropTarget;
-
+   
   if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
 
     // get position of drag element
@@ -140,7 +140,7 @@ function dragDrop(eventDrop) {
 function deletePlaylistObject(event) {
   var el = event.target,
     i = 0,
-    tempEl = el.parentNode;
+    tempEl = el.parentNode.parentNode;
 
   while (tempEl.previousSibling !== null) {
     if (tempEl.previousSibling.tagName === "LI") {

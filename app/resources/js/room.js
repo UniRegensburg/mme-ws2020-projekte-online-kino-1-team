@@ -186,7 +186,7 @@ export function getNickName() {
 }
 
 export function changeVideoOnClick(e) {
-  let liElement = e.target,
+  let liElement = e.target.parentNode,
     tempLi = liElement,
     deleteButtons = document.querySelectorAll(".deleteButtonPlaylist"),
     isDeleteButton,
