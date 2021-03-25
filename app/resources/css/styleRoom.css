@@ -5,7 +5,7 @@ html {
 }
 
 body{
-    background: url("backgroundRoom.jpg");
+    background: url("pictures/backgroundRoom.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -116,52 +116,91 @@ input:checked + .roundButton:before  {
     border: 3px solid var(--font-color);
     height: 500px;
     width: 30%;
-    overflow-y: scroll;
 }
 
 .playlist-header{
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+}
+
+input[type="file"]{
+    display:none;
+}
+
+.playlist-upload-button-label{
+    width: 30%;
+    cursor: pointer;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.8em;
+}
+
+.uploadIcon{
+    width: 30%;
+}
+
+.playlist-header-title{
     font-size: 40px;
-    text-align: center;
     color: var(--font-color);
+    margin-left: 0.1em;
     margin-top: 0.2em;
+}
+
+.playlist-upload-button-label:hover{
+    color: var(--hover-color);
+}
+
+.playlist-body{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    height: 450px;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow-y: scroll;
+    padding-left: 1.5em;
 }
 
 li{
     text-align: left;
-    padding: 5%;
     display: flex;
-    height: 2.5em;
-    width: justify-content;
+    flex-direction: row;
+    margin-top: 0.5em;
+}
+
+.playlist-left-body{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
 }
 
 li video{
-    width: 2.5em;
-    height: 100%;
+    width: 3.5em;
+    margin-right: 1em;
 }
 
-.test{
-    padding-left: 2%;
-    padding-right: 2%;
-    text-align: center;
-    font-size: 17px;
-    word-wrap: break-word;
-    overflow: auto;
-    width: 13em;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+li p{
+    color: var(--font-color);
+    font-size: 20px;
+}
+
+.playlist-right-body{
+    display: flex;
+    justify-content: right;
+    text-align: right;
+}
+
+.deleteButtonPlaylist{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
     color: var(--font-color);
     font-size: 30px;
-}
-
-.buttonPlaylist{
-    color: white;
-    background-color: transparent;
-    border: transparent;
-    width: auto;
-    height: auto;
-    font-size: 1em;
-    position: sticky;
-    align-items: flex-end;
+    justify-content: right;
+    margin-left: 0.5em;
+    padding-left: 0;
 }
 
 .chat{
@@ -196,6 +235,10 @@ li video{
     margin-left: 0.5em;
     margin-top: 0.5em;
     margin-bottom: 0.8em;
+}
+
+.chat-header-icon:hover{
+    content: url("pictures/arrowIconHover.png")
 }
 
 .chat-header-title{
@@ -250,6 +293,10 @@ li video{
     margin-left: 0.5em;
     margin-bottom: 0;
     cursor: pointer;
+}
+
+.chat-footer-icon:hover{
+    content: url("pictures/sendIconHover.png");
 }
 
 .typeField:hover{
