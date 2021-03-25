@@ -13,5 +13,8 @@ https://de.freepik.com/freie-ikonen/papierflieger_809024.htm#page=1&query=send&p
 Favicon:
 https://de.freepik.com/freie-ikonen/tv-hand-gezeichnet-umriss_734774.htm
 
+UploadIcon:
+https://www.flaticon.com/de/kostenloses-icon/zeichen-hochladen_73726?term=upload&page=1&position=1&page=1&position=1&related_id=73726&origin=search
+
 Message Sound:
 self made
