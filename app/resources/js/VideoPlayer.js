@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import { onVideoPlayed, onVideoPaused } from "./room.js";
+import { onVideoPlayed, onVideoPaused, onVideoEnded } from "./room.js";
 
 var player,
   options = {
@@ -57,8 +57,8 @@ export class VideoPlayer {
   loadNext() {
     if (this.currentTrack < this.playlist.length - 1) {
       this.currentTrack++;
-      this.changeSrc(this.playlist[this.currentTrack]);
-      //this.play();
+      //this.changeSrc(this.playlist[this.currentTrack]);
+      onVideoEnded(this.currentTrack);
     }
   }
 
