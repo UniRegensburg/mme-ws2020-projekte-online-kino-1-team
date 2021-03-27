@@ -89,6 +89,12 @@ function init() {
       videoPlayer.pause();
     }
   });
+  //videoEndedToClients
+  socket.on("videoEndedToClients", (url, currentTrack) =>{
+    if(url === window.location.href){
+      videoPlayer.load(currentTrack);
+    }
+  });
 
   socket.emit("clientEntersRoom", (window.location.href));
   // eslint-disable-next-line no-undef
@@ -220,6 +226,9 @@ export function onVideoPlayed(time) {
 }
 export function onVideoPaused() {
   socket.emit("videoPausedToServer", window.location.href);
+}
+export function onVideoEnded(currentTrack){
+  socket.emit("videoEndedToServer", window.location.href, currentTrack);
 }
 
 init();
