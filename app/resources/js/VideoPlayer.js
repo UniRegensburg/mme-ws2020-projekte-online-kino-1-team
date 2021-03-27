@@ -11,6 +11,10 @@ var player,
         playing: false,
       },
     },
+    //f- fullscreen  m - mute  k - playpause  Space - playpause
+    userActions: {
+      hotkeys: true,
+    },
   };
 
 export class VideoPlayer {
