@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import {CAL_SINGLE} from "./createICal.js";
 import {sendDateToServer} from "./index.js";
 
