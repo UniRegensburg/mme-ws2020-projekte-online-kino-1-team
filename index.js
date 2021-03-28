@@ -106,6 +106,15 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
       socket.emit("URLFound", room[0]);
     });
   });
+  socket.on("deleteFile", (roomID, srcName, name) => {
+    let tempSrc = "data/" + roomID + "/" + name + "." + srcName.split(".").pop();
+    fs.unlink(tempSrc, err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+  });
 });
 
 httpServer.listen(SOCKETPORT, function () {

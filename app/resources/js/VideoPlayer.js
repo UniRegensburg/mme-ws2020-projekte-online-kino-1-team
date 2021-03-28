@@ -118,19 +118,20 @@ export class VideoPlayer {
   setCurrentTime(time) {
     videoPlayer.currentTime(time);
   }
+
 }
 
-function isVideo(src) {
+export function isVideo(src) {
   let type = src.split(".").pop();
   return supportedFiles.video.includes(type);
 }
 
-function isAudio(src) {
+export function isAudio(src) {
   let type = src.split(".").pop();
   return supportedFiles.audio.includes(type);
 }
 
-function isImage(src) {
+export function isImage(src) {
   let type = src.split(".").pop();
   return supportedFiles.image.includes(type);
 }

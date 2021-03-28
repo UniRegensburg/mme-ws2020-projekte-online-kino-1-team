@@ -2,7 +2,7 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
-import { VideoPlayer } from "./VideoPlayer.js";
+import { VideoPlayer, isVideo, isAudio, isImage } from "./VideoPlayer.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
@@ -108,7 +108,12 @@ function init() {
 
 function emitFileUpload(e) {
   let roomID = window.location.pathname.split("/")[2];
-  socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
+  if(isVideo(e.file.name) || isAudio(e.file.name) || isImage(e.file.name)){
+    socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
+ }
+ else{
+   socket.emit("deleteFile", roomID, e.file.name, e.name);
+ }
 }
 
 export function sendDeleteNumber(deleteNumber) {
