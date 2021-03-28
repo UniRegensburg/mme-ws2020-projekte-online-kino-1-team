@@ -63,9 +63,11 @@ export class Playlist {
 
   deletePlaylistEl(deleteNumber) {
     var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
-
+    //console.log("Davor: " + playlistSources);
+    //console.log(allChildElemtsPlaylistBody);
     allChildElemtsPlaylistBody[deleteNumber].remove();
-    playlistSources.splice(deleteNumber, 2);
+    playlistSources.splice(deleteNumber, 1);
+    //console.log("Danach: " + playlistSources);
   }
 
   changeDragDropPosition(dragPosition, dropPosition) {
@@ -116,7 +118,7 @@ function dragDrop(eventDrop) {
     iDrop = 0,
     tempDragTarget = dragTarget,
     tempDropTarget = dropTarget;
-   
+
   if (dragTarget !== undefined && dragTarget.parentNode !== dropTarget) {
 
     // get position of drag element

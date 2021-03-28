@@ -34,12 +34,12 @@ io.on("connection", (socket) => {
       socket.emit("loadPlaylist", e[0].playlist);
       socket.broadcast.emit("sendDataRequestToClients", url);
     });
-    
   });
   //Synchroner Stream
   // init
-  socket.on("currentTrackInfoToServer",(url, currentTrack) =>{
-    socket.broadcast.emit("currentTrackInfoToClients", url, currentTrack);
+  socket.on("currentTrackInfoToServer", (url, currentTrack) => {
+    socket.broadcast.emit("currentTrackInfoToClients", url,
+      currentTrack);
   });
 
   //videoclick
@@ -54,10 +54,10 @@ io.on("connection", (socket) => {
   socket.on("videoPausedToServer", (url) => {
     io.emit("videoPausedToClients", url);
   });
-//onVideoEnded
-socket.on("videoEndedToServer", (url, currentTrack) =>{
-  io.emit("videoEndedToClients", url, currentTrack);
-});
+  //onVideoEnded
+  socket.on("videoEndedToServer", (url, currentTrack) => {
+    io.emit("videoEndedToClients", url, currentTrack);
+  });
 
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
@@ -82,9 +82,10 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
     let tempSrc = roomID + "/" + name + "." + srcName.split(".").pop(),
       playlistObject = {
         roomID: roomID,
-        playlistObject: { src: tempSrc, title: tempSrc.split("/").pop() },
+        playlistObject: {
+          src: tempSrc, title: tempSrc.split("/").pop(),
+        },
       };
-
     io.emit("playlistObjectToClients", playlistObject);
 
     dbClient.addPlaylistEntry(roomID, tempSrc);
@@ -99,7 +100,8 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
   socket.on("DragDropPositionToServer", (roomID, iDrag, iDrop) => {
     io.emit("DragDropPositionToClients", roomID, iDrag, iDrop);
 
-    dbClient.changePlaylistPosition(roomID.split("/").pop(), iDrag, iDrop);
+    dbClient.changePlaylistPosition(roomID.split("/").pop(), iDrag,
+      iDrop);
   });
   socket.on("URLEnteredInTextField", (roomID) => {
     dbClient.getRoom(roomID).then((room) => {
@@ -107,7 +109,8 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
     });
   });
   socket.on("deleteFile", (roomID, srcName, name) => {
-    let tempSrc = "data/" + roomID + "/" + name + "." + srcName.split(".").pop();
+    let tempSrc = "data/" + roomID + "/" + name + "." + srcName.split(
+      ".").pop();
     fs.unlink(tempSrc, err => {
       if (err) {
         console.error(err);

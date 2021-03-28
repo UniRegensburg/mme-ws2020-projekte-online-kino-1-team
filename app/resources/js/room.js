@@ -2,7 +2,7 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
-import { VideoPlayer, isVideo, isAudio, isImage } from "./VideoPlayer.js";
+import { VideoPlayer} from "./VideoPlayer.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
@@ -12,7 +12,8 @@ let nicknameTextField,
   videoPlayer;
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3000"),
+supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav"], image: ["jpg", "jpeg", "png"] };
 
 function init() {
   setClickListener();
@@ -38,7 +39,7 @@ function init() {
       playlist.addFile([playlistObject.playlistObject]);
       playlist.setListener();
       playlist.initDeleteButton();
-      videoPlayer.addSource(playlistObject.playlistObject.src);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
@@ -234,6 +235,21 @@ export function onVideoPaused() {
 }
 export function onVideoEnded(currentTrack){
   socket.emit("videoEndedToServer", window.location.href, currentTrack);
+}
+
+export function isVideo(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.video.includes(type);
+}
+
+export function isAudio(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.audio.includes(type);
+}
+
+export function isImage(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.image.includes(type);
 }
 
 init();

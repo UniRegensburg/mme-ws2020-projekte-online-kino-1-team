@@ -1,5 +1,6 @@
 /* eslint-env node */
-import { onVideoPlayed, onVideoPaused, onVideoEnded } from "./room.js";
+import { onVideoPlayed, onVideoPaused, onVideoEnded, isAudio, isImage,
+  isVideo } from "./room.js";
 
 var videoPlayer,
   options = {
@@ -16,8 +17,6 @@ var videoPlayer,
     },
   },
   diaPlayer;
-
-const supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav"], image: ["jpg", "jpeg", "png"] };
 
 export class VideoPlayer {
 
@@ -43,7 +42,7 @@ export class VideoPlayer {
     return this.currentTrack;
   }
 
-  getPlaylist(){
+  getPlaylist() {
     return this.playlist;
   }
 
@@ -56,8 +55,9 @@ export class VideoPlayer {
     if (src === undefined) {
       //Testvideo
       this.changeSrc("//vjs.zencdn.net/v/oceans.mp4");
-      return; }
-      
+      return;
+    }
+
     if (isVideo(src) || isAudio(src)) {
       changeToVideoJS();
       videoPlayer.src(src);
@@ -72,6 +72,7 @@ export class VideoPlayer {
   play() {
     videoPlayer.play();
   }
+  
   pause() {
     videoPlayer.pause();
   }
@@ -90,26 +91,28 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    if (this.playlist.length > 0 ) {
+    console.log("load, Playlist: " + this.playlist);
+    if (this.playlist.length > 0) {
       this.currentTrack = trackNumber;
       this.changeSrc(this.playlist[this.currentTrack]);
-    }
-    else if (this.playlist.length === 0){
+    } else if (this.playlist.length === 0) {
       this.changeSrc();
     }
-
   }
 
   addSource(source) {
     this.playlist.push(source);
+   // console.log("add");
     if (this.playlist.length <= 1) {
       this.load(0);
     }
   }
 
   updatePlaylist(playlist) {
+   // console.log("update");
     this.playlist = playlist;
   }
+
   getPlayer() {
     return videoPlayer;
   }
@@ -117,33 +120,20 @@ export class VideoPlayer {
   getCurrentTime() {
     return videoPlayer.currentTime();
   }
+
   setCurrentTime(time) {
     videoPlayer.currentTime(time);
   }
 
 }
 
-export function isVideo(src) {
-  let type = src.split(".").pop();
-  return supportedFiles.video.includes(type);
-}
-
-export function isAudio(src) {
-  let type = src.split(".").pop();
-  return supportedFiles.audio.includes(type);
-}
-
-export function isImage(src) {
-  let type = src.split(".").pop();
-  return supportedFiles.image.includes(type);
-}
-
-function changeToVideoJS(){
+function changeToVideoJS() {
   document.querySelector(".diashowContainer").classList.add("hidden");
   document.querySelector(".video-js").classList.remove("hidden");
 }
 
-function changeToDia(){
+function changeToDia() {
   document.querySelector(".diashowContainer").classList.remove("hidden");
   document.querySelector(".video-js").classList.add("hidden");
+  videoPlayer.pause();
 }
