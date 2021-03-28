@@ -1,8 +1,7 @@
 /* eslint-env node */
-
 import { onVideoPlayed, onVideoPaused, onVideoEnded } from "./room.js";
 
-var player,
+var videoPlayer,
   options = {
     controls: true,
     muted: true,
@@ -15,26 +14,28 @@ var player,
     userActions: {
       hotkeys: true,
     },
-  };
+  },
+  diaPlayer;
+
+const supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav"], image: ["jpg", "jpeg", "png"] };
 
 export class VideoPlayer {
 
   constructor(videoJsID, playlist, currentTrack) {
-    var videoSource = document.getElementById("video-source");
     this.currentTrack = currentTrack;
     this.playlist = playlist;
 
-    if (playlist.length === 0) {
-      videoSource.src = "//vjs.zencdn.net/v/oceans.mp4";
-    } else {
-      videoSource.src = playlist[currentTrack];
-    }
     // eslint-disable-next-line no-undef
-    player = videojs(videoJsID, options);
-    player.on("play", () => {
-      onVideoPlayed(player.currentTime());
+    videoPlayer = videojs(videoJsID, options);
+    diaPlayer = document.querySelector(".imageID");
+
+    this.load(currentTrack);
+
+    videoPlayer.on("play", () => {
+      console.log("play das Video");
+      onVideoPlayed(videoPlayer.currentTime());
     });
-    player.on("pause", () => {
+    videoPlayer.on("pause", () => {
       onVideoPaused();
     });
   }
@@ -44,18 +45,36 @@ export class VideoPlayer {
   }
 
   setAutoplay() {
-    player.on("ended", () => this.loadNext());
+    videoPlayer.on("ended", () => this.loadNext());
   }
 
   changeSrc(src) {
-    player.src(src);
+
+    if (src === undefined) { 
+      console.log("falsche Src");
+      return; }
+      
+    if (isVideo(src) || isAudio(src)) {
+      changeToVideoJS();
+      videoPlayer.src(src);
+      console.log("Video wird abgespielt");
+      return;
+    }
+    if (isImage(src)) {
+      console.log("spiele Bild ab");
+      changeToDia();
+      diaPlayer.src = src;
+    }
   }
 
   play() {
-    player.play();
+    //if(isImage){ return;}
+    console.log("Abgespielt");
+    videoPlayer.play();
   }
   pause() {
-    player.pause();
+    //if(isImage){ return;}
+    videoPlayer.pause();
   }
 
   loadNext() {
@@ -90,13 +109,38 @@ export class VideoPlayer {
     this.playlist = playlist;
   }
   getPlayer() {
-    return player;
+    return videoPlayer;
   }
-  
+
   getCurrentTime() {
-    return player.currentTime();
+    return videoPlayer.currentTime();
   }
-  setCurrentTime(time){
-    player.currentTime(time);
+  setCurrentTime(time) {
+    videoPlayer.currentTime(time);
   }
+}
+
+function isVideo(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.video.includes(type);
+}
+
+function isAudio(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.audio.includes(type);
+}
+
+function isImage(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.image.includes(type);
+}
+
+function changeToVideoJS(){
+  document.querySelector(".diashowContainer").classList.add("hidden"); 
+  document.querySelector(".video-js").classList.remove("hidden");
+}
+
+function changeToDia(){
+  document.querySelector(".diashowContainer").classList.remove("hidden");
+  document.querySelector(".video-js").classList.add("hidden");
 }

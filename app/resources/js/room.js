@@ -80,12 +80,14 @@ function init() {
   socket.on("videoPlayedToClients", (url, time) => {
     if (url === window.location.href) {
       videoPlayer.setCurrentTime(time);
+      console.log("play das Video roomJS");
       videoPlayer.play();
     }
   });
   //videoPausedToClients
   socket.on("videoPausedToClients", (url) =>{
     if (url === window.location.href) {
+      console.log("pause das Video roomJS");
       videoPlayer.pause();
     }
   });
