@@ -73,11 +73,9 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    if(isVideo(this.playlist[trackNumber])){
-      if (this.playlist.length !== 0) {
-        this.currentTrack = trackNumber;
-        this.changeSrc(this.playlist[this.currentTrack]);
-      }
+    if (this.playlist.length !== 0) {
+      this.currentTrack = trackNumber;
+      this.changeSrc(this.playlist[this.currentTrack]);
     }
   }
 
@@ -101,9 +99,4 @@ export class VideoPlayer {
   setCurrentTime(time){
     player.currentTime(time);
   }
-}
-
-function isVideo(videoSrc){
-  let type = videoSrc.split(".").pop();
-  return (type === "mp4" || type === "mp3" || type === "wav" || type === "webm");
 }

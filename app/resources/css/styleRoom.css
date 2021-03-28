@@ -180,11 +180,6 @@ li video{
     margin-right: 1em;
 }
 
-li img{
-    width: 3.5em;
-    margin-right: 1em;
-}
-
 li p{
     color: var(--font-color);
     font-size: 20px;
