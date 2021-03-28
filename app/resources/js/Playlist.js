@@ -8,41 +8,38 @@ var dragTarget,
 export class Playlist {
 
   constructor(playlist) {
+    let playlistBox = document.querySelector(".playlist-body"),
+      playlistTemplate = document.getElementById("playlistTemplate"),
+      templateVideo = playlistTemplate.content.querySelector("video"),
+      templateP = playlistTemplate.content.querySelector("p");
+
     playlistSources = [];
-    this.addFile(playlist);
+
+    playlist.forEach(element => {
+      templateVideo.src = element.src;
+      templateP.innerHTML = element.title;
+      let clone = document.importNode(playlistTemplate.content, true);
+      playlistBox.appendChild(clone);
+      playlistSources.push(element.src);
+
+    });
     this.setListener();
     this.initDeleteButton();
   }
 
   addFile(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
-      playlistTemplate = document.getElementById("playlistTemplate");
+      playlistTemplate = document.getElementById("playlistTemplate"),
+      templateVideo = playlistTemplate.content.querySelector("video"),
+      templateP = playlistTemplate.content.querySelector("p");
 
-      playlist.forEach(element => {
-        let testClone = document.importNode(playlistTemplate.content, true),
-        testImg, testP, fileEnding, testVideo;
-        playlistBox.appendChild(testClone);
-        testClone = playlistBox.lastChild.previousSibling;
-        testVideo = testClone.querySelector("video");
-        testImg = testClone.querySelector("img");
-        testP = testClone.querySelector("p");
-        fileEnding = element.src.split(".").pop();
-
-        testP.innerHTML = element.title;
-        if(fileEnding === "png" || fileEnding ==="jpeg" || fileEnding === "jpg"){
-          testVideo.remove();
-          testImg.src = element.src;
-        }
-        else if(fileEnding === "mp4"||fileEnding === "mp3"||fileEnding === "wav" ||fileEnding === "webm") {
-          testImg.remove();
-          testVideo.src = element.src;
-        }
-        else{
-          testClone.remove();
-          return;
-        }
-        playlistSources.push(element.src);
-      });
+    playlist.forEach(element => {
+      templateVideo.src = element.src;
+      templateP.innerHTML = element.title;
+      let clone = document.importNode(playlistTemplate.content, true);
+      playlistBox.appendChild(clone);
+      playlistSources.push(element.src);
+    });
 
   }
   setListener() {
@@ -98,15 +95,6 @@ export class Playlist {
 
   getPlaylistSources() {
     return playlistSources;
-  }
-
-  isVideo(currentTrack){
-    var isVideo = false,
-    trackFileType = playlistSources[currentTrack].split(".").pop();
-    if (trackFileType === "mp4" || trackFileType ==="mp3" || trackFileType ==="wav" || trackFileType ==="webm"){
-      isVideo = true;
-    }
-    return isVideo;
   }
 }
 

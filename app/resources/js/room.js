@@ -1,17 +1,15 @@
 /* eslint-env node */
 
-import { setLiveChatClickListener } from "./liveChat.js";
+import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
 import { VideoPlayer } from "./VideoPlayer.js";
-import { Diashow } from "./Diashow.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
   playlist,
   uploader,
   localRoomID,
-  videoPlayer,
-  diashow;
+  videoPlayer;
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000");
@@ -31,7 +29,6 @@ function init() {
     playlist.setListener();
     playlist.initDeleteButton();
 
-    diashow = new Diashow(playlistFiles, 0);
     videoPlayer = new VideoPlayer("my-player", playlistFiles, 0);
     videoPlayer.setAutoplay();
   });
@@ -42,17 +39,14 @@ function init() {
       playlist.setListener();
       playlist.initDeleteButton();
       videoPlayer.addSource(playlistObject.playlistObject.src);
-      diashow.addSource(playlistObject.playlistObject.src);
     }
   });
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
-      diashow.updatePlaylist(playlist.getPlaylistSources());
       if (videoPlayer.getCurrentTrackNumber() === deleteNumber) {
         videoPlayer.load(videoPlayer.getCurrentTrackNumber());
-        diashow.load(videoPlayer.getCurrentTrackNumber());
       }
     }
   });
@@ -60,7 +54,6 @@ function init() {
     if (window.location.href === roomID) {
       playlist.changeDragDropPosition(iDrag, iDrop);
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
-      diashow.updatePlaylist(playlist.getPlaylistSources());
     }
   });
 
@@ -76,21 +69,11 @@ function init() {
   socket.on("currentTrackInfoToClients", (url, currentTrack) => {
     if (url === window.location.href) {
       videoPlayer.load(currentTrack);
-      diashow.load(currentTrack);
     }
   });
-  //videoClickToClients
   socket.on("videoClickToClients", (url, currentTrack) => {
     if (url === window.location.href) {
-      if (playlist.isVideo(currentTrack)) {
-        videoPlayer.load(currentTrack);
-        document.querySelector(".video-js").classList.remove("hidden");
-        document.querySelector(".diashowContainer").classList.add("hidden");
-      }else{
-        diashow.load(currentTrack);
-        document.querySelector(".video-js").classList.add("hidden");
-        document.querySelector(".diashowContainer").classList.remove("hidden");
-      }
+      videoPlayer.load(currentTrack);
     }
   });
   //videoPlayedToClients
@@ -101,14 +84,14 @@ function init() {
     }
   });
   //videoPausedToClients
-  socket.on("videoPausedToClients", (url) => {
+  socket.on("videoPausedToClients", (url) =>{
     if (url === window.location.href) {
       videoPlayer.pause();
     }
   });
   //videoEndedToClients
-  socket.on("videoEndedToClients", (url, currentTrack) => {
-    if (url === window.location.href) {
+  socket.on("videoEndedToClients", (url, currentTrack) =>{
+    if(url === window.location.href){
       videoPlayer.load(currentTrack);
     }
   });
@@ -123,23 +106,7 @@ function init() {
 
 function emitFileUpload(e) {
   let roomID = window.location.pathname.split("/")[2];
-  if (isSupported(e.file.type)) {
-    socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
-  }
-  else {
-    socket.emit("deleteFile", roomID, e.file.name, e.name);
-  }
-}
-
-function isSupported(filetype) {
-  var isFileSupported = false;
-  if (filetype === "video/mp4" || filetype === "audio/mp3" || filetype === "audio/wav" ||
-    filetype === "video/webm" || filetype === "image/png" || filetype === "image/jpeg" ||
-    filetype === "image/jpg") {
-
-    isFileSupported = true;
-  }
-  return isFileSupported;
+  socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
 }
 
 export function sendDeleteNumber(deleteNumber) {
@@ -250,6 +217,7 @@ export function changeVideoOnClick(e) {
     }
 
     socket.emit("videoClickToServer", window.location.href, counter);
+    //videoPlayer.load(counter);
   }
 }
 
@@ -259,7 +227,7 @@ export function onVideoPlayed(time) {
 export function onVideoPaused() {
   socket.emit("videoPausedToServer", window.location.href);
 }
-export function onVideoEnded(currentTrack) {
+export function onVideoEnded(currentTrack){
   socket.emit("videoEndedToServer", window.location.href, currentTrack);
 }
 

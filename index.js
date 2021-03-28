@@ -34,11 +34,11 @@ io.on("connection", (socket) => {
       socket.emit("loadPlaylist", e[0].playlist);
       socket.broadcast.emit("sendDataRequestToClients", url);
     });
-
+    
   });
   //Synchroner Stream
   // init
-  socket.on("currentTrackInfoToServer", (url, currentTrack) => {
+  socket.on("currentTrackInfoToServer",(url, currentTrack) =>{
     socket.broadcast.emit("currentTrackInfoToClients", url, currentTrack);
   });
 
@@ -54,10 +54,10 @@ io.on("connection", (socket) => {
   socket.on("videoPausedToServer", (url) => {
     io.emit("videoPausedToClients", url);
   });
-  //onVideoEnded
-  socket.on("videoEndedToServer", (url, currentTrack) => {
-    io.emit("videoEndedToClients", url, currentTrack);
-  });
+//onVideoEnded
+socket.on("videoEndedToServer", (url, currentTrack) =>{
+  io.emit("videoEndedToClients", url, currentTrack);
+});
 
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
@@ -88,20 +88,6 @@ io.on("connection", (socket) => {
     io.emit("playlistObjectToClients", playlistObject);
 
     dbClient.addPlaylistEntry(roomID, tempSrc);
-  });
-  //deleteFile
-  socket.on("deleteFile", (roomID, srcName, name) => {
-    let tempSrc = "data/" + roomID + "/" + name + "." + srcName.split(".").pop();
-    console.log("PFAD: "+ tempSrc);
-
-    fs.unlink(tempSrc, err => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-    });
-
-
   });
 
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
