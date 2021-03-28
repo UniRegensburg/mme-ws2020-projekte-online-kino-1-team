@@ -238,17 +238,17 @@ export function onVideoEnded(currentTrack){
 }
 
 export function isVideo(src) {
-  let type = src.split(".").pop();
+  let type = src.toLowerCase().split(".").pop();
   return supportedFiles.video.includes(type);
 }
 
 export function isAudio(src) {
-  let type = src.split(".").pop();
+  let type = src.toLowerCase().split(".").pop();
   return supportedFiles.audio.includes(type);
 }
 
 export function isImage(src) {
-  let type = src.split(".").pop();
+  let type = src.toLowerCase().split(".").pop();
   return supportedFiles.image.includes(type);
 }
 

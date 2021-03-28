@@ -91,7 +91,6 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    console.log("load, Playlist: " + this.playlist);
     if (this.playlist.length > 0) {
       this.currentTrack = trackNumber;
       this.changeSrc(this.playlist[this.currentTrack]);

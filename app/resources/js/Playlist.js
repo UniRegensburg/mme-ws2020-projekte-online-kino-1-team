@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import { sendDeleteNumber, sendDragDropPosition, changeVideoOnClick } from "./room.js";
+import { sendDeleteNumber, sendDragDropPosition, changeVideoOnClick, isImage, isAudio, isVideo } from "./room.js";
 
 var dragTarget,
   playlistSources;
@@ -8,36 +8,40 @@ var dragTarget,
 export class Playlist {
 
   constructor(playlist) {
-    let playlistBox = document.querySelector(".playlist-body"),
-      playlistTemplate = document.getElementById("playlistTemplate"),
-      templateVideo = playlistTemplate.content.querySelector("video"),
-      templateP = playlistTemplate.content.querySelector("p");
-
+  
     playlistSources = [];
 
-    playlist.forEach(element => {
-      templateVideo.src = element.src;
-      templateP.innerHTML = element.title;
-      let clone = document.importNode(playlistTemplate.content, true);
-      playlistBox.appendChild(clone);
-      playlistSources.push(element.src);
-
-    });
+    this.addFile(playlist);
     this.setListener();
     this.initDeleteButton();
   }
 
   addFile(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
-      playlistTemplate = document.getElementById("playlistTemplate"),
-      templateVideo = playlistTemplate.content.querySelector("video"),
-      templateP = playlistTemplate.content.querySelector("p");
+    playlistTemplate = document.getElementById("playlistTemplate");
 
     playlist.forEach(element => {
-      templateVideo.src = element.src;
-      templateP.innerHTML = element.title;
-      let clone = document.importNode(playlistTemplate.content, true);
-      playlistBox.appendChild(clone);
+      let testClone = document.importNode(playlistTemplate.content, true),
+      testImg, testP, testVideo;
+      playlistBox.appendChild(testClone);
+      testClone = playlistBox.lastChild.previousSibling;
+      testVideo = testClone.querySelector("video");
+      testImg = testClone.querySelector("img");
+      testP = testClone.querySelector("p");
+
+      testP.innerHTML = element.title;
+      if(isImage(element.src)){
+        testVideo.remove();
+        testImg.src = element.src;
+      }
+      else if(isAudio(element.src)) {
+        testVideo.remove();
+        testImg.src = "Note.png";
+      }
+      else if(isVideo(element.src)){
+        testImg.remove();
+        testVideo.src = element.src;
+      }
       playlistSources.push(element.src);
     });
 
