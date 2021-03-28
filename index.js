@@ -54,10 +54,10 @@ io.on("connection", (socket) => {
   socket.on("videoPausedToServer", (url) => {
     io.emit("videoPausedToClients", url);
   });
-  //onVideoEnded
-  socket.on("videoEndedToServer", (url, currentTrack) => {
-    io.emit("videoEndedToClients", url, currentTrack);
-  });
+//onVideoEnded
+socket.on("videoEndedToServer", (url, currentTrack) =>{
+  io.emit("videoEndedToClients", url, currentTrack);
+});
 
   socket.on("createRoom", () => {
     let url = roomManager.createUrl();
