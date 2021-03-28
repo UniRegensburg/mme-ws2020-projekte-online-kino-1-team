@@ -32,7 +32,6 @@ export class VideoPlayer {
     this.load(currentTrack);
 
     videoPlayer.on("play", () => {
-      console.log("play das Video");
       onVideoPlayed(videoPlayer.currentTime());
     });
     videoPlayer.on("pause", () => {
@@ -44,43 +43,42 @@ export class VideoPlayer {
     return this.currentTrack;
   }
 
+  getPlaylist(){
+    return this.playlist;
+  }
+
   setAutoplay() {
     videoPlayer.on("ended", () => this.loadNext());
   }
 
   changeSrc(src) {
 
-    if (src === undefined) { 
-      console.log("falsche Src");
+    if (src === undefined) {
+      //Testvideo
+      this.changeSrc("//vjs.zencdn.net/v/oceans.mp4");
       return; }
       
     if (isVideo(src) || isAudio(src)) {
       changeToVideoJS();
       videoPlayer.src(src);
-      console.log("Video wird abgespielt");
       return;
     }
     if (isImage(src)) {
-      console.log("spiele Bild ab");
       changeToDia();
       diaPlayer.src = src;
     }
   }
 
   play() {
-    //if(isImage){ return;}
-    console.log("Abgespielt");
     videoPlayer.play();
   }
   pause() {
-    //if(isImage){ return;}
     videoPlayer.pause();
   }
 
   loadNext() {
     if (this.currentTrack < this.playlist.length - 1) {
       this.currentTrack++;
-      //this.changeSrc(this.playlist[this.currentTrack]);
       onVideoEnded(this.currentTrack);
     }
   }
@@ -92,10 +90,14 @@ export class VideoPlayer {
   }
 
   load(trackNumber) {
-    if (this.playlist.length !== 0) {
+    if (this.playlist.length > 0 ) {
       this.currentTrack = trackNumber;
       this.changeSrc(this.playlist[this.currentTrack]);
     }
+    else if (this.playlist.length === 0){
+      this.changeSrc();
+    }
+
   }
 
   addSource(source) {
@@ -137,7 +139,7 @@ export function isImage(src) {
 }
 
 function changeToVideoJS(){
-  document.querySelector(".diashowContainer").classList.add("hidden"); 
+  document.querySelector(".diashowContainer").classList.add("hidden");
   document.querySelector(".video-js").classList.remove("hidden");
 }
 

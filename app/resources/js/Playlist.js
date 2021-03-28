@@ -65,7 +65,7 @@ export class Playlist {
     var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
 
     allChildElemtsPlaylistBody[deleteNumber].remove();
-    playlistSources.splice(deleteNumber, 1);
+    playlistSources.splice(deleteNumber, 2);
   }
 
   changeDragDropPosition(dragPosition, dropPosition) {
