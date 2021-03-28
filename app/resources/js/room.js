@@ -2,7 +2,7 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
-import { VideoPlayer } from "./VideoPlayer.js";
+import { VideoPlayer} from "./VideoPlayer.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
@@ -12,7 +12,8 @@ let nicknameTextField,
   videoPlayer;
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3000"),
+supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav"], image: ["jpg", "jpeg", "png"] };
 
 function init() {
   setClickListener();
@@ -38,7 +39,7 @@ function init() {
       playlist.addFile([playlistObject.playlistObject]);
       playlist.setListener();
       playlist.initDeleteButton();
-      videoPlayer.addSource(playlistObject.playlistObject.src);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
@@ -89,6 +90,12 @@ function init() {
       videoPlayer.pause();
     }
   });
+  //videoEndedToClients
+  socket.on("videoEndedToClients", (url, currentTrack) =>{
+    if(url === window.location.href){
+      videoPlayer.load(currentTrack);
+    }
+  });
 
   socket.emit("clientEntersRoom", (window.location.href));
   // eslint-disable-next-line no-undef
@@ -100,7 +107,12 @@ function init() {
 
 function emitFileUpload(e) {
   let roomID = window.location.pathname.split("/")[2];
-  socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
+  if(isVideo(e.file.name) || isAudio(e.file.name) || isImage(e.file.name)){
+    socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
+ }
+ else{
+   socket.emit("deleteFile", roomID, e.file.name, e.name);
+ }
 }
 
 export function sendDeleteNumber(deleteNumber) {
@@ -220,6 +232,24 @@ export function onVideoPlayed(time) {
 }
 export function onVideoPaused() {
   socket.emit("videoPausedToServer", window.location.href);
+}
+export function onVideoEnded(currentTrack){
+  socket.emit("videoEndedToServer", window.location.href, currentTrack);
+}
+
+export function isVideo(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.video.includes(type);
+}
+
+export function isAudio(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.audio.includes(type);
+}
+
+export function isImage(src) {
+  let type = src.split(".").pop();
+  return supportedFiles.image.includes(type);
 }
 
 init();

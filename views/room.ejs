@@ -28,7 +28,7 @@
         <div class="playlist">
             <div class="playlist-header">
                 <label class="playlist-upload-button-label">
-                    <input type="file" id="siofu_input"/>
+                    <input type="file" id="siofu_input" />
                     <img src="uploadIcon.png" alt="Icon" class="uploadIcon">
                 </label>
                 <span class="playlist-header-title">Playlist</span>
@@ -36,13 +36,17 @@
             <ul class="playlist-body"></ul>
         </div>
         <video id="my-player" class="video-js" width="1080px" height="480px">
-            <source id="video-source" src="" type=""></source>
+            <source id="video-source" src="//vjs.zencdn.net/v/oceans.mp4" type="">
+            </source>
             <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
                 <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
             </p>
         </video>
+        <div class="diashowContainer hidden" width="1080px" height="480px">
+            <img class="imageID" src="" alt=""></img>
+        </div>
         <div class="chat">
             <div class="chat-header">
                 <img src="arrowIcon.png" alt="Icon-Arrow" class="chat-header-icon" />
@@ -78,6 +82,7 @@
     <li id="playlistElement" draggable="true">
         <span class="playlist-left-body">
             <video src="" draggable="false"></video>
+            <img src="" draggable="false"></img>
             <p></p>
         </span>
         <span class="playlist-right-body">

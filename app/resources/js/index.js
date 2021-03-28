@@ -25,15 +25,21 @@ function init() {
 
 function setClickListener() {
   let closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
-    creatingRoomButton = document.querySelector(".creatingRoom");
+    creatingRoomButton = document.querySelector(".creatingRoom"),
+    reloadPageButton = document.querySelector(".logo");
   dropDownMenu.addEventListener("keypress", onLinkEntered);
   joinRoomButton.addEventListener("click", showURLTextBox);
   closeDropDownMenu.addEventListener("click", hideURLTextBox);
   creatingRoomButton.addEventListener("click", createNewRoom);
+  reloadPageButton.addEventListener("click", reloadPage);
 }
 
 function createNewRoom() {
   socket.emit("createRoom");
+}
+
+function reloadPage(){
+  location.reload();
 }
 
 function showURLTextBox() {
