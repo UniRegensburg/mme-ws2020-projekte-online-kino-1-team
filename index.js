@@ -19,7 +19,10 @@ const AppServer = require("./server/AppServer.js"),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
   uri =
-    "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority";
+    "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority",
+    convertDate = (date, time) =>{
+      let exportDate = date + "T" + time + ":00";
+      return new Date(exportDate);};
 io.on("connection", (socket) => {
   let uploader = new siofu(),
     roomID;
@@ -60,9 +63,9 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
 });
 
   socket.on("createRoom", () => {
-    let url = roomManager.createUrl();
-
-    dbClient.addRoom(url);
+    let url = roomManager.createUrl(),
+    currentDate = new Date(Date.now());
+    dbClient.addRoom(url, currentDate);
     server.addRoom(url);
     socket.emit("changeUrl", url);
   });
@@ -70,9 +73,9 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
   socket.on("MessageToServer", (message, nickname, room) => {
     socket.broadcast.emit("MessageToClients", message, nickname, room);
   });
-  socket.on("dateToServer", () => {
+  socket.on("dateToServer", (date) => {
     let url = roomManager.createUrl();
-    dbClient.addRoom(url);
+    dbClient.addRoom(url, convertDate(date.date, date.time));
     server.addRoom(url);
     socket.emit("urlToClient", url);
   });
@@ -126,7 +129,6 @@ function createRoomFolder(roomDir) {
 }
 
 function deleteFile(src){
-  console.log("SRC:" + src);
   fs.unlink(src, err => {
     if (err) {
       console.error(err);

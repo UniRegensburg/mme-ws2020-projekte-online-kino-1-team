@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import {CAL_SINGLE} from "./createICal.js";
 import {sendDateToServer} from "./index.js";
 
@@ -35,7 +37,7 @@ function submitMeeting(){
     
     if (date.value !== "" && time.value !== "") {
         error.classList.remove("active");
-        sendDateToServer();
+        sendDateToServer({date: date.value, time: time.value});
         overlayOutputLink.classList.add("active");
     } else {
         error.classList.add("active");

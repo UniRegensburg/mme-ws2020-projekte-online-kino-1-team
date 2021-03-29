@@ -17,19 +17,21 @@ class DBManager {
       url: String,
       test: String,
       playlist: Array,
+      date: Date,
     });
     Room = mongoose.model("Room", room);
   }
 
-  addRoom(randomUrl) {
+  addRoom(randomUrl, date) {
     let roomInstance = new Room({
       url: randomUrl,
+      date: date,
     });
     roomInstance.save();
   }
 
   deleteRoom(roomID) {
-    Room.find({ _id: roomID }).deleteOne().exec();
+    Room.find({ url: roomID }).deleteOne().exec();
   }
 
   getRoom(roomID) {
@@ -44,6 +46,9 @@ class DBManager {
     return Room.find({ url: roomID }, "playlist").exec();
   }
 
+  getDate(roomID){
+    return Room.find({ url: roomID }, "date").exec();
+  }
   deletePlaylistEntry(roomID, playlistIndex) {
     Room.find({ url: roomID }, "playlist").exec().then(e => {
       let tempPlaylist = e[0].playlist;
@@ -79,7 +84,7 @@ class DBManager {
   }
 
   updatePlaylist(roomID, playlist) {
-    Room.findOneAndUpdate({ _id: roomID }, { playlist: playlist }).exec();
+    Room.findOneAndUpdate({ url: roomID }, { playlist: playlist }).exec();
   }
 }
 

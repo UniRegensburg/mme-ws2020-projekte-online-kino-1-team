@@ -1,8 +1,9 @@
 /* eslint-env node */
 
 import { getNickName } from "./room.js";
+import { HOST} from "./constants.js";
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
+const socket = io(HOST);
 var messageTextField,
     messageSendIcon;
 

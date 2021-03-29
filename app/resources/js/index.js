@@ -1,10 +1,11 @@
 /* eslint-env browser */
 import { Calender, getUrlFromIndex } from "./Calender.js";
+import {HOST} from "./constants.js";
 
 //Client
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
+const socket = io(HOST);
 
 let dropDownMenu = document.querySelector(".dropDownMenu"),
   joinRoomButton = document.querySelector(".joiningRoom"),
@@ -24,6 +25,7 @@ function init() {
 }
 
 function setClickListener() {
+  //console.log(test);
   let closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
     creatingRoomButton = document.querySelector(".creatingRoom"),
     reloadPageButton = document.querySelector(".logo");
@@ -77,8 +79,8 @@ function onLinkEntered(e) {
   }
 }
 
-export function sendDateToServer() {
-  socket.emit("dateToServer");
+export function sendDateToServer(date) {
+  socket.emit("dateToServer", date);
 }
 
 init();

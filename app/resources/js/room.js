@@ -3,6 +3,7 @@
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
 import { VideoPlayer} from "./VideoPlayer.js";
+import {HOST, SUPPORTED_FILES} from "./constants.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
@@ -12,8 +13,7 @@ let nicknameTextField,
   videoPlayer;
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000"),
-supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav", "flac"], image: ["jpg", "jpeg", "png"] };
+const socket = io(HOST);
 
 function init() {
   setClickListener();
@@ -239,17 +239,17 @@ export function onVideoEnded(currentTrack){
 
 export function isVideo(src) {
   let type = src.toLowerCase().split(".").pop();
-  return supportedFiles.video.includes(type);
+  return SUPPORTED_FILES.video.includes(type);
 }
 
 export function isAudio(src) {
   let type = src.toLowerCase().split(".").pop();
-  return supportedFiles.audio.includes(type);
+  return SUPPORTED_FILES.audio.includes(type);
 }
 
 export function isImage(src) {
   let type = src.toLowerCase().split(".").pop();
-  return supportedFiles.image.includes(type);
+  return SUPPORTED_FILES.image.includes(type);
 }
 
 init();
