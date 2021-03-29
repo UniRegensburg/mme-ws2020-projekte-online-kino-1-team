@@ -2,8 +2,8 @@
 
 import { setLiveChatClickListener } from "./LiveChat.js";
 import { Playlist } from "./Playlist.js";
-import { VideoPlayer} from "./VideoPlayer.js";
-import {HOST, SUPPORTED_FILES} from "./constants.js";
+import { VideoPlayer } from "./VideoPlayer.js";
+import { HOST, SUPPORTED_FILES } from "./constants.js";
 
 let nicknameTextField,
   showChatIcon = document.querySelector(".chat-icon"),
@@ -20,6 +20,8 @@ function init() {
   setLiveChatClickListener();
   localRoomID = window.location.href.split("/").pop();
 
+  //Client Enters Room Sockets
+  //load playlist
   socket.on("loadPlaylist", playlistFiles => {
     let tempPlaylist = [];
     playlistFiles.forEach(element => {
@@ -33,7 +35,57 @@ function init() {
     videoPlayer = new VideoPlayer("my-player", playlistFiles, 0);
     videoPlayer.setAutoplay();
   });
+  //datarequest to clients
+  socket.on("sendDataRequestToClients", (url) => {
+    var currentTrack;
+    if (url === window.location.href) {
+      currentTrack = videoPlayer.getCurrentTrackNumber();
+      socket.emit("currentTrackInfoToServer", url, currentTrack);
+    }
+  });
+  //current trackinfo to clients
+  socket.on("currentTrackInfoToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
 
+  // Synchrones Video Sockets
+  //videoPlayedToClients
+  socket.on("videoPlayedToClients", (url, time) => {
+    if (url === window.location.href) {
+      videoPlayer.setCurrentTime(time);
+      videoPlayer.play();
+    }
+  });
+  //videoPausedToClients
+  socket.on("videoPausedToClients", (url) => {
+    if (url === window.location.href) {
+      videoPlayer.pause();
+    }
+  });
+  //videoEndedToClients
+  socket.on("videoEndedToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
+
+  // Synchrone Playlist Sockets
+  //Drag&Drop
+  socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
+    if (window.location.href === roomID) {
+      playlist.changeDragDropPosition(iDrag, iDrop);
+      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
+    }
+  });
+  //videoclick
+  socket.on("videoClickToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
+  //upload File
   socket.on("playlistObjectToClients", playlistObject => {
     if (localRoomID === playlistObject.roomID) {
       playlist.addFile([playlistObject.playlistObject]);
@@ -42,6 +94,7 @@ function init() {
       videoPlayer.updatePlaylist(playlist.getPlaylistSources());
     }
   });
+  //delete File
   socket.on("deleteNumberToClients", (roomID, deleteNumber) => {
     if (window.location.href === roomID) {
       playlist.deletePlaylistEl(deleteNumber);
@@ -51,52 +104,8 @@ function init() {
       }
     }
   });
-  socket.on("DragDropPositionToClients", (roomID, iDrag, iDrop) => {
-    if (window.location.href === roomID) {
-      playlist.changeDragDropPosition(iDrag, iDrop);
-      videoPlayer.updatePlaylist(playlist.getPlaylistSources());
-    }
-  });
 
-  // Für Data Synchro
-  socket.on("sendDataRequestToClients", (url) => {
-    var currentTrack;
-    if (url === window.location.href) {
-      currentTrack = videoPlayer.getCurrentTrackNumber();
-      socket.emit("currentTrackInfoToServer", url, currentTrack);
-    }
-
-  });
-  socket.on("currentTrackInfoToClients", (url, currentTrack) => {
-    if (url === window.location.href) {
-      videoPlayer.load(currentTrack);
-    }
-  });
-  socket.on("videoClickToClients", (url, currentTrack) => {
-    if (url === window.location.href) {
-      videoPlayer.load(currentTrack);
-    }
-  });
-  //videoPlayedToClients
-  socket.on("videoPlayedToClients", (url, time) => {
-    if (url === window.location.href) {
-      videoPlayer.setCurrentTime(time);
-      videoPlayer.play();
-    }
-  });
-  //videoPausedToClients
-  socket.on("videoPausedToClients", (url) =>{
-    if (url === window.location.href) {
-      videoPlayer.pause();
-    }
-  });
-  //videoEndedToClients
-  socket.on("videoEndedToClients", (url, currentTrack) =>{
-    if(url === window.location.href){
-      videoPlayer.load(currentTrack);
-    }
-  });
-
+  //Send Client Entered Room
   socket.emit("clientEntersRoom", (window.location.href));
   // eslint-disable-next-line no-undef
   uploader = new SocketIOFileUpload(socket);
@@ -107,12 +116,12 @@ function init() {
 
 function emitFileUpload(e) {
   let roomID = window.location.pathname.split("/")[2];
-  if(isVideo(e.file.name) || isAudio(e.file.name) || isImage(e.file.name)){
-    socket.emit("fileUpload", roomID, e.file.name, e.name, e.file.type);
- }
- else{
-   socket.emit("deleteFile", roomID, e.file.name, e.name);
- }
+  if (isVideo(e.file.name) || isAudio(e.file.name) || isImage(e.file.name)) {
+    socket.emit("fileUpload", roomID, e.file.name, e.name);
+  }
+  else {
+    socket.emit("deleteFile", roomID, e.file.name, e.name);
+  }
 }
 
 export function sendDeleteNumber(deleteNumber) {
@@ -209,7 +218,6 @@ export function changeVideoOnClick(e) {
       isDeleteButton = true;
     }
   });
-
   if (!isDeleteButton) {
     if (liElement.parentNode.tagName === "LI") {
       liElement = liElement.parentNode;
@@ -221,9 +229,7 @@ export function changeVideoOnClick(e) {
       }
       tempLi = tempLi.previousSibling;
     }
-
     socket.emit("videoClickToServer", window.location.href, counter);
-    //videoPlayer.load(counter);
   }
 }
 
@@ -233,7 +239,7 @@ export function onVideoPlayed(time) {
 export function onVideoPaused() {
   socket.emit("videoPausedToServer", window.location.href);
 }
-export function onVideoEnded(currentTrack){
+export function onVideoEnded(currentTrack) {
   socket.emit("videoEndedToServer", window.location.href, currentTrack);
 }
 

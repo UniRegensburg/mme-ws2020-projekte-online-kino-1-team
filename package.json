@@ -25,6 +25,7 @@
         "express": "^4.17.1",
         "mongodb": "^3.6.4",
         "mongoose": "^5.11.19",
+        "node-schedule": "^2.0.0",
         "node-uuid": "^1.4.8",
         "socket.io": "^3.1.2",
         "socketio-file-upload": "^0.7.3"

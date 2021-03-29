@@ -39,7 +39,7 @@ class DBManager {
   }
 
   getOpenRooms() {
-    return Room.find({}, "url").exec();
+    return Room.find({}).exec();
   }
 
   getPlaylist(roomID) {
