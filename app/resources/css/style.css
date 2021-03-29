@@ -35,7 +35,6 @@ body {
     animation: shine 4s forwards, blinkOne 3s infinite;
 }
 
-
 @keyframes blink {
     0%,
     22%,
@@ -272,10 +271,6 @@ body {
     align-items: center;
     margin: 0 auto 2em auto;
     max-width: 1500px;
-}
-
-.preview{
-    /*border: 2px solid var(--font-color);*/
 }
 
 .explanation {

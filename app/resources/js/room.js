@@ -137,9 +137,10 @@ export function sendDragDropPosition(iDrag, iDrop) {
 function setClickListener() {
   nicknameTextField = document.querySelector(".nickname");
   let hideChatIcon = document.querySelector(".chat-header-icon"),
-    toggleOne = document.querySelector(".toggleOne"),
+    //toggleOne = document.querySelector(".toggleOne"),
     toggleTwo = document.querySelector(".toggleTwo"),
-    copyURLText = document.querySelector(".copy");
+    copyURLText = document.querySelector(".copy"),
+    loadStartPageButton = document.querySelector(".logoRoom");
   nicknameTextField.addEventListener("keypress", function (e) {
     if (e.key === "Enter" && nicknameTextField.value !== "") {
       enterNickname();
@@ -148,16 +149,16 @@ function setClickListener() {
 
   hideChatIcon.addEventListener("click", hideChat);
   showChatIcon.addEventListener("click", showChat);
-  toggleOne.addEventListener("mouseover", showOverlayOne);
   toggleTwo.addEventListener("mouseover", showOverlayTwo);
-  toggleOne.addEventListener("mouseout", hideOverlayOne);
   toggleTwo.addEventListener("mouseout", hideOverlayTwo);
   copyURLText.addEventListener("click", copyURL);
+  loadStartPageButton.addEventListener("click", loadStartPage);
 }
 
 function enterNickname() {
   nicknameTextField.classList.add("hidden");
   document.querySelector(".chat-header-title").classList.remove("disabled");
+  document.querySelector(".chat-footer-icon").classList.remove("disabledIcon");
   document.querySelector(".typeField").disabled = false;
 }
 
@@ -173,16 +174,8 @@ function showChat() {
   showChatIcon.classList.add("hidden");
 }
 
-function showOverlayOne() {
-  document.querySelector(".overlay-toggleOne").classList.remove("hidden");
-}
-
 function showOverlayTwo() {
   document.querySelector(".overlay-toggleTwo").classList.remove("hidden");
-}
-
-function hideOverlayOne() {
-  document.querySelector(".overlay-toggleOne").classList.add("hidden");
 }
 
 function hideOverlayTwo() {
@@ -197,9 +190,12 @@ function copyURL() {
   elem.select();
   document.execCommand("copy");
   document.body.removeChild(elem);
-  //Kann man machen, muss man aber nicht
   // eslint-disable-next-line no-alert
   alert("Url kopiert");
+}
+
+function loadStartPage(){
+  window.open("http://localhost:8000/app/", "_self");
 }
 
 export function getNickName() {
