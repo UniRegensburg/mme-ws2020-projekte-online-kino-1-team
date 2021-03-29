@@ -13,7 +13,7 @@ let nicknameTextField,
 
 // eslint-disable-next-line no-undef
 const socket = io("http://localhost:3000"),
-supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav"], image: ["jpg", "jpeg", "png"] };
+supportedFiles = { video: ["mp4", "webm"], audio: ["mp3", "wav", "flac"], image: ["jpg", "jpeg", "png"] };
 
 function init() {
   setClickListener();

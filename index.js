@@ -94,7 +94,9 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
     io.emit("deleteNumberToClients", roomID, numberDelete);
 
+    dbClient.getPlaylist(roomID.split("/").pop()).then(e => deleteFile("data/" + e[0].playlist[numberDelete]));
     dbClient.deletePlaylistEntry(roomID.split("/").pop(), numberDelete);
+    
   });
 
   socket.on("DragDropPositionToServer", (roomID, iDrag, iDrop) => {
@@ -111,12 +113,7 @@ socket.on("videoEndedToServer", (url, currentTrack) =>{
   socket.on("deleteFile", (roomID, srcName, name) => {
     let tempSrc = "data/" + roomID + "/" + name + "." + srcName.split(
       ".").pop();
-    fs.unlink(tempSrc, err => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-    });
+    deleteFile(tempSrc);
   });
 });
 
@@ -128,6 +125,15 @@ function createRoomFolder(roomDir) {
   fs.mkdirSync(roomDir, { recursive: true });
 }
 
+function deleteFile(src){
+  console.log("SRC:" + src);
+  fs.unlink(src, err => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+}
 /**
  * Starts webserver to serve files from "/app" folder
  */
