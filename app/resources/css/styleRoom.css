@@ -232,6 +232,12 @@ li p:hover{
     color: var(--hover-color);
 }
 
+.uploadHint{
+    color: var(--uploadHintColor);
+    font-size: 20px;
+    margin-left: 0.5em;
+}
+
 .playlist-right-body{
     display: flex;
     justify-content: right;

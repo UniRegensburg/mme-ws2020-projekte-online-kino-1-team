@@ -118,9 +118,15 @@ function init() {
   uploader.listenOnInput(document.getElementById("siofu_input"));
   uploader.listenOnDrop(document.querySelector(".playlist"));
   uploader.addEventListener("load", emitFileUpload);
+  uploader.addEventListener("start", showUploadStarted);
+}
+
+function showUploadStarted(){
+  document.querySelector(".uploadHint").classList.remove("hidden");
 }
 
 function emitFileUpload(e) {
+  document.querySelector(".uploadHint").classList.add("hidden");
   let roomID = window.location.pathname.split("/")[2];
   if (isVideo(e.file.name) || isAudio(e.file.name) || isImage(e.file.name)) {
     socket.emit("fileUpload", roomID, e.file.name, e.name);
