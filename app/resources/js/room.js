@@ -1,7 +1,7 @@
 /* eslint-env node */
 
 import { setLiveChatClickListener } from "./LiveChat.js";
-import { Playlist } from "./Playlist.js";
+import { Playlist, counterForElements } from "./Playlist.js";
 import { VideoPlayer } from "./VideoPlayer.js";
 import { HOST, SUPPORTED_FILES } from "./constants.js";
 
@@ -81,6 +81,12 @@ function init() {
   });
   //videoclick
   socket.on("videoClickToClients", (url, currentTrack) => {
+    if (url === window.location.href) {
+      videoPlayer.load(currentTrack);
+    }
+  });
+  //videokey
+  socket.on("videoKeyToClients", (url, currentTrack) => {
     if (url === window.location.href) {
       videoPlayer.load(currentTrack);
     }
@@ -194,7 +200,7 @@ function copyURL() {
   alert("Url kopiert");
 }
 
-function loadStartPage(){
+function loadStartPage() {
   window.open("http://localhost:8000/app/", "_self");
 }
 
@@ -226,6 +232,24 @@ export function changeVideoOnClick(e) {
       tempLi = tempLi.previousSibling;
     }
     socket.emit("videoClickToServer", window.location.href, counter);
+  }
+}
+
+export function changeVideoOnKeypress(e) {
+  let counter = 0;
+
+  if (e.key === "ArrowRight") {
+    if (videoPlayer.getCurrentTrackNumber() < counterForElements - 1) {
+      counter = videoPlayer.getCurrentTrackNumber();
+      counter++;
+      socket.emit("videoKeyToServer", window.location.href, counter);
+    }
+  } else if (e.key === "ArrowLeft") {
+    if (videoPlayer.getCurrentTrackNumber() > 0) {
+      counter = videoPlayer.getCurrentTrackNumber();
+      counter--;
+      socket.emit("videoKeyToServer", window.location.href, counter);
+    }
   }
 }
 

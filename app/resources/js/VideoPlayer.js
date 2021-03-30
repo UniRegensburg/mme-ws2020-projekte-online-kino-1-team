@@ -1,6 +1,8 @@
 /* eslint-env node */
-import { onVideoPlayed, onVideoPaused, onVideoEnded, isAudio, isImage,
-  isVideo } from "./room.js";
+import {
+  onVideoPlayed, onVideoPaused, onVideoEnded, isAudio, isImage,
+  isVideo
+} from "./room.js";
 
 var videoPlayer,
   options = {
@@ -72,7 +74,7 @@ export class VideoPlayer {
   play() {
     videoPlayer.play();
   }
-  
+
   pause() {
     videoPlayer.pause();
   }
@@ -101,14 +103,14 @@ export class VideoPlayer {
 
   addSource(source) {
     this.playlist.push(source);
-   // console.log("add");
+    // console.log("add");
     if (this.playlist.length <= 1) {
       this.load(0);
     }
   }
 
   updatePlaylist(playlist) {
-   // console.log("update");
+    // console.log("update");
     this.playlist = playlist;
   }
 

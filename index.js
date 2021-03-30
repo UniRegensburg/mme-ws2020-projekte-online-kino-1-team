@@ -82,6 +82,10 @@ io.on("connection", (socket) => {
   socket.on("videoClickToServer", (url, currentTrack) => {
     io.emit("videoClickToClients", url, currentTrack);
   });
+  //videokey
+  socket.on("videoKeyToServer", (url, currentTrack) => {
+    io.emit("videoKeyToClients", url, currentTrack);
+  });
   //upload File
   socket.on("fileUpload", (roomID, srcName, name) => {
     let tempSrc = roomID + "/" + name + "." + srcName.split(".").pop(),

@@ -1,14 +1,16 @@
 /* eslint-env node */
 
-import { sendDeleteNumber, sendDragDropPosition, changeVideoOnClick, isImage, isAudio, isVideo } from "./room.js";
+import { sendDeleteNumber, sendDragDropPosition, changeVideoOnClick, changeVideoOnKeypress, isImage, isAudio, isVideo } from "./room.js";
 
 var dragTarget,
   playlistSources;
 
+export let counterForElements = 0;
+
 export class Playlist {
 
   constructor(playlist) {
-  
+
     playlistSources = [];
 
     this.addFile(playlist);
@@ -18,11 +20,11 @@ export class Playlist {
 
   addFile(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
-    playlistTemplate = document.getElementById("playlistTemplate");
+      playlistTemplate = document.getElementById("playlistTemplate");
 
     playlist.forEach(element => {
       let testClone = document.importNode(playlistTemplate.content, true),
-      testImg, testP, testVideo;
+        testImg, testP, testVideo;
       playlistBox.appendChild(testClone);
       testClone = playlistBox.lastChild.previousSibling;
       testVideo = testClone.querySelector("video");
@@ -30,18 +32,20 @@ export class Playlist {
       testP = testClone.querySelector("p");
 
       testP.innerHTML = element.title;
-      if(isImage(element.src)){
+      if (isImage(element.src)) {
         testVideo.remove();
         testImg.src = element.src;
       }
-      else if(isAudio(element.src)) {
+      else if (isAudio(element.src)) {
         testVideo.remove();
         testImg.src = "Note.png";
       }
-      else if(isVideo(element.src)){
+      else if (isVideo(element.src)) {
         testImg.remove();
         testVideo.src = element.src;
       }
+
+      counterForElements++;
       playlistSources.push(element.src);
     });
 
@@ -54,6 +58,7 @@ export class Playlist {
       element.addEventListener("dragenter", dragEnter);
       element.addEventListener("drop", dragDrop);
       element.addEventListener("click", changeVideoOnClick);
+      document.body.addEventListener("keydown", changeVideoOnKeypress);
     });
   }
 
