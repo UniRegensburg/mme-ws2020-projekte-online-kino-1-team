@@ -110,6 +110,10 @@ function init() {
       }
     }
   });
+  //handle Error
+  socket.on("error" ,e => {
+    console.error("Socketio error: " + e);
+  });
 
   //Send Client Entered Room
   socket.emit("clientEntersRoom", (window.location.href));

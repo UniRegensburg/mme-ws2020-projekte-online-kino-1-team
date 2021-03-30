@@ -20,16 +20,25 @@ const AppServer = require("./server/AppServer.js"),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
   uri =
-    "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority",
+  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority",
   DELETE_INTERVAL_FOR_SCHEDULE = "0 3 * * *",
   DELETE_AFTER_IN_MS = 604800000,
   convertDate = (date, time) => {
     let exportDate = date + "T" + time + ":00";
     return new Date(exportDate);
   };
+
+io.on("error", e => {
+  console.error(e);
+});
+
 io.on("connection", (socket) => {
   let uploader = new siofu(),
     roomID;
+
+  uploader.on("error", e => {
+    console.error(e);
+  });
 
   //Client Enters Room Sockets
   //createRoom
@@ -92,7 +101,8 @@ io.on("connection", (socket) => {
       playlistObject = {
         roomID: roomID,
         playlistObject: {
-          src: tempSrc, title: tempSrc.split("/").pop(),
+          src: tempSrc,
+          title: tempSrc.split("/").pop(),
         },
       };
     io.emit("playlistObjectToClients", playlistObject);
@@ -102,7 +112,8 @@ io.on("connection", (socket) => {
   //delete File
   socket.on("deleteNumberToServer", (roomID, numberDelete) => {
     io.emit("deleteNumberToClients", roomID, numberDelete);
-    dbClient.getPlaylist(roomID.split("/").pop()).then(e => deleteFile("data/" + e[0].playlist[numberDelete]));
+    dbClient.getPlaylist(roomID.split("/").pop()).then(e => deleteFile(
+      "data/" + e[0].playlist[numberDelete]));
     dbClient.deletePlaylistEntry(roomID.split("/").pop(), numberDelete);
   });
 
@@ -134,7 +145,7 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(SOCKETPORT, function () {
+httpServer.listen(SOCKETPORT, function() {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
