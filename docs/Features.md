@@ -12,17 +12,14 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 | **Live-Chat** | Während des Streams haben die Nutzer die Möglichkeit live zu chatten | "hoch" | 2 Tage | User Interface |
 | **Username erstellen** | User können Nicknames festlegen | "hoch" | 2 Tag | Server |
 | **Drag&Drop** | Ein beliebiges Video per D&D in den Videoplayer einfügen | "hoch" | 1 Tag | User Interface |
-| **Verschiedene Dateiformate formatieren** | Alle Multimediadateien werden in das beste Streamingformat formatiert | "hoch" | 2-3 Tag | Server |
 | **Fullscreen** | Der User hat die Möglichkeit Inhalte in Fullscreen zu sehen| "hoch" | 1 Tag | Funktionalität des Players |
 | **Playlist erstellen** | Der User hat die Möglichkeit verschiedene Playlists zu erstellen und im Stream wiederzugeben | "mittel" | 1 Tage | User Interface |
 | **Terminkalender** | Die User haben die Möglichkeit Termine festzulegen und andere User zu diesen einzuladen | "mittel" | 2 Tage | User Interface |
 | **Audioformate wiedergeben** | Der User hat die Möglichkeit Audio verschiedener Formate hochzuladen und wiederzugeben z.B. MP3, WAV | "mittel" | 2 Tag | Funktionalität des Players |
-| **Kinomodus** | Die User haben die Möglichkeit einen Kinomodus einzuschalten, der den Hintergrund verdunkelt | "nice-to-have" | 1 Tage | Funktionalität des Players |
-| **Ambilight** | Die User haben die Möglichkeit den Ambilight-modus zu aktivieren | "nice-to-have" | 2 Tage | Funktionalität des Players |
+| **Kinomodus** | Die User haben die Möglichkeit, durch Einklappen des Chats in den Kinomodus zu wechseln | "nice-to-have" | 1 Tage | Funktionalität des Players |
 | **Diashow** | Der User hat die Möglichkeit eine Diashow aus vorher hochgeladenen Bildern zu erstellen | "nice-to-have" | 2 Tage | User-Server-Kommunikation |
 | **Shortcuts für den Videoplayer** | Der User hat die Möglichkeit über gängige Shortcuts(z.B. Leertaste für Pause) mit dem Video zu interagieren | "nice-to-have" | 1 Tage | User-Server-Kommunikation |
-| **Passwort festlegen** | User haben die Möglichkeit optional ein Passwort für einen Raum festzulegen | "nice-to-have" | 2 Tag | Server |
-| **Countdown** | Vor dem eigentlichen Video wird ein Countdown eingeblendet | "nice-to-have" | 1 Tage | Funktionalität des Players |
+| **Countdown** | Falls ein Termin erstellt wurde, läuft ein Countdown bis zu diesem Termin. Solange bleibt der Raum mindestens geöffnet | "nice-to-have" | 1 Tage | Funktionalität des Players |
 
 
 
