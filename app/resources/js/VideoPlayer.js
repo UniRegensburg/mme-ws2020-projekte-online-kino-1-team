@@ -1,8 +1,5 @@
 /* eslint-env node */
-import {
-  onVideoPlayed, onVideoPaused, onVideoEnded, isAudio, isImage,
-  isVideo
-} from "./room.js";
+import { onVideoPlayed, onVideoPaused, onVideoEnded, isAudio, isImage, isVideo } from "./room.js";
 
 var videoPlayer,
   options = {
