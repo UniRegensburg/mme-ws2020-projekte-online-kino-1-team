@@ -3,10 +3,9 @@
 ## Client
 **index.js:** [Socket.io]
 
-Zentrale Kommunikationsschnittstelle mit dem Server. Verwaltet alle anderen Client Module.
-User-Interface für Startscreen,
-StartScreen.js gibt User die Möglichkeit über einen Button eine Anfrage an den Server zu senden, um eine Unterseite zu erstellen und leitet ihn auf diese weiter.
-Der User kann auch einem existierenden Raum beitreten, über einen vorgefertigten Button + Input Feld (für Link). Gibt der Server das "OK" leitet er ihn auf die Unterseite weiter. Über einen weiteren Button "Raum reservieren" kann der User ein Datum festlegen, einen Raum erstellen und sich den Termin als ICS herunterladen.
+Zentrale Kommunikationsschnittstelle mit dem Server. Leitet die Eingabe der Clients zum Server weiter und verwaltet die Antworten des selbigen:
+Zu erstelltem Raum weiterleiten, auf bereits existierenden Raum weiterleiten, Erstellten Raum über das Termin-Interface anzeigen
+
 
 
 **room.js:** [Socket.io, socket-io-fileupload]
@@ -14,7 +13,7 @@ Der User kann auch einem existierenden Raum beitreten, über einen vorgefertigte
 User Interface für Room,
 Beim Betreten eines Raums erscheint ein Inputfeld, welches einen Nickname fordert.
 User-Interface welches mit dem Server-Status regelmäßig abgeglichen wird. Zentrales Modul für die Räume.
-Anzeigen des Ambilights/Kinomodus; Falls ein Raum an einem bestimmten Datum erstellt wurde, wird ein Countdown angezeigt, dieser kann auch vorzeitig beendet werden. Lädt die Multimediadatei vom Server in den VideoPlayer/Diashow bei allen Clients des gleichen Raums. Laden der Datei vom Server abhängig von Playlistreihenfolge.
+Anzeigen des Kinomodus; Falls ein Raum an einem bestimmten Datum erstellt wurde, wird ein Countdown angezeigt, dieser kann auch vorzeitig beendet werden. Lädt die Multimediadatei vom Server in den VideoPlayer/Diashow bei allen Clients des gleichen Raums. Laden der Datei vom Server abhängig von Playlistreihenfolge.
 
 **VideoPlayer.js** [video.js]
 
