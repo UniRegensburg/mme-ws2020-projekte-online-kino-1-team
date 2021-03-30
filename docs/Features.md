@@ -6,12 +6,14 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 | Feature | Beschreibung | Priorität | Geschätzter Aufwand | Betroffene Schichten |
 |---------|--------------|-----------|--------------------|---------------------|
 | **Räume Erstellen** | Der User hat die Möglichkeit Räume zu erstellen und andere User einzuladen | "kritisch" | 3 Tage | User2User-Interaktion |
+| **Räume Beitreten** | Durch eine Copy-To-Clipboard Option wird der aktuelle Link kopiert. Dieser kann an Freunde gesendet werden. | "kritisch" | 3 Tage | User2User-Interaktion |
 | **Video Upload** | Die User besitzen die Möglichkeit eigene Videos per Upload-Button hochzuladen | "kritisch" | 1 Tag | User Interface |
 | **Synchroner Videostream über Server** | Ermöglicht den Usern synchron ein ausgewähltes Video anzusehen | "kritisch" | 2-3 Tage | Server |
 | **Interaktion mit dem Videoplayer** | Der User/Der Host hat die Möglichkeit das Video zu Stoppen/Starten/Vor-/Zurückzuspulen/Mute/ | "kritisch" | 2-3 Tage | User-Server-Kommunikation |
 | **Live-Chat** | Während des Streams haben die Nutzer die Möglichkeit live zu chatten | "hoch" | 2 Tage | User Interface |
+| **Live-Chat-Ton** | Ein Ton soll anzeigen, dass eine neue Nachricht angekommen ist. Dieser kann auch deaktiviert werden. | "hoch" | 2 Tage | User Interface |
 | **Username erstellen** | User können Nicknames festlegen | "hoch" | 2 Tag | Server |
-| **Drag&Drop** | Ein beliebiges Video per D&D in den Videoplayer einfügen | "hoch" | 1 Tag | User Interface |
+| **Drag&Drop** | Ein beliebige Datei per D&D in die Playlist einfügen | "hoch" | 1 Tag | User Interface |
 | **Fullscreen** | Der User hat die Möglichkeit Inhalte in Fullscreen zu sehen| "hoch" | 1 Tag | Funktionalität des Players |
 | **Playlist erstellen** | Der User hat die Möglichkeit verschiedene Playlists zu erstellen und im Stream wiederzugeben | "mittel" | 1 Tage | User Interface |
 | **Terminkalender** | Die User haben die Möglichkeit Termine festzulegen und andere User zu diesen einzuladen | "mittel" | 2 Tage | User Interface |
