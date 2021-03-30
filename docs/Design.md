@@ -33,6 +33,7 @@ Verwaltet die Wiedergabe der Player (Reihenfolge, aktuelle Datei).
 Ermöglicht das Erstellen von Terminen und erstellt ICS-Datei.
 
 **constants.js**
+
 Speicherung aller Konstanten der Anwendung in einer Datei. 
 
 
