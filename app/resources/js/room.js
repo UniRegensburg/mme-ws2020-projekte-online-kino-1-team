@@ -129,7 +129,7 @@ function init() {
 function showUploadStarted(){
   document.querySelector(".uploadHint").classList.remove("hidden");
 }
-
+// checks if uploaded file is supported and sends the information to the server
 function emitFileUpload(e) {
   document.querySelector(".uploadHint").classList.add("hidden");
   let roomID = window.location.pathname.split("/")[2];
@@ -163,7 +163,6 @@ function setClickListener() {
       enterNickname();
     }
   });
-
   hideChatIcon.addEventListener("click", hideChat);
   showChatIcon.addEventListener("click", showChat);
   toggleTwo.addEventListener("mouseover", showOverlayTwo);
@@ -198,7 +197,7 @@ function showOverlayTwo() {
 function hideOverlayTwo() {
   document.querySelector(".overlay-toggleTwo").classList.add("hidden");
 }
-
+// copies the current user URL to the clipboard
 function copyURL() {
   let elem = document.createElement("input"),
     url = window.location.href;
@@ -219,6 +218,7 @@ export function getNickName() {
   return nicknameTextField.value;
 }
 
+// checks which playlist element is clicked and sends the information to the server
 export function changeVideoOnClick(e) {
   let liElement = e.target.parentNode,
     tempLi = liElement,
@@ -246,6 +246,7 @@ export function changeVideoOnClick(e) {
   }
 }
 
+// checks if left/right arrows are pressed and if yes sends information to the server
 export function changeVideoOnKeypress(e) {
   let counter = 0;
 

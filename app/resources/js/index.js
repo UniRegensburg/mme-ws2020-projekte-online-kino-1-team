@@ -11,9 +11,11 @@ let dropDownMenu = document.querySelector(".dropDownMenu"),
   joinRoomButton = document.querySelector(".joiningRoom"),
   URLTextArea = document.querySelector(".URLTextArea");
 
+// receives changed URL from server and sends user to the new URL
 socket.on("changeUrl", (data) => window.location.href =
   window.location.href + data);
 
+// when url received send url to calender.js to show current date in popup
 socket.on("urlToClient", (data) => {
   getUrlFromIndex(data);
 });
@@ -25,7 +27,6 @@ function init() {
 }
 
 function setClickListener() {
-  //console.log(test);
   let closeDropDownMenu = document.querySelector(".closeDropDownMenu"),
     creatingRoomButton = document.querySelector(".creatingRoom"),
     reloadPageButton = document.querySelector(".logo");
@@ -44,6 +45,7 @@ function reloadPage(){
   location.reload();
 }
 
+// if user presses button join room, opens input field
 function showURLTextBox() {
   dropDownMenu.classList.remove("hidden");
   if (URLTextArea.value !== "") {
@@ -64,7 +66,7 @@ function showURLTextBox() {
 function hideURLTextBox() {
   dropDownMenu.classList.add("hidden");
 }
-
+// sends user url to the room he wants to enter
 function onLinkEntered(e) {
   if (e.key === "Enter" && URLTextArea.value !== "") {
     socket.emit("URLEnteredInTextField", (URLTextArea.value.split("/").pop()));

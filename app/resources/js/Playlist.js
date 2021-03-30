@@ -18,6 +18,7 @@ export class Playlist {
     this.initDeleteButton();
   }
 
+  // when user uploads file the method checks which type it is and creates playlist element
   addFile(playlist) {
     let playlistBox = document.querySelector(".playlist-body"),
       playlistTemplate = document.getElementById("playlistTemplate");
@@ -72,13 +73,11 @@ export class Playlist {
 
   deletePlaylistEl(deleteNumber) {
     var allChildElemtsPlaylistBody = document.querySelectorAll("#playlistElement");
-    //console.log("Davor: " + playlistSources);
-    //console.log(allChildElemtsPlaylistBody);
     allChildElemtsPlaylistBody[deleteNumber].remove();
     playlistSources.splice(deleteNumber, 1);
-    //console.log("Danach: " + playlistSources);
   }
 
+  // changes the order of the elements in the playlist and updates the playlist
   changeDragDropPosition(dragPosition, dropPosition) {
     var allPlaylistElements = document.querySelectorAll("#playlistElement"),
       dragElement = allPlaylistElements[dragPosition],
@@ -121,6 +120,7 @@ function dragEnter(eventEnter) {
   eventEnter.preventDefault();
 }
 
+//checks which element is dragged and where it is dropped and sends information to server
 function dragDrop(eventDrop) {
   var dropTarget = eventDrop.target.parentNode.parentNode,
     iDrag = 0,
@@ -147,7 +147,7 @@ function dragDrop(eventDrop) {
     sendDragDropPosition(iDrag, iDrop);
   }
 }
-
+// checks which element the user wants to delete and sends the index value to the server
 function deletePlaylistObject(event) {
   var el = event.target,
     i = 0,

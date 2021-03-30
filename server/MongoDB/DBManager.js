@@ -49,6 +49,7 @@ class DBManager {
   getDate(roomID){
     return Room.find({ url: roomID }, "date").exec();
   }
+
   deletePlaylistEntry(roomID, playlistIndex) {
     Room.find({ url: roomID }, "playlist").exec().then(e => {
       let tempPlaylist = e[0].playlist;
@@ -64,7 +65,7 @@ class DBManager {
       Room.findOneAndUpdate({ url: roomID }, { playlist: tempPlaylist }).exec();
     });
   }
-
+  // updates playlist in database for specified room
   changePlaylistPosition(roomID, iDrag, iDrop) {
     Room.find({ url: roomID }, "playlist").exec().then(e => {
       let startPlaylist = e[0].playlist,

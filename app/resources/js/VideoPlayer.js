@@ -100,14 +100,12 @@ export class VideoPlayer {
 
   addSource(source) {
     this.playlist.push(source);
-    // console.log("add");
     if (this.playlist.length <= 1) {
       this.load(0);
     }
   }
 
   updatePlaylist(playlist) {
-    // console.log("update");
     this.playlist = playlist;
   }
 

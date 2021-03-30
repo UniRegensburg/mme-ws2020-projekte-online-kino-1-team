@@ -20,7 +20,7 @@ const AppServer = require("./server/AppServer.js"),
   options = { cors: true, origin: appDir },
   io = require("socket.io")(httpServer, options),
   uri =
-  "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority",
+    "mongodb+srv://Admin:MME2020@watchmates.jhgji.mongodb.net/WatchMatesDB?retryWrites=true&w=majority",
   DELETE_INTERVAL_FOR_SCHEDULE = "0 3 * * *",
   DELETE_AFTER_IN_MS = 604800000,
   convertDate = (date, time) => {
@@ -32,7 +32,7 @@ io.on("error", e => {
   // eslint-disable-next-line no-console
   console.error(e);
 });
-
+// handles all socket messages sent to server
 io.on("connection", (socket) => {
   let uploader = new siofu(),
     roomID;
@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
       currentTrack);
   });
 
-  //Synchrones Video Sockets
+  //Synchronous Video Sockets
   //onVideoPlayed
   socket.on("videoPlayedToServer", (url, time) => {
     io.emit("videoPlayedToClients", url, time);
@@ -82,7 +82,7 @@ io.on("connection", (socket) => {
     io.emit("videoEndedToClients", url, currentTrack);
   });
 
-  //Synchrone Playlist Sockets
+  //Synchronous Playlist Sockets
   //drag&drop
   socket.on("DragDropPositionToServer", (roomID, iDrag, iDrop) => {
     io.emit("DragDropPositionToClients", roomID, iDrag, iDrop);
@@ -125,7 +125,7 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("MessageToClients", message, nickname, room);
   });
 
-  //standard Sockets
+  //Basic Sockets
   //delete
   socket.on("dateToServer", (date) => {
     let url = roomManager.createUrl();
@@ -147,7 +147,7 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(SOCKETPORT, function() {
+httpServer.listen(SOCKETPORT, function () {
   //console.log("Ich höre auf socket IO Port 3000");
 });
 
@@ -164,10 +164,10 @@ function deleteFile(src) {
     }
   });
 }
+
 /**
  * Starts webserver to serve files from "/app" folder
  */
-
 function init() {
   // Access command line parameters from start command (see package.json)
   let appDirectory = process.argv[2],
@@ -184,6 +184,8 @@ function init() {
 
 }
 
+/*checks every day at 3am if there are any unused rooms to delete
+ and delete the files from the server and from the database*/
 function checkForOldRooms() {
   schedule.scheduleJob(DELETE_INTERVAL_FOR_SCHEDULE, () => {
     dbClient.getOpenRooms().then((rooms) => {

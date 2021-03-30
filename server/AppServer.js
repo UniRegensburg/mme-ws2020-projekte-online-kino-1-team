@@ -30,9 +30,6 @@ class AppServer {
     this.app.use("/app", express.static(this.appDir));
     this.app.use("/app", express.static("public"));
     this.app.use(siofu.router);
-
-    //Das hier ist Crap!!!!!!!!
-    //this.app.use("/app", express.static("data"));
   }
 
   /**
@@ -64,7 +61,7 @@ class AppServer {
     }
     this.server.close();
   }
-
+  //mounts new data folder for the new created room
   addRoom(url) {
     var randomLink = "/app/" + url;
     this.app.set("view engine", "ejs");
