@@ -4,7 +4,7 @@
 
 Jakob Kellnhofer, jakob.kellnhofer@stud.uni-regensburg.de, Github: JKellnhofer, Komponenten: Playlist, Streamen, Datenbank, Fileupload
 
-Celina Kurrer, celina.kurrer@stud.uni-regensburg.de, Github: Celina-kur, Komponenten:
+Celina Kurrer, celina.kurrer@stud.uni-regensburg.de, Github: Celina-kur, Komponenten: Video.js, Git managen, Synchrone Playlist/Videostream
 
 Sandro Michl, sandro.michl@stud.uni-regensburg.de, Github: XXXxxxXXX17, Komponenten: HTML, CSS, UI Design, Termin, ICal
 
