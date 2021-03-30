@@ -29,6 +29,7 @@ const AppServer = require("./server/AppServer.js"),
   };
 
 io.on("error", e => {
+  // eslint-disable-next-line no-console
   console.error(e);
 });
 
@@ -37,6 +38,7 @@ io.on("connection", (socket) => {
     roomID;
 
   uploader.on("error", e => {
+    // eslint-disable-next-line no-console
     console.error(e);
   });
 

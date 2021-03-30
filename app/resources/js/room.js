@@ -112,6 +112,7 @@ function init() {
   });
   //handle Error
   socket.on("error" ,e => {
+    // eslint-disable-next-line no-console
     console.error("Socketio error: " + e);
   });
 

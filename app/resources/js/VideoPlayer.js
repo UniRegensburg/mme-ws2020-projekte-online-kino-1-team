@@ -53,7 +53,7 @@ export class VideoPlayer {
 
     if (src === undefined) {
       //Testvideo
-      this.changeSrc("//vjs.zencdn.net/v/oceans.mp4");
+      this.changeSrc("./resources/css/Beispielvideo.mp4");
       return;
     }
 
