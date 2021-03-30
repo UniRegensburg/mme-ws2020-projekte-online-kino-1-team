@@ -31,18 +31,15 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 3. Synchrones Abspielen
 4. Synchrone Interaktion mit dem Player
 5. Live Chat
-6. Videoformate formatieren
-7. Drag & Drop für Videoupload
-8. Fullscreen
-9. Playlist erstellen und bearbeiten
-10. Termine für Videoabende planen
-11. Audioformate unterstützen und ggf. formatieren
-12. Kinomodus/Ambilight
-13. Diashow ermöglichen durch Bildupload(Bildformatierung)
-14. Shortcuts für Interaktion mit den UI-Elementen
-15. Countdown vor Start der Wiedergabe
-15. Passwort für Räume optional ermöglichen
+6. Drag & Drop für Videoupload
+7. Fullscreen
+8. Playlist erstellen und bearbeiten
+9. Termine für Videoabende planen
+10. Audioformate unterstützen
+11. Kinomodus
+12. Diashow ermöglichen durch Bildupload(Bildformatierung)
+13. Shortcuts für Interaktion mit den UI-Elementen
 
 **Frameworks und API's:**
 
-Video.js, Express.js, fullscreen-api, node.js, (mySQL||MongoDB), (IFrame Player API)
+Video.js, Express.js, fullscreen-api, node.js, MongoDB, ejs, mongoose, node-schedule, node-uuid, socket.io, socketio-file-upload
