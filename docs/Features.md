@@ -20,7 +20,7 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 | **Diashow** | Der User hat die Möglichkeit eine Diashow aus vorher hochgeladenen Bildern zu erstellen | "nice-to-have" | 2 Tage | User-Server-Kommunikation |
 | **Shortcuts für den Videoplayer** | Der User hat die Möglichkeit über gängige Shortcuts(z.B. Leertaste für Pause) mit dem Video zu interagieren | "nice-to-have" | 1 Tage | User-Server-Kommunikation |
 | **Countdown** | Falls ein Termin erstellt wurde, läuft ein Countdown bis zu diesem Termin. Solange bleibt der Raum mindestens geöffnet | "nice-to-have" | 1 Tage | Funktionalität des Players |
-
+| **Playlist Shortcuts** | Mithilfe der Pfeiltasten soll in der Playlist zwischen den einzelnen Elementen gewechselt werden können. | "nice-to-have" | 1 Tage | Funktionalität des Players |
 
 
 ## Umsetzung
