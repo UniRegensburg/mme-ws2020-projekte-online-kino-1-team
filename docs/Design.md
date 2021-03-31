@@ -59,4 +59,4 @@ Erstellen eines neuen Raumes mit einer unqiue ID.
 
 index.ejs und room.ejs werden als Templates für die Html-Dateien verwendet.
 
-![Darstellund des Designs](DesignBild.jpg)
+![Darstellund des Designs](Design.jpg)
