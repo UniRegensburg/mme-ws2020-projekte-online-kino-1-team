@@ -59,4 +59,4 @@ Erstellen eines neuen Raumes mit einer unqiue ID.
 
 index.ejs und room.ejs werden als Templates für die Html-Dateien verwendet.
 
-![Darstellund des Designs](Design.jpg)
+<img height="600" src="https://cdn.discordapp.com/attachments/806433890486845460/826726405810946108/Design.jpg" />
