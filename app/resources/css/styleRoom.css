@@ -174,6 +174,10 @@ input[type="file"]{
     width: 30%;
 }
 
+.uploadIcon:hover{
+    content: url("pictures/uploadIconHover.png");
+}
+
 .playlist-header-title{
     font-size: 40px;
     color: var(--font-color);
