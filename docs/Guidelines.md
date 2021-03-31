@@ -14,5 +14,4 @@
 
 ## Zusätzliche Übereinkünfte
 
-[Notieren Sie hier alle team-internen Übereinkünfte zur Verwendung des Repositorys, z.B. spezielle Überlegungen zur Codequalität oder zur Formulierung von *Commit Messages*]
-
+Grundsätzlich haben wir viel mit Liveshare zusammengearbeitet. Nebenbei haben wir bei der Arbeitsteilung die Features in kleinere Branches ausgelagert, die wir auf Basis des dev Branches erstellt haben und über einen Pull Request wieder in den dev Branch gemerged haben.
