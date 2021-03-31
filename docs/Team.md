@@ -1,11 +1,26 @@
 # Team
 
-[Beschreiben Sie hier die einzelnen Teammitglieder mit Namen, E-Mail-Adresse, Github-Nutzer und Foto. Nennen Sie mindestens eine Komponenten der Anwendung, die in wesentlichen Teilen vom jeweiligen Teammitglied entwickelt wurde.]
+**Jakob Kellnhofer**
 
-Jakob Kellnhofer, jakob.kellnhofer@stud.uni-regensburg.de, Github: JKellnhofer, Komponenten: Playlist, Streamen, Datenbank, Fileupload
+E-Mail: jakob.kellnhofer@stud.uni-regensburg.de<br>
+Github: JKellnhofer<br>
+Komponenten: Playlist, Streamen, Datenbank, Fileupload<br>
 
-Celina Kurrer, celina.kurrer@stud.uni-regensburg.de, Github: Celina-kur, Komponenten: Video.js, Git managen, Synchrone Playlist/Videostream
+**Celina Kurrer**
 
-Sandro Michl, sandro.michl@stud.uni-regensburg.de, Github: XXXxxxXXX17, Komponenten: HTML, CSS, UI Design, Termin, ICal
+E-Mail: celina.kurrer@stud.uni-regensburg.de<br>
+Github: Celina-kur<br>
+Komponenten: Video.js, Git managen, Synchrone Playlist/Videostream<br>
 
-Niklas Keller, niklas.keller@stud.uni-regensburg.de, Github: LegendNeo, Komponenten: LiveChat, Synchrone Playlist/Synchroner Videostream
+**Sandro Michl**
+
+<img height="300" src="https://cdn.discordapp.com/attachments/806433890486845460/826752838557892628/SandroBild.PNG" /><br>
+E-Mail: sandro.michl@stud.uni-regensburg.de<br>
+Github: XXXxxxXXX17<br>
+Komponenten: HTML, CSS, UI Design, Termin, ICal
+
+**Niklas Keller**
+
+E-Mail: niklas.keller@stud.uni-regensburg.de<br>
+Github: LegendNeo<br>
+Komponenten: LiveChat, Synchrone Playlist/Synchroner Videostream
