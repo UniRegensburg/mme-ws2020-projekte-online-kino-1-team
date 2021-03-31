@@ -7,6 +7,7 @@ Unser Ziel ist es ein Online-Kino Erlebnis zu ermöglichen. Den NutzerInnen wird
 |---------|--------------|-----------|--------------------|---------------------|
 | **Räume Erstellen** | Der User hat die Möglichkeit Räume zu erstellen und andere User einzuladen | "kritisch" | 3 Tage | User2User-Interaktion |
 | **Räume Beitreten** | Durch eine Copy-To-Clipboard Option wird der aktuelle Link kopiert. Dieser kann an Freunde gesendet werden. | "kritisch" | 3 Tage | User2User-Interaktion |
+| **Räume Löschen** |Räume werden nach einer Woche ohne Benutzung gelöscht und alle Dateien in der Playlist ebenfalls | "mittel" | 2 Tage | User2User-Interaktion |
 | **Video Upload** | Die User besitzen die Möglichkeit eigene Videos per Upload-Button hochzuladen | "kritisch" | 1 Tag | User Interface |
 | **Synchroner Videostream über Server** | Ermöglicht den Usern synchron ein ausgewähltes Video anzusehen | "kritisch" | 2-3 Tage | Server |
 | **Interaktion mit dem Videoplayer** | Der User/Der Host hat die Möglichkeit das Video zu Stoppen/Starten/Vor-/Zurückzuspulen/Mute/ | "kritisch" | 2-3 Tage | User-Server-Kommunikation |
