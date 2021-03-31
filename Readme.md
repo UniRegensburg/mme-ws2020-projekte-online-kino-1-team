@@ -20,7 +20,7 @@ So nutzen Sie den vorgegebenen Server:
 
 1. Führen Sie **einmalig** den Befehl `npm install` aus, um die notwendigen Abhängigkeiten (`express`) separat vom Startprozess zu installieren. Beim Aufruf des Befehls `npm start` werden automatisch auch der Befehl `npm install` und `npm run build` ausgeführt.
 
-2. Führen Sie den Befehl `npm start` aus um die Anwendung zu starten. Der Inhalt des `/app`-Verzeichnis ist anschließend über die die Adresse `http://localhost:8000/app` erreichbar.
+2. Führen Sie den Befehl `npm start` aus um die Anwendung zu starten. Der Inhalt des `/app`-Verzeichnis ist anschließend über die die Adresse `http://localhost:/app` erreichbar.
 
 ### Automatisches Bauen der Anwendung
 

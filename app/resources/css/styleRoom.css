@@ -5,7 +5,7 @@ html {
 }
 
 body{
-    background: url("backgroundRoom.jpg");
+    background: url("pictures/backgroundRoom.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -19,16 +19,60 @@ body{
     justify-content: space-between;
 }
 
-.toggleOne {
-    display: flex;
-    position: relative;
-    margin: 2em 0 0 2em;
-    width: 6em;
-    height: 3.4em;
+.logoRoom{
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+    -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+    0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    animation: shine 4s forwards, blinkOne 3s infinite;
 }
 
-.toggleOne input {
-    display: none;
+@keyframes blink {
+    0%,
+    22%,
+    36%,
+    75% {
+      color: var(--font-color);
+      text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+        -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+        0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    }
+    28%,
+    33% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+    82%,
+    97% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+}
+
+.blinkOne {
+    animation: shine 8s forwards, blink 6s 4s infinite;
+}
+
+.blinkTwo{
+    animation: shine 8s forwards, blink 6s 4s infinite;
+}
+  
+@keyframes shine {
+    0% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+    100% {
+      color: var(--font-color);
+      text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+        -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+        0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    }
 }
 
 .roundButton {
@@ -78,16 +122,6 @@ input:checked + .roundButton:before  {
     display: none;
 }
 
-.overlay-toggleOne{
-    position: absolute;
-    z-index: 10;
-    background: transparent;
-    color: var(--font-color);
-    font-size: 15px;
-    margin-left: 3em;
-    margin-top: 0.7em;
-}
-
 .overlay-toggleTwo{
     position: absolute;
     z-index: 10;
@@ -116,14 +150,128 @@ input:checked + .roundButton:before  {
     border: 3px solid var(--font-color);
     height: 500px;
     width: 30%;
-    overflow-y: scroll;
 }
 
 .playlist-header{
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+}
+
+input[type="file"]{
+    display:none;
+}
+
+.playlist-upload-button-label{
+    width: 30%;
+    cursor: pointer;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.8em;
+}
+
+.uploadIcon{
+    width: 30%;
+}
+
+.uploadIcon:hover{
+    content: url("pictures/uploadIconHover.png");
+}
+
+.playlist-header-title{
     font-size: 40px;
-    text-align: center;
     color: var(--font-color);
+    margin-left: 0.1em;
     margin-top: 0.2em;
+}
+
+.playlist-upload-button-label:hover{
+    color: var(--hover-color);
+}
+
+.playlist-body{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    height: 450px;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow-y: scroll;
+    padding-left: 1.5em;
+}
+
+#playlistElement{
+    cursor:pointer;
+}
+
+li{
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+}
+
+.playlist-left-body{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+li video{
+    width: 3.5em;
+    margin-right: 1em;
+}
+
+li img{
+    width: 3.5em;
+    margin-right: 1em;
+}
+
+li p{
+    color: var(--font-color);
+    font-size: 20px;
+}
+
+li p:hover{
+    color: var(--hover-color);
+}
+
+.uploadHint{
+    color: var(--uploadHintColor);
+    font-size: 20px;
+    margin-left: 0.5em;
+}
+
+.playlist-right-body{
+    display: flex;
+    justify-content: right;
+    text-align: right;
+}
+
+.deleteButtonPlaylist{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--font-color);
+    font-size: 30px;
+    justify-content: right;
+    margin-left: 0.5em;
+    padding-left: 0;
+}
+
+.deleteButtonPlaylist:hover{
+    color: var(--hover-color);
+}
+
+.video-js{
+    width: 1180px;
+    height: 480px;
+}
+
+.imageID{
+    width: 780px;
+    height: 480px;
 }
 
 .chat{
@@ -158,6 +306,10 @@ input:checked + .roundButton:before  {
     margin-left: 0.5em;
     margin-top: 0.5em;
     margin-bottom: 0.8em;
+}
+
+.chat-header-icon:hover{
+    content: url("pictures/arrowIconHover.png")
 }
 
 .chat-header-title{
@@ -214,6 +366,14 @@ input:checked + .roundButton:before  {
     cursor: pointer;
 }
 
+.disabledIcon{
+    content: url("pictures/sendIconDisabled.png");
+}
+
+.chat-footer-icon:hover{
+    content: url("pictures/sendIconHover.png");
+}
+
 .typeField:hover{
     border: 2px solid var(--hover-color);
 }
@@ -233,6 +393,10 @@ input:checked + .roundButton:before  {
     width: 2.5em;
     transform: rotate(180deg);
     cursor: pointer;
+}
+
+.chat-icon:hover{
+    content: url("pictures/arrowIconHover.png");
 }
 
 .nickname{

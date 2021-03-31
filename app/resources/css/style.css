@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background-image: url("background.png");
+    background-image: url("pictures/background.png");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -20,13 +20,62 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto 4em auto;
+    margin: 0 auto 2em auto;
     max-width: 1600px;
 }
 
 .logo{
     font-size: 50px;
     font-weight: bold;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+    -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+    0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    animation: shine 4s forwards, blinkOne 3s infinite;
+}
+
+@keyframes blink {
+    0%,
+    22%,
+    36%,
+    75% {
+      color: var(--font-color);
+      text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+        -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+        0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    }
+    28%,
+    33% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+    82%,
+    97% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+}
+
+.blinkOne {
+    animation: shine 8s forwards, blink 6s 4s infinite;
+}
+
+.blinkTwo{
+    animation: shine 8s forwards, blink 6s 4s infinite;
+}
+  
+@keyframes shine {
+    0% {
+      color: var(--font-color);
+      text-shadow: none;
+    }
+    100% {
+      color: var(--font-color);
+      text-shadow: 0 0 0.6rem var(--font-shadow-color), 0 0 1.5rem var(--font-shadow-color),
+        -0.2rem 0.1rem 1rem var(--font-shadow-color), 0.2rem 0.1rem 1rem var(--font-shadow-color),
+        0 -0.5rem 2rem var(--font-shadow-color), 0 0.5rem 3rem var(--font-shadow-color);
+    }
 }
 
 .calender{
@@ -220,7 +269,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto 4em auto;
+    margin: 0 auto 2em auto;
     max-width: 1500px;
 }
 
@@ -234,7 +283,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto 4em auto;
+    margin: 0 auto 2em auto;
     max-width: 1600px;
 }
 
@@ -276,7 +325,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 4em auto;
+    margin: 0 auto 2em auto;
 }
 
 .hidden{

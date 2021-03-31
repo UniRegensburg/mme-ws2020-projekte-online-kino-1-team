@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import {CAL_SINGLE} from "./createICal.js";
 import {sendDateToServer} from "./index.js";
 
@@ -29,13 +31,14 @@ function closeOverlay() {
     overlayBackground.classList.remove("active");
 }
 
+// sends chosen date to server
 function submitMeeting(){
     let error = document.querySelector(".overlay-input-error"),
     overlayOutputLink = document.querySelector(".overlay-output-link");
     
     if (date.value !== "" && time.value !== "") {
         error.classList.remove("active");
-        sendDateToServer();
+        sendDateToServer({date: date.value, time: time.value});
         overlayOutputLink.classList.add("active");
     } else {
         error.classList.add("active");
@@ -48,7 +51,7 @@ function readFormInput() {
     overlayOutputExplanation.innerHTML = "Der Raum ist reserviert für den " + date.value + " um " + time.value + " Uhr. <br>" +
         "Unter der folgenden Url kannst du schon einmal beitreten und alles einstellen: " + window.location.href + url;
 }
-
+//adds Ical informations in calendar
 function addICalInCalender() {
     let dateAndTime = date.value + " " + time.value;
     CAL_SINGLE.addEvent("WatchMates", "Du hast dir diese URL gesichert: " + window.location.href + url, "", dateAndTime, "");

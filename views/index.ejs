@@ -11,7 +11,7 @@
 
 <body>
     <div class="topBar">
-        <span class="logo">WatchMates</span>
+        <span class="logo"> <span class="blinkOne">W</span>atch<span class="blinkTwo">M</span>ates</span>
         <button class="calender">Termin festlegen</button>
     </div>
     <div class="overlay" id="overlay">
@@ -21,7 +21,7 @@
         </div>
         <div class="overlay-body">
             <div class="overlay-left-body">
-                <form class ="overlay-body-form">
+                <form class="overlay-body-form">
                     <label class="overlay-label-date">Datum:</label>
                     <input class="overlay-choose-date" name="choose-date" type="date" min="2021-01-01" max="2025-12-31">
                     <label class="overlay-label-time">Uhrzeit:</label>
@@ -38,16 +38,17 @@
     </div>
     <div class="overlay-background"></div>
     <div class="middleBar">
-        <video class="preview" width="580px" height="480px" loop ="1" muted="1">
-            <source src="resources/css/SampleVideo_1280x720_2mb.mp4" type="video/mp4">
+        <video class="preview" width="580px" height="480px" autoplay="1" loop="1" muted="1">
+            <source src="resources/css/Beispielvideo.mp4" type="video/mp4">
         </video>
         <span class="explanation">WatchMates bietet Dir die Möglichkeit auch online ein einzigartiges Erlebnis zu haben.
-            Treffe dich mit deiner Familie oder deinen Freunden in einem virtuellen Kino und ihr könnt euch gemeinsam Videos anschauen,
+            Treffe dich mit deiner Familie oder deinen Freunden in einem virtuellen Kino und ihr könnt euch gemeinsam
+            Videos anschauen,
             eine Diashow erstellen oder zeitgleich Audiodateien anhören.
         </span>
     </div>
     <div class="createAndJoinRoomBar">
-        <a class="creatingRoom" >Einen Raum erstellen</a>
+        <a class="creatingRoom">Einen Raum erstellen</a>
         <button class="joiningRoom">Einem Raum beitreten</button>
     </div>
     <div class="dropDownMenu hidden">

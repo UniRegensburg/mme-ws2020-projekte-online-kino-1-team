@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WatchMates</title>
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/styleRoom.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
@@ -12,24 +13,38 @@
 <body>
     <audio src="messageSound.mp3" class="audioFile"></audio>
     <div class="header">
-        <label class="toggleOne">
-            <input id="toggleButtonOne" type="checkbox">
-            <span class="roundButton"></span>
-        </label>
+        <span class="logoRoom">
+            <span class="blinkOne">W</span>atch<span class="blinkTwo">M</span>ates</span>
         <label class="toggleTwo">
             <input id="toggleButtonTwo" type="checkbox">
             <span class="roundButton"></span>
         </label>
     </div>
-    <div class="overlay-toggleOne hidden">Ambilight</div>
     <div class="overlay-toggleTwo hidden">Nachrichten stummschalten</div>
     <div class="room">
         <div class="playlist">
-            <span class="playlist-header">Playlist</span>
+            <div class="playlist-header">
+                <label class="playlist-upload-button-label">
+                    <input type="file" id="siofu_input" />
+                    <img src="uploadIcon.png" alt="Icon" class="uploadIcon">
+                </label>
+                <span class="playlist-header-title">Playlist</span>
+            </div>
+            <p class="uploadHint hidden">Datei wird hochgeladen... Bitte verlasse die Seite nicht :)</p>
+            <ul class="playlist-body"></ul>
         </div>
-        <video class="video" controls="true" width="80%">
-            <source src="" type="video.mp4">
+        <video id="my-player" class="video-js">
+            <source id="video-source" src="resources/css/Beispielvideo.mp4" type="">
+            </source>
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
         </video>
+        <div class="diashowContainer hidden">
+            <img class="imageID" src="" alt=""></img>
+        </div>
         <div class="chat">
             <div class="chat-header">
                 <img src="arrowIcon.png" alt="Icon-Arrow" class="chat-header-icon" />
@@ -40,7 +55,7 @@
             </div>
             <div class="chat-footer">
                 <input class="typeField" type="text" disabled>
-                <img src="sendIcon.png" alt="Icon-Send" class="chat-footer-icon" />
+                <img src="sendIcon.png" alt="Icon-Send" class="chat-footer-icon disabledIcon" />
             </div>
         </div>
         <img src="arrowIcon.png" alt="Icon" class="chat-icon hidden" />
@@ -57,7 +72,21 @@
         <span class="stepThree">Chattet miteinander</span>
     </div>
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="/siofu/client.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
     <script type="module" src="resources/js/room.js"></script>
 </body>
+<template id="playlistTemplate">
+    <li id="playlistElement" draggable="true">
+        <span class="playlist-left-body">
+            <video src="" draggable="false"></video>
+            <img src="" alt="" draggable="false"></img>
+            <p></p>
+        </span>
+        <span class="playlist-right-body">
+            <button class="deleteButtonPlaylist">&times</button>
+        </span>
+    </li>
+</template>
 
 </html>

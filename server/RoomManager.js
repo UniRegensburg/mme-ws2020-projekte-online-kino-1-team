@@ -13,7 +13,6 @@ class RoomManger {
 
   createUrl() {
     randomUrl = uuid.v4();
-    //console.log("http://localhost:8000/app/" + randomUrl);
     return randomUrl;
   }
 

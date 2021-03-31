@@ -1,12 +1,13 @@
 /* eslint-env node */
 
 import { getNickName } from "./room.js";
-
+import { HOST} from "./constants.js";
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:3000");
+const socket = io(HOST);
 var messageTextField,
     messageSendIcon;
 
+//set click listener on symbol and on enter key
 export function setLiveChatClickListener() {
     messageTextField = document.querySelector(".typeField");
     messageSendIcon = document.querySelector(".chat-footer-icon");
@@ -67,6 +68,7 @@ function showMessage(messageFromServer, nickname) {
 
 }
 
+//plays sound when massage received and not muted
 function playSound() {
     var audio = document.querySelector(".audioFile"),
         muteCheckBox = document.getElementById("toggleButtonTwo");
@@ -79,6 +81,7 @@ function playSound() {
     }
 }
 
+//checks if nickname is entered to be able to chat
 function checkIfNicknameEntered() {
     var nicknameTextField = document.querySelector(".nickname");
 
@@ -93,6 +96,7 @@ function checkIfNicknameEntered() {
     });
 }
 
+//enables chat when nickname is entered
 function removeDisabled() {
     var user = document.getElementsByClassName("receivedUser"),
         message = document.getElementsByClassName("receivedMessage");
@@ -103,10 +107,12 @@ function removeDisabled() {
     }
 }
 
+//handles scrolling in livechat
 function pageScroll() {
+    var scrollNumber = 3;
     let autoScroll = document.querySelector(".chat-body"),
         scrolldelay;
     autoScroll.scrollBy(0, 1);
     // eslint-disable-next-line no-unused-vars
-    scrolldelay = setTimeout(pageScroll, 3);
+    scrolldelay = setTimeout(pageScroll, scrollNumber);
 }
